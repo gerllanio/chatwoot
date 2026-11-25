@@ -8,6 +8,7 @@ import { useAlert, useAssignmentError } from 'dashboard/composables';
 import { useMapGetter } from 'dashboard/composables/store';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
+import GtiTaskModal from 'dashboard/components/widgets/gti/GtiTaskModal.vue';
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
 import wootConstants from 'dashboard/constants/globals';
 import { GTI_CHAT_ACTIONS, gtiChatActions } from 'dashboard/helper/gtiChat';
@@ -24,6 +25,7 @@ const teams = useMapGetter('teams/getTeams');
 
 const isBusy = ref(false);
 const transferDialogRef = ref(null);
+const taskModalRef = ref(null);
 const transferTeamId = ref('');
 const transferAgentId = ref('');
 
@@ -173,6 +175,16 @@ const transfer = () =>
       :disabled="isBusy"
       @click="openTransfer"
     />
+    <Button
+      v-tooltip.bottom="t('GTI.TASKS.NEW_FOR_CONVERSATION')"
+      icon="i-lucide-list-checks"
+      size="sm"
+      color="slate"
+      variant="faded"
+      :aria-label="t('GTI.TASKS.NEW_FOR_CONVERSATION')"
+      @click="taskModalRef.open(null, { conversationDisplayId: chat.id })"
+    />
+    <GtiTaskModal ref="taskModalRef" />
     <Dialog
       ref="transferDialogRef"
       :title="t('GTI_CHAT.TRANSFER_TITLE')"

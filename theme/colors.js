@@ -238,6 +238,10 @@ export const colors = {
       'in-dark': '#1F2933',
       out: '#D9FDD3',
       'out-dark': '#144D37',
+      // Task priority chips (Alta / Média / Baixa).
+      'prio-high': '#D64545',
+      'prio-medium': '#E08A00',
+      'prio-low': '#64748B',
     },
     portal: 'var(--dynamic-portal-color)',
     'portal-soft': 'var(--dynamic-portal-color-soft)',

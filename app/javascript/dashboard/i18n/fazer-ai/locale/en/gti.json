@@ -127,20 +127,22 @@
     },
     "TASKS": {
       "TITLE": "Tasks",
-      "SUBTITLE": "Team to-dos with an owner and a due date.",
+      "SUBTITLE": "Team to-dos, linked to conversations.",
       "ONLY_MINE": "Only mine",
       "STATUS": {
         "PENDING": "Pending",
         "COMPLETED": "Completed"
       },
       "FORM": {
-        "TITLE": "Task",
-        "TITLE_PLACEHOLDER": "E.g.: call the customer back",
+        "TITLE": "Description",
+        "TITLE_PLACEHOLDER": "E.g.: call the customer tomorrow",
         "ASSIGNEE": "Owner",
         "ME": "Me",
         "PRIORITY": "Priority",
         "DUE": "Due",
-        "CREATE": "Create"
+        "CREATE": "Create",
+        "TICKET": "Ticket (optional)",
+        "TICKET_PLACEHOLDER": "Conversation number, e.g.: 6956"
       },
       "PRIORITY": {
         "HIGH": "High",
@@ -152,7 +154,25 @@
       "DELETE": "Delete task",
       "LOADING": "Loading tasks…",
       "EMPTY": "No tasks here.",
-      "CONVERSATION": "Conversation #{id}"
+      "CONVERSATION": "Ticket #{id}",
+      "NEW": "New task",
+      "EDIT_TITLE": "Edit task",
+      "UPDATED": "Task updated",
+      "DONE": "Task completed",
+      "REOPENED": "Task reopened",
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "CONFIRM_DELETE": "Delete this task?",
+      "SAVE_ERROR": "Could not save the task",
+      "SEPARATOR": " · ",
+      "DUE": {
+        "TODAY": "Today {time}",
+        "TOMORROW": "Tomorrow {time}",
+        "YESTERDAY": "Yesterday"
+      },
+      "NEW_FOR_CONVERSATION": "New task for this conversation",
+      "META_ASSIGNEE": "👤 {name}",
+      "META_DUE": "⏰ {due}"
     },
     "TOPBAR": {
       "PRODUCT": "Work",

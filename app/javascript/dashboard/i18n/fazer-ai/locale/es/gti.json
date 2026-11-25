@@ -127,20 +127,22 @@
     },
     "TASKS": {
       "TITLE": "Tareas",
-      "SUBTITLE": "Pendientes del equipo, con responsable y plazo.",
+      "SUBTITLE": "Pendientes del equipo, vinculados a las atenciones.",
       "ONLY_MINE": "Solo las mías",
       "STATUS": {
         "PENDING": "Pendientes",
         "COMPLETED": "Completadas"
       },
       "FORM": {
-        "TITLE": "Tarea",
-        "TITLE_PLACEHOLDER": "Ej.: devolver la llamada del cliente",
+        "TITLE": "Descripción",
+        "TITLE_PLACEHOLDER": "Ej.: llamar al cliente mañana",
         "ASSIGNEE": "Responsable",
         "ME": "Yo",
         "PRIORITY": "Prioridad",
         "DUE": "Plazo",
-        "CREATE": "Crear"
+        "CREATE": "Crear",
+        "TICKET": "Ticket (opcional)",
+        "TICKET_PLACEHOLDER": "Número de la atención, ej.: 6956"
       },
       "PRIORITY": {
         "HIGH": "Alta",
@@ -152,7 +154,25 @@
       "DELETE": "Eliminar tarea",
       "LOADING": "Cargando tareas…",
       "EMPTY": "No hay tareas aquí.",
-      "CONVERSATION": "Conversación #{id}"
+      "CONVERSATION": "Ticket #{id}",
+      "NEW": "Nueva tarea",
+      "EDIT_TITLE": "Editar tarea",
+      "UPDATED": "Tarea actualizada",
+      "DONE": "Tarea completada",
+      "REOPENED": "Tarea reabierta",
+      "SAVE": "Guardar",
+      "CANCEL": "Cancelar",
+      "CONFIRM_DELETE": "¿Eliminar esta tarea?",
+      "SAVE_ERROR": "No se pudo guardar la tarea",
+      "SEPARATOR": " · ",
+      "DUE": {
+        "TODAY": "Hoy {time}",
+        "TOMORROW": "Mañana {time}",
+        "YESTERDAY": "Ayer"
+      },
+      "NEW_FOR_CONVERSATION": "Nueva tarea para esta atención",
+      "META_ASSIGNEE": "👤 {name}",
+      "META_DUE": "⏰ {due}"
     },
     "TOPBAR": {
       "PRODUCT": "Work",

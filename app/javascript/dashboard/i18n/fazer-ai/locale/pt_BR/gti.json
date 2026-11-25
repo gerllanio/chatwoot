@@ -127,20 +127,22 @@
     },
     "TASKS": {
       "TITLE": "Tarefas",
-      "SUBTITLE": "Pendências da equipe, com responsável e prazo.",
+      "SUBTITLE": "Pendências da equipe, ligadas aos atendimentos.",
       "ONLY_MINE": "Só as minhas",
       "STATUS": {
         "PENDING": "Pendentes",
         "COMPLETED": "Concluídas"
       },
       "FORM": {
-        "TITLE": "Tarefa",
-        "TITLE_PLACEHOLDER": "Ex.: retornar a ligação do cliente",
+        "TITLE": "Descrição",
+        "TITLE_PLACEHOLDER": "Ex.: Ligar para o cliente amanhã",
         "ASSIGNEE": "Responsável",
         "ME": "Eu",
         "PRIORITY": "Prioridade",
         "DUE": "Prazo",
-        "CREATE": "Criar"
+        "CREATE": "Criar",
+        "TICKET": "Ticket (opcional)",
+        "TICKET_PLACEHOLDER": "Número do atendimento, ex.: 6956"
       },
       "PRIORITY": {
         "HIGH": "Alta",
@@ -152,7 +154,25 @@
       "DELETE": "Excluir tarefa",
       "LOADING": "Carregando tarefas…",
       "EMPTY": "Nenhuma tarefa aqui.",
-      "CONVERSATION": "Conversa #{id}"
+      "CONVERSATION": "Ticket #{id}",
+      "NEW": "Nova tarefa",
+      "EDIT_TITLE": "Editar tarefa",
+      "UPDATED": "Tarefa atualizada",
+      "DONE": "Tarefa concluída",
+      "REOPENED": "Tarefa reaberta",
+      "SAVE": "Salvar",
+      "CANCEL": "Cancelar",
+      "CONFIRM_DELETE": "Excluir esta tarefa?",
+      "SAVE_ERROR": "Não foi possível salvar a tarefa",
+      "SEPARATOR": " · ",
+      "DUE": {
+        "TODAY": "Hoje {time}",
+        "TOMORROW": "Amanhã {time}",
+        "YESTERDAY": "Ontem"
+      },
+      "NEW_FOR_CONVERSATION": "Nova tarefa para este atendimento",
+      "META_ASSIGNEE": "👤 {name}",
+      "META_DUE": "⏰ {due}"
     },
     "TOPBAR": {
       "PRODUCT": "Work",
