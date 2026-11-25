@@ -18,6 +18,7 @@ const props = defineProps({
 });
 
 const MESSAGE_MAX_LENGTH = 2000;
+const DEFAULT_RATING_TIMEOUT = 20;
 const NOTICE_PLACEHOLDER_VALUES = { user: '{{user}}', queue: '{{queue}}' };
 
 const { t } = useI18n();
@@ -26,6 +27,10 @@ const { currentAccount, updateAccount } = useAccount();
 const minCloseMinutes = window.chatwootConfig?.autoResolveMinMinutes || 10;
 
 const ratingsEnabled = ref(false);
+const ratingMode = ref('whatsapp_digits');
+const ratingMessage = ref('');
+const ratingThanks = ref('');
+const ratingTimeout = ref('');
 const acceptedMessage = ref('');
 const transferMessage = ref('');
 const closeAfter = ref('');
@@ -37,6 +42,13 @@ const isSaving = ref(false);
 const enabledOptions = computed(() => [
   { value: true, label: t('GTI_SETTINGS.GENERAL.ENABLED') },
   { value: false, label: t('GTI_SETTINGS.GENERAL.DISABLED') },
+]);
+const ratingModeOptions = computed(() => [
+  {
+    value: 'whatsapp_digits',
+    label: t('GTI_SETTINGS.GENERAL.RATING_MODE_DIGITS'),
+  },
+  { value: 'link', label: t('GTI_SETTINGS.GENERAL.RATING_MODE_LINK') },
 ]);
 const officeOptions = computed(() => [
   { value: true, label: t('GTI_SETTINGS.OFFICE.BY_COMPANY') },
@@ -55,6 +67,10 @@ watch(
     const settings = account?.settings || {};
     acceptedMessage.value = settings.gti_ticket_accepted_message || '';
     transferMessage.value = settings.gti_transfer_message || '';
+    ratingMode.value = settings.gti_rating_mode || 'whatsapp_digits';
+    ratingMessage.value = settings.gti_rating_message || '';
+    ratingThanks.value = settings.gti_rating_thanks_message || '';
+    ratingTimeout.value = settings.gti_rating_timeout_minutes ?? '';
     closeAfter.value = settings.auto_resolve_after ?? '';
     closeMessage.value = settings.auto_resolve_message || '';
   },
@@ -105,6 +121,13 @@ const save = async () => {
       {
         gti_ticket_accepted_message: acceptedMessage.value,
         gti_transfer_message: transferMessage.value,
+        gti_rating_mode: ratingMode.value,
+        gti_rating_message: ratingMessage.value,
+        gti_rating_thanks_message: ratingThanks.value,
+        gti_rating_timeout_minutes:
+          ratingTimeout.value === '' || ratingTimeout.value === null
+            ? null
+            : Number(ratingTimeout.value),
         auto_resolve_after: closeAfterMinutes.value,
         auto_resolve_message: closeMessage.value,
       },
@@ -145,6 +168,42 @@ const save = async () => {
             {{ t('GTI_SETTINGS.GENERAL.RATINGS_HINT') }}
           </span>
         </label>
+        <label class="flex flex-col gap-1 text-sm text-n-slate-11">
+          {{ t('GTI_SETTINGS.GENERAL.RATING_MODE') }}
+          <Select
+            v-model="ratingMode"
+            :options="ratingModeOptions"
+            :disabled="!ratingsEnabled"
+          />
+        </label>
+        <Input
+          v-if="ratingMode === 'whatsapp_digits'"
+          v-model="ratingTimeout"
+          type="number"
+          :label="t('GTI_SETTINGS.GENERAL.RATING_TIMEOUT')"
+          :placeholder="String(DEFAULT_RATING_TIMEOUT)"
+          :message="t('GTI_SETTINGS.GENERAL.RATING_TIMEOUT_HINT')"
+          :disabled="!ratingsEnabled"
+        />
+      </div>
+      <div
+        v-if="ratingsEnabled && ratingMode === 'whatsapp_digits'"
+        class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(18rem,1fr))]"
+      >
+        <TextArea
+          v-model="ratingMessage"
+          :label="t('GTI_SETTINGS.GENERAL.RATING_MESSAGE')"
+          :placeholder="t('GTI_SETTINGS.GENERAL.RATING_MESSAGE_PLACEHOLDER')"
+          :max-length="MESSAGE_MAX_LENGTH"
+          auto-height
+        />
+        <TextArea
+          v-model="ratingThanks"
+          :label="t('GTI_SETTINGS.GENERAL.RATING_THANKS')"
+          :placeholder="t('GTI_SETTINGS.GENERAL.RATING_THANKS_PLACEHOLDER')"
+          :max-length="MESSAGE_MAX_LENGTH"
+          auto-height
+        />
       </div>
       <div class="grid gap-4 grid-cols-[repeat(auto-fit,minmax(18rem,1fr))]">
         <TextArea

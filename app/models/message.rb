@@ -640,13 +640,18 @@ class Message < ApplicationRecord
   end
 
   def reopen_conversation
-    return if conversation.muted?
-    return unless incoming?
-    return if reaction?
-    return unless conversation.snoozed? || conversation.resolved?
+    return unless reopens_conversation?
 
     conversation.check_assignee_team_on_reopen
     conversation.snoozed? ? conversation.open! : reopen_resolved_conversation
+  end
+
+  def reopens_conversation?
+    return false if conversation.muted? || !incoming? || reaction?
+    return true if conversation.snoozed?
+
+    # GTI "Work": a 1-5 answer to the WhatsApp rating is stored and leaves the conversation closed.
+    conversation.resolved? && !Gti::WhatsappRatingService.new(conversation: conversation).consume_reply(self)
   end
 
   def mark_pending_conversation_as_open_for_human_response

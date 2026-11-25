@@ -20,7 +20,16 @@
       "ACCEPTED_PLACEHOLDER": "Agent {user} will continue the service.",
       "TRANSFER_MESSAGE": "Transfer message",
       "TRANSFER_PLACEHOLDER": "You have been transferred to the {queue} queue.",
-      "VARIABLES": "Available variables: {variables}. Leave empty to send nothing."
+      "VARIABLES": "Available variables: {variables}. Leave empty to send nothing.",
+      "RATING_MODE": "How the customer rates",
+      "RATING_MODE_DIGITS": "Reply with a number from 1 to 5 (WhatsApp)",
+      "RATING_MODE_LINK": "Survey link",
+      "RATING_TIMEOUT": "Wait for the rating (minutes)",
+      "RATING_TIMEOUT_HINT": "After this time a reply reopens the conversation as usual. Empty: 20 minutes.",
+      "RATING_MESSAGE": "Rating request",
+      "RATING_MESSAGE_PLACEHOLDER": "We are about to finish your service 😄 Rate it from 1 (bad) to 5 (excellent).",
+      "RATING_THANKS": "Thank-you message",
+      "RATING_THANKS_PLACEHOLDER": "Thank you for your rating! 💚"
     },
     "TIMEOUTS": {
       "TITLE": "Waiting times",

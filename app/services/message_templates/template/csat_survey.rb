@@ -2,6 +2,9 @@ class MessageTemplates::Template::CsatSurvey
   pattr_initialize [:conversation!]
 
   def perform
+    # GTI "Work": QR-code WhatsApp customers rate with a digit (1-5) instead of opening the survey link.
+    return Gti::WhatsappRatingService.new(conversation: conversation).request if Gti::WhatsappRatingService.applies_to?(conversation)
+
     ActiveRecord::Base.transaction do
       conversation.messages.create!(csat_survey_message_params)
     end

@@ -20,7 +20,16 @@
       "ACCEPTED_PLACEHOLDER": "O colaborador {user} irá prosseguir com o atendimento.",
       "TRANSFER_MESSAGE": "Mensagem de transferência",
       "TRANSFER_PLACEHOLDER": "Você foi transferido para a fila {queue}.",
-      "VARIABLES": "Variáveis disponíveis: {variables}. Deixe vazio para não enviar nada."
+      "VARIABLES": "Variáveis disponíveis: {variables}. Deixe vazio para não enviar nada.",
+      "RATING_MODE": "Como o cliente avalia",
+      "RATING_MODE_DIGITS": "Responde com um número de 1 a 5 (WhatsApp)",
+      "RATING_MODE_LINK": "Link da pesquisa",
+      "RATING_TIMEOUT": "Tempo para avaliar (minutos)",
+      "RATING_TIMEOUT_HINT": "Depois desse tempo, a resposta reabre a conversa normalmente. Vazio: 20 minutos.",
+      "RATING_MESSAGE": "Mensagem de avaliação",
+      "RATING_MESSAGE_PLACEHOLDER": "Estamos quase finalizando seu atendimento 😄 Envie uma avaliação de 1 (ruim) a 5 (excelente).",
+      "RATING_THANKS": "Mensagem de agradecimento",
+      "RATING_THANKS_PLACEHOLDER": "Obrigado pela sua avaliação! 💚"
     },
     "TIMEOUTS": {
       "TITLE": "Tempos de espera",

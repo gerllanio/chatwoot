@@ -74,6 +74,7 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   store_accessor :settings, :brand_name, :brand_url, :brand_color
   # GTI "Work": texts sent to the customer when an agent accepts or transfers a conversation.
   store_accessor :settings, :gti_ticket_accepted_message, :gti_transfer_message
+  include GtiAccountRating
   include AccountAgentRestrictions
   include AccountWhatsappProviders
   include AccountCaptainAutoResolve

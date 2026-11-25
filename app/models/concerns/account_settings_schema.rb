@@ -28,6 +28,10 @@ module AccountSettingsSchema
         'brand_color': { 'type': %w[string null], 'pattern': '^(#(\\h{3}|\\h{6}))?$' },
         'gti_ticket_accepted_message': { 'type': %w[string null], 'maxLength': 2000 },
         'gti_transfer_message': { 'type': %w[string null], 'maxLength': 2000 },
+        'gti_rating_mode': { 'type': %w[string null], 'enum': ['whatsapp_digits', 'link', nil] },
+        'gti_rating_message': { 'type': %w[string null], 'maxLength': 2000 },
+        'gti_rating_thanks_message': { 'type': %w[string null], 'maxLength': 2000 },
+        'gti_rating_timeout_minutes': { 'type': %w[integer null], 'minimum': 1, 'maximum': 1440 },
         'conversation_required_attributes': {
           'type': %w[array null],
           'items': { 'type': 'string' }
