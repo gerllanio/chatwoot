@@ -1,0 +1,95 @@
+{
+  "GTI_PANEL": {
+    "TITLE": "Panel",
+    "SUBTITLE": "Resumen de la atención · {period}",
+    "LIVE": "En vivo",
+    "MONITOR_MODE": "Modo monitor",
+    "NO_QUEUE": "Sin cola",
+    "EMPTY": "Sin conversaciones en el período",
+    "PERIODS": {
+      "TODAY": "Hoy",
+      "LAST7": "Últimos 7 días",
+      "LAST30": "Últimos 30 días",
+      "MONTH": "Este mes"
+    },
+    "FILTERS": {
+      "PERIOD": "Período",
+      "QUEUE": "Cola",
+      "CONNECTION": "Conexión",
+      "AGENT": "Agente",
+      "ALL_QUEUES": "Todas las colas",
+      "ALL_CONNECTIONS": "Todas las conexiones",
+      "ALL_AGENTS": "Todos los agentes"
+    },
+    "SECTIONS": {
+      "NOW": "Ahora",
+      "PERIOD": "{period} · comparado con el período anterior",
+      "VOLUME": "Volumen",
+      "AGENTS": "Agentes"
+    },
+    "STATUS": {
+      "ONLINE": "En línea",
+      "BUSY": "Ocupado",
+      "OFFLINE": "Desconectado"
+    },
+    "NOW": {
+      "AGENTS_ONLINE": "Agentes en línea",
+      "WAITING": "En espera · mayor espera {longest}",
+      "ATTENDING": "En atención",
+      "LATE_TITLE": "⚠ Esperando hace más de 10 min",
+      "ON_TIME_TITLE": "✓ Cola dentro del plazo",
+      "ON_TIME": "Ningún cliente espera más de 10 minutos.",
+      "LATE_ENTRY": "{name} · {queue}"
+    },
+    "KPI": {
+      "CONVERSATIONS": "Conversaciones en el período",
+      "RESOLVED": "Resueltas",
+      "INCOMING": "Mensajes recibidos",
+      "FIRST_RESPONSE": "1ª respuesta (media)",
+      "REPLY_TIME": "Tiempo de respuesta (media)",
+      "RESOLUTION": "Tiempo medio de resolución",
+      "CSAT": "Satisfacción (CSAT)",
+      "BETTER": "mejor",
+      "WORSE": "peor",
+      "NO_COMPARISON": "sin período anterior"
+    },
+    "VOLUME": {
+      "TITLE": "Conversaciones abiertas x resueltas",
+      "BY_HOUR": "Por hora (hoy) · pase el ratón para ver los números",
+      "BY_DAY": "Por día · pase el ratón para ver los números",
+      "OPENED": "Abiertas",
+      "RESOLVED": "Resueltas",
+      "READOUT": "{label}: {opened} abiertas · {resolved} resueltas",
+      "MAX": "máx. {max}"
+    },
+    "CHANNELS": {
+      "TITLE": "Por canal",
+      "SUBTITLE": "% de las conversaciones en el período",
+      "WHATSAPP": "WhatsApp",
+      "INSTAGRAM": "Instagram",
+      "FACEBOOK": "Facebook",
+      "EMAIL": "Correo",
+      "WEBSITE": "Sitio web",
+      "OTHER": "Otros (API)"
+    },
+    "QUEUES": {
+      "TITLE": "Por cola",
+      "SUBTITLE": "Conversaciones en el período"
+    },
+    "PEAK": {
+      "TITLE": "Horas pico",
+      "SUBTITLE": "Conversaciones por día de la semana y hora en los últimos {days} días · ayuda a armar la escala",
+      "CELL": "{day} {hour}h: {count} conversaciones"
+    },
+    "AGENTS": {
+      "NAME": "Agente",
+      "TOTAL": "Total",
+      "OPEN": "Abiertas ahora",
+      "RESOLVED": "Resueltas",
+      "FIRST_RESPONSE": "1ª respuesta",
+      "RESOLUTION": "T. medio resolución",
+      "SHARE": "% del volumen",
+      "EMPTY": "Ningún agente"
+    }
+  }
+}

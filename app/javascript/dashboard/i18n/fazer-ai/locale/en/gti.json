@@ -20,7 +20,9 @@
       "SUPER_ADMIN": "Super Admin",
       "MONITOR": "TV monitor",
       "HELP": "Help",
-      "TASKS": "Tasks"
+      "TASKS": "Tasks",
+      "PANEL": "Panel",
+      "ADMIN_SECTION": "Administration"
     },
     "TICKETS": {
       "ATTENDING": "Attending",

@@ -2,6 +2,7 @@ import { frontendURL } from '../../../helper/URLHelper';
 import GtiMonitor from './GtiMonitor.vue';
 import GtiHelp from './GtiHelp.vue';
 import GtiTasks from './GtiTasks.vue';
+import GtiPanel from './GtiPanel.vue';
 
 export default {
   routes: [
@@ -28,6 +29,14 @@ export default {
         permissions: ['administrator', 'agent'],
       },
       component: GtiTasks,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/panel'),
+      name: 'gti_panel',
+      meta: {
+        permissions: ['administrator', 'report_manage'],
+      },
+      component: GtiPanel,
     },
   ],
 };

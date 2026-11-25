@@ -32,7 +32,7 @@ const renamed = (item, overrides) => {
 export const buildGtiMenu = (
   upstreamItems,
   t,
-  { monitorRoute, helpRoute, tasksRoute } = {}
+  { monitorRoute, helpRoute, tasksRoute, panelRoute } = {}
 ) => {
   const settings = findByName(upstreamItems, 'Settings');
   const settingsChildren = settings?.children || [];
@@ -101,6 +101,14 @@ export const buildGtiMenu = (
   ];
 
   const adminItems = [
+    panelRoute
+      ? {
+          name: 'Gti Panel',
+          label: t('GTI.SIDEBAR.PANEL'),
+          icon: 'i-lucide-layout-dashboard',
+          to: panelRoute,
+        }
+      : null,
     renamed(findByName(upstreamItems, 'Reports'), {
       label: t('GTI.SIDEBAR.REPORTS'),
     }),
@@ -154,7 +162,19 @@ export const buildGtiMenu = (
     item => !known.includes(item.name)
   );
 
-  return [...attendanceItems, ...adminItems, ...newUpstreamItems].filter(
-    Boolean
-  );
+  // The first admin entry carries the "Administração" heading the sidebar
+  // draws above it.
+  const visibleAdminItems = adminItems.filter(Boolean);
+  if (visibleAdminItems.length) {
+    visibleAdminItems[0] = {
+      ...visibleAdminItems[0],
+      sectionLabel: t('GTI.SIDEBAR.ADMIN_SECTION'),
+    };
+  }
+
+  return [
+    ...attendanceItems.filter(Boolean),
+    ...visibleAdminItems,
+    ...newUpstreamItems,
+  ];
 };

@@ -92,4 +92,24 @@ describe('buildGtiMenu', () => {
 
     expect(names.indexOf('Gti Monitor')).toBe(names.indexOf('Kanban') + 1);
   });
+
+  it('opens the admin group with the panel and its section heading', () => {
+    const menu = buildGtiMenu(upstreamMenu(), t, { panelRoute: '/panel' });
+    const panelIndex = menu.findIndex(item => item.name === 'Gti Panel');
+
+    expect(menu[panelIndex]).toMatchObject({
+      to: '/panel',
+      sectionLabel: 'GTI.SIDEBAR.ADMIN_SECTION',
+    });
+    expect(menu[panelIndex + 1].name).toBe('Reports');
+    expect(menu.filter(item => item.sectionLabel)).toHaveLength(1);
+  });
+
+  it('puts the admin heading on Reports when there is no panel route', () => {
+    const reports = buildGtiMenu(upstreamMenu(), t).find(
+      item => item.name === 'Reports'
+    );
+
+    expect(reports.sectionLabel).toBe('GTI.SIDEBAR.ADMIN_SECTION');
+  });
 });

@@ -1,0 +1,95 @@
+{
+  "GTI_PANEL": {
+    "TITLE": "Panel",
+    "SUBTITLE": "Support overview · {period}",
+    "LIVE": "Live",
+    "MONITOR_MODE": "Monitor mode",
+    "NO_QUEUE": "No queue",
+    "EMPTY": "No conversations in this period",
+    "PERIODS": {
+      "TODAY": "Today",
+      "LAST7": "Last 7 days",
+      "LAST30": "Last 30 days",
+      "MONTH": "This month"
+    },
+    "FILTERS": {
+      "PERIOD": "Period",
+      "QUEUE": "Queue",
+      "CONNECTION": "Connection",
+      "AGENT": "Agent",
+      "ALL_QUEUES": "All queues",
+      "ALL_CONNECTIONS": "All connections",
+      "ALL_AGENTS": "All agents"
+    },
+    "SECTIONS": {
+      "NOW": "Now",
+      "PERIOD": "{period} · compared with the previous period",
+      "VOLUME": "Volume",
+      "AGENTS": "Agents"
+    },
+    "STATUS": {
+      "ONLINE": "Online",
+      "BUSY": "Busy",
+      "OFFLINE": "Offline"
+    },
+    "NOW": {
+      "AGENTS_ONLINE": "Agents online",
+      "WAITING": "Waiting · longest wait {longest}",
+      "ATTENDING": "Being attended",
+      "LATE_TITLE": "⚠ Waiting for more than 10 min",
+      "ON_TIME_TITLE": "✓ Queue within target",
+      "ON_TIME": "No customer has waited more than 10 minutes.",
+      "LATE_ENTRY": "{name} · {queue}"
+    },
+    "KPI": {
+      "CONVERSATIONS": "Conversations in period",
+      "RESOLVED": "Resolved",
+      "INCOMING": "Messages received",
+      "FIRST_RESPONSE": "First response (avg)",
+      "REPLY_TIME": "Reply time (avg)",
+      "RESOLUTION": "Resolution time (avg)",
+      "CSAT": "Satisfaction (CSAT)",
+      "BETTER": "better",
+      "WORSE": "worse",
+      "NO_COMPARISON": "no previous period"
+    },
+    "VOLUME": {
+      "TITLE": "Opened x resolved conversations",
+      "BY_HOUR": "By hour (today) · hover to see the numbers",
+      "BY_DAY": "By day · hover to see the numbers",
+      "OPENED": "Opened",
+      "RESOLVED": "Resolved",
+      "READOUT": "{label}: {opened} opened · {resolved} resolved",
+      "MAX": "max {max}"
+    },
+    "CHANNELS": {
+      "TITLE": "By channel",
+      "SUBTITLE": "% of conversations in period",
+      "WHATSAPP": "WhatsApp",
+      "INSTAGRAM": "Instagram",
+      "FACEBOOK": "Facebook",
+      "EMAIL": "Email",
+      "WEBSITE": "Website",
+      "OTHER": "Other (API)"
+    },
+    "QUEUES": {
+      "TITLE": "By queue",
+      "SUBTITLE": "Conversations in period"
+    },
+    "PEAK": {
+      "TITLE": "Peak hours",
+      "SUBTITLE": "Conversations by weekday and hour over the last {days} days · helps plan the schedule",
+      "CELL": "{day} {hour}h: {count} conversations"
+    },
+    "AGENTS": {
+      "NAME": "Agent",
+      "TOTAL": "Total",
+      "OPEN": "Open now",
+      "RESOLVED": "Resolved",
+      "FIRST_RESPONSE": "First response",
+      "RESOLUTION": "Avg resolution",
+      "SHARE": "% of volume",
+      "EMPTY": "No agents"
+    }
+  }
+}

@@ -32,6 +32,7 @@ import {
   sortSidebarItems,
 } from 'dashboard/helper/sidebarSort';
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
+import { useAdmin } from 'dashboard/composables/useAdmin';
 import { setGtiClassicMode, useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
 import GtiMessageAlerts from 'dashboard/components/widgets/gti/GtiMessageAlerts.vue';
@@ -1046,8 +1047,11 @@ const gtiMenuItems = computed(() =>
         monitorRoute: accountScopedRoute('gti_monitor'),
         helpRoute: accountScopedRoute('gti_help'),
         tasksRoute: accountScopedRoute('gti_tasks'),
+        panelRoute: accountScopedRoute('gti_panel'),
       })
 );
+// Agents see none of the admin pages, so the heading only shows for admins.
+const { isAdmin } = useAdmin();
 </script>
 
 <template>
@@ -1178,11 +1182,23 @@ const gtiMenuItems = computed(() =>
         class="flex flex-col gap-1 m-0 list-none min-w-0"
         :class="{ 'items-center': isEffectivelyCollapsed }"
       >
-        <SidebarGroup
-          v-for="item in gtiMenuItems"
+        <template
+          v-for="{ sectionLabel, ...item } in gtiMenuItems"
           :key="item.name"
-          v-bind="item"
-        />
+        >
+          <li
+            v-if="sectionLabel && isAdmin && !isEffectivelyCollapsed"
+            class="px-2 pt-3 pb-1 text-xs font-semibold tracking-wide uppercase text-n-slate-10 select-none"
+          >
+            {{ sectionLabel }}
+          </li>
+          <li
+            v-else-if="sectionLabel && isAdmin"
+            class="w-6 my-2 border-t border-n-weak"
+            aria-hidden="true"
+          />
+          <SidebarGroup v-bind="item" />
+        </template>
       </ul>
     </nav>
     <section

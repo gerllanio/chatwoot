@@ -1,0 +1,95 @@
+{
+  "GTI_PANEL": {
+    "TITLE": "Painel",
+    "SUBTITLE": "Visão geral do atendimento · {period}",
+    "LIVE": "Ao vivo",
+    "MONITOR_MODE": "Modo monitor",
+    "NO_QUEUE": "Sem fila",
+    "EMPTY": "Sem atendimentos no período",
+    "PERIODS": {
+      "TODAY": "Hoje",
+      "LAST7": "Últimos 7 dias",
+      "LAST30": "Últimos 30 dias",
+      "MONTH": "Este mês"
+    },
+    "FILTERS": {
+      "PERIOD": "Período",
+      "QUEUE": "Fila",
+      "CONNECTION": "Conexão",
+      "AGENT": "Atendente",
+      "ALL_QUEUES": "Todas as filas",
+      "ALL_CONNECTIONS": "Todas as conexões",
+      "ALL_AGENTS": "Todos os atendentes"
+    },
+    "SECTIONS": {
+      "NOW": "Agora",
+      "PERIOD": "{period} · comparado ao período anterior",
+      "VOLUME": "Volume",
+      "AGENTS": "Atendentes"
+    },
+    "STATUS": {
+      "ONLINE": "Online",
+      "BUSY": "Ocupado",
+      "OFFLINE": "Offline"
+    },
+    "NOW": {
+      "AGENTS_ONLINE": "Atendentes online",
+      "WAITING": "Aguardando · maior espera {longest}",
+      "ATTENDING": "Em atendimento",
+      "LATE_TITLE": "⚠ Esperando há mais de 10 min",
+      "ON_TIME_TITLE": "✓ Fila dentro do prazo",
+      "ON_TIME": "Nenhum cliente esperando além de 10 minutos.",
+      "LATE_ENTRY": "{name} · {queue}"
+    },
+    "KPI": {
+      "CONVERSATIONS": "Atendimentos no período",
+      "RESOLVED": "Resolvidos",
+      "INCOMING": "Mensagens recebidas",
+      "FIRST_RESPONSE": "1ª resposta (média)",
+      "REPLY_TIME": "Tempo de resposta (média)",
+      "RESOLUTION": "Tempo médio de resolução",
+      "CSAT": "Satisfação (CSAT)",
+      "BETTER": "melhor",
+      "WORSE": "pior",
+      "NO_COMPARISON": "sem período anterior"
+    },
+    "VOLUME": {
+      "TITLE": "Atendimentos abertos x resolvidos",
+      "BY_HOUR": "Por hora (hoje) · passe o mouse para ver os números",
+      "BY_DAY": "Por dia · passe o mouse para ver os números",
+      "OPENED": "Abertos",
+      "RESOLVED": "Resolvidos",
+      "READOUT": "{label}: {opened} abertos · {resolved} resolvidos",
+      "MAX": "máx. {max}"
+    },
+    "CHANNELS": {
+      "TITLE": "Por canal",
+      "SUBTITLE": "% dos atendimentos no período",
+      "WHATSAPP": "WhatsApp",
+      "INSTAGRAM": "Instagram",
+      "FACEBOOK": "Facebook",
+      "EMAIL": "E-mail",
+      "WEBSITE": "Site",
+      "OTHER": "Outros (API)"
+    },
+    "QUEUES": {
+      "TITLE": "Por fila",
+      "SUBTITLE": "Atendimentos no período"
+    },
+    "PEAK": {
+      "TITLE": "Horários de pico",
+      "SUBTITLE": "Atendimentos por dia da semana e hora nos últimos {days} dias · ajuda a montar a escala",
+      "CELL": "{day} {hour}h: {count} atendimentos"
+    },
+    "AGENTS": {
+      "NAME": "Atendente",
+      "TOTAL": "Total",
+      "OPEN": "Abertos agora",
+      "RESOLVED": "Resolvidos",
+      "FIRST_RESPONSE": "1ª resposta",
+      "RESOLUTION": "T.M. resolução",
+      "SHARE": "% do volume",
+      "EMPTY": "Nenhum atendente"
+    }
+  }
+}
