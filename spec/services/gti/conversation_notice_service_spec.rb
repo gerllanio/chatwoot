@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Gti::ConversationNoticeService do
   let(:account) { create(:account) }
-  let(:agent) { create(:user, account: account, name: 'Kaue Silva') }
+  let(:agent) { create(:user, account: account, name: 'Kaue Silva', display_name: 'Kaue Silva') }
   let(:contact) { create(:contact, account: account, name: 'Maria Souza') }
   let(:team) { create(:team, account: account, name: 'Suporte') }
   let(:conversation) { create(:conversation, account: account, contact: contact, team: team) }

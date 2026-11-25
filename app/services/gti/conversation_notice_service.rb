@@ -32,7 +32,7 @@ class Gti::ConversationNoticeService
       'firstname' => contact_name.split.first.to_s,
       'name' => contact_name,
       'user' => user.available_name.to_s,
-      'queue' => conversation.team&.name.to_s
+      'queue' => conversation.team&.name.to_s.upcase_first
     }
     template.gsub(VARIABLE) { values[Regexp.last_match(1).downcase] }
   end

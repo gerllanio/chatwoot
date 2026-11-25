@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Conversation GTI notices API', type: :request do
   let(:account) { create(:account, gti_ticket_accepted_message: 'O colaborador {{user}} vai prosseguir.') }
   let(:conversation) { create(:conversation, account: account) }
-  let(:agent) { create(:user, account: account, role: :agent, name: 'Rhuan') }
+  let(:agent) { create(:user, account: account, role: :agent, name: 'Rhuan', display_name: 'Rhuan') }
 
   def post_notice(kind, headers: agent.create_new_auth_token)
     post api_v1_account_conversation_gti_notices_url(account_id: account.id, conversation_id: conversation.display_id),

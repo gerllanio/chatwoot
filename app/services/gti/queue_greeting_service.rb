@@ -43,7 +43,7 @@ class Gti::QueueGreetingService
     name = conversation.contact.name.to_s
     text.gsub('{{firstname}}', name.split.first.to_s)
         .gsub('{{name}}', name)
-        .gsub('{{queue}}', setting.team.name)
+        .gsub('{{queue}}', setting.team.name.upcase_first)
   end
 
   def send_text(content)

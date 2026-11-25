@@ -177,20 +177,18 @@ Rails.application.routes.draw do
           end
           resources :canned_responses, only: [:index, :create, :update, :destroy]
           resources :gti_tasks, only: [:index, :create, :update, :destroy]
-          scope 'gti_mail', controller: 'gti_mail', as: 'gti_mail' do
+          resource :gti_mail, only: [], controller: 'gti_mail' do
             get 'mailboxes', action: :mailboxes
-            scope 'mailboxes/:inbox_id' do
-              get 'folders', action: :folders
-              post 'folders', action: :create_folder
-              get 'messages', action: :messages
-              post 'send', action: :send_mail
-              get 'messages/:uid', action: :show
-              get 'messages/:uid/attachments/:index', action: :attachment
-              patch 'messages/:uid/seen', action: :seen
-              post 'messages/:uid/move', action: :move
-              post 'messages/:uid/conversation', action: :to_conversation
-              delete 'messages/:uid', action: :destroy
-            end
+            get 'mailboxes/:inbox_id/folders', action: :folders
+            post 'mailboxes/:inbox_id/folders', action: :create_folder
+            get 'mailboxes/:inbox_id/messages', action: :messages
+            post 'mailboxes/:inbox_id/send', action: :send_mail
+            get 'mailboxes/:inbox_id/messages/:uid', action: :show
+            get 'mailboxes/:inbox_id/messages/:uid/attachments/:index', action: :attachment
+            patch 'mailboxes/:inbox_id/messages/:uid/seen', action: :seen
+            post 'mailboxes/:inbox_id/messages/:uid/move', action: :move
+            post 'mailboxes/:inbox_id/messages/:uid/conversation', action: :to_conversation
+            delete 'mailboxes/:inbox_id/messages/:uid', action: :destroy
           end
           resources :gti_api_tokens, only: [:index, :create, :update, :destroy] do
             post :regenerate, on: :member

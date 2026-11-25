@@ -5,7 +5,12 @@
 class Gti::CampaignSendService
   pattr_initialize [:shipping!]
 
+  # A WhatsApp number has a country code plus 8 to 11 digits; anything shorter cannot be sent.
+  SENDABLE_NUMBER = /\A\d{10,15}\z/
+
   def perform
+    raise ArgumentError, "número inválido: #{shipping.number}" unless shipping.number.to_s.match?(SENDABLE_NUMBER)
+
     contact_inbox = find_or_create_contact_inbox
     conversation = latest_conversation(contact_inbox) || create_conversation(contact_inbox)
     message = conversation.messages.new(
