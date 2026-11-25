@@ -1,0 +1,89 @@
+{
+  "GTI_TICKETS": {
+    "CARD": {
+      "YOU": "You:",
+      "NO_MESSAGES": "No messages",
+      "AGENT": "👤 {name}"
+    },
+    "PEEK": {
+      "TITLE": "👁 Peeking",
+      "WAITING": "waiting for {time}",
+      "FINISH": "Finish"
+    },
+    "HEADER": {
+      "CONTACT_INFO": "Contact details"
+    },
+    "TRANSFER": {
+      "NOTE": "Message to your colleague (private note)",
+      "NOTE_PLACEHOLDER": "E.g. the customer wants to renegotiate the invoice"
+    },
+    "DRAWER": {
+      "CLOSE": "Close contact details",
+      "EDIT_CONTACT": "Edit contact",
+      "PRIMATA": "Primata · Customer",
+      "COMPANY": "Company",
+      "PRIMATA_SOON": "Primata integration coming soon.",
+      "OPEN_PRIMATA": "Open a Primata ticket",
+      "TAGS": "Tags",
+      "NOTES": "Notes",
+      "NOTE_PLACEHOLDER": "E.g. prefers to be contacted in the afternoon",
+      "SAVE_NOTE": "Save note",
+      "NOTE_SAVED": "Note saved",
+      "NOTE_FAILED": "Could not save the note",
+      "INFO": "Details",
+      "CHANNEL": "Channel",
+      "CONNECTION": "Connection",
+      "TICKET": "Ticket",
+      "OPENED_AT": "Opened at",
+      "HISTORY": "Previous conversations",
+      "NO_HISTORY": "No previous conversations",
+      "NO_QUEUE": "No queue",
+      "STATUS_OPEN": "Open",
+      "STATUS_RESOLVED": "Resolved"
+    },
+    "COMPOSER": {
+      "REPLY": "Reply",
+      "NOTE": "🔒 Private note",
+      "ATTACH": "Attach a document, photo or video",
+      "TAKE_PHOTO": "Take a photo",
+      "DOCUMENT": "Document",
+      "GALLERY": "Photos and videos",
+      "PHOTO": "Take a photo",
+      "VIDEO": "Record a video",
+      "RECORD": "Record audio",
+      "SIGN": "Sign with my name",
+      "HINTS": "Enter sends · Shift+Enter new line · 🎤 records audio · 📷 takes a photo"
+    },
+    "PENDING": {
+      "RESOLVED": "Ticket resolved. Reopen it to reply.",
+      "WAITING": "This ticket is waiting in the queue",
+      "ACCEPT": "Accept ticket"
+    },
+    "NEW": {
+      "TITLE": "New conversation",
+      "CONTACT": "Contact",
+      "CONTACT_PLACEHOLDER": "Type a name, phone or email",
+      "CHANGE": "Change",
+      "REGISTER": "Register a new contact",
+      "REGISTER_NAMED": "Register a new contact \"{name}\"",
+      "NAME": "Name*",
+      "PHONE": "WhatsApp / phone*",
+      "PHONE_PLACEHOLDER": "(98) 9 0000-0000",
+      "EMAIL": "Email",
+      "COMPANY": "Company",
+      "BACK": "← Pick an existing contact",
+      "CONNECTION": "Connection",
+      "QUEUE": "Queue",
+      "NO_QUEUE": "No queue",
+      "FIRST_MESSAGE": "First message (optional)",
+      "FIRST_MESSAGE_PLACEHOLDER": "Hi! This is {name} from GTI.",
+      "CANCEL": "Cancel",
+      "START": "Start conversation",
+      "REQUIRED": "Pick a contact (or fill in name and phone) and the connection",
+      "NOT_REACHABLE": "This contact cannot be reached through that connection",
+      "CREATED": "Conversation with {name} started",
+      "CREATED_NEW": "Contact {name} registered and conversation started",
+      "FAILED": "Could not start the conversation"
+    }
+  }
+}

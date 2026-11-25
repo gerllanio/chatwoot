@@ -546,10 +546,24 @@ export default {
       return `${sendMessageText} ${keyLabel}`;
     },
     replyBoxClass() {
+      if (!this.gtiClassicMode) {
+        // GTI composer: one row (buttons · rounded input · send), tabs above
+        // and the signature/hints line below, like the prototype.
+        return '!m-0 !rounded-none !border-x-0 !border-b-0 !bg-n-solid-1 flex flex-wrap items-end gap-1.5 px-3 pt-2 pb-1.5';
+      }
       return {
         'is-private': this.isPrivate,
         'is-focused': this.isFocused || this.hasAttachments,
       };
+    },
+    gtiEditorClass() {
+      if (this.gtiClassicMode) return '';
+      return [
+        'order-3 flex-1 min-w-0 !px-3.5 !mt-0 py-0.5 border rounded-[1.25rem] max-h-[7.5rem] overflow-y-auto',
+        this.isPrivate
+          ? 'bg-n-gti-note dark:bg-n-gti-note-dark border-n-gti-note-line'
+          : 'bg-n-slate-2 border-n-weak',
+      ];
     },
     hasAttachments() {
       return this.attachedFiles.length;
@@ -1745,7 +1759,11 @@ export default {
       leave-from-class="opacity-100 translate-y-0 scale-100"
       leave-to-class="opacity-0 translate-y-2 scale-[0.98]"
     >
-      <div :key="copilot.editorTransitionKey.value" class="reply-box__top">
+      <div
+        :key="copilot.editorTransitionKey.value"
+        class="reply-box__top"
+        :class="gtiEditorClass"
+      >
         <ReplyToMessage
           v-if="shouldShowReplyToMessage"
           :message="inReplyTo"

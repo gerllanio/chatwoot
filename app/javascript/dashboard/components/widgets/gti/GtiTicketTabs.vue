@@ -10,7 +10,7 @@ import { useAccount } from 'dashboard/composables/useAccount';
 import Switch from 'dashboard/components-next/switch/Switch.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
 import DropdownMenu from 'dashboard/components-next/dropdown-menu/DropdownMenu.vue';
-import ComposeConversation from 'dashboard/components-next/NewConversation/ComposeConversation.vue';
+import GtiNewTicketModal from './GtiNewTicketModal.vue';
 import {
   GTI_LIST_SECTIONS,
   GTI_TICKET_TABS,
@@ -106,6 +106,7 @@ const subTabClass = key => {
 const badgeClass = key =>
   key === GTI_TICKET_TABS.WAITING ? 'bg-n-amber-9' : 'bg-n-gti-blue';
 
+const newTicketModalRef = ref(null);
 const showTeamMenu = ref(false);
 const teamMenuItems = computed(() => [
   {
@@ -169,16 +170,14 @@ useKeyboardEvents({
     </nav>
 
     <div class="flex items-center gap-2 px-3 py-2">
-      <ComposeConversation>
-        <template #trigger>
-          <Button
-            :label="t('GTI.TICKETS.NEW')"
-            icon="i-lucide-plus"
-            size="sm"
-            class="!bg-n-brand !text-white hover:!brightness-110"
-          />
-        </template>
-      </ComposeConversation>
+      <Button
+        :label="t('GTI.TICKETS.NEW')"
+        icon="i-lucide-plus"
+        size="sm"
+        class="!bg-n-brand !text-white hover:!brightness-110"
+        @click="newTicketModalRef.open()"
+      />
+      <GtiNewTicketModal ref="newTicketModalRef" />
       <label
         v-if="showAllToggleVisible"
         class="flex items-center gap-1.5 text-xs cursor-pointer text-n-slate-11 whitespace-nowrap"

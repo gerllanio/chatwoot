@@ -28,6 +28,7 @@ const transferDialogRef = ref(null);
 const taskModalRef = ref(null);
 const transferTeamId = ref('');
 const transferAgentId = ref('');
+const transferNote = ref('');
 
 const actions = computed(() => gtiChatActions(props.chat));
 const has = action => actions.value.includes(action);
@@ -96,6 +97,7 @@ const reopen = () =>
 const openTransfer = () => {
   transferTeamId.value = props.chat.meta?.team?.id || '';
   transferAgentId.value = '';
+  transferNote.value = '';
   transferDialogRef.value.open();
 };
 
@@ -117,6 +119,15 @@ const transfer = () =>
     }
     if (teamChanged || agent) {
       await sendNotice('transfer');
+    }
+    // Message for the colleague, as a private note (the customer never sees it).
+    const note = transferNote.value.trim();
+    if (note) {
+      await store.dispatch('createPendingMessageAndSend', {
+        conversationId: props.chat.id,
+        message: note,
+        private: true,
+      });
     }
     transferDialogRef.value.close();
     useAlert(t('GTI_CHAT.TRANSFERRED'));
@@ -141,14 +152,14 @@ const transfer = () =>
       icon="i-lucide-undo-2"
       size="sm"
       color="slate"
-      variant="faded"
+      variant="outline"
       :disabled="isBusy"
       @click="returnToQueue"
     />
     <Button
       v-if="has(GTI_CHAT_ACTIONS.RESOLVE)"
       :label="t('GTI_CHAT.RESOLVE')"
-      icon="i-lucide-check-check"
+      icon="i-lucide-check"
       size="sm"
       color="blue"
       :disabled="isBusy"
@@ -160,7 +171,7 @@ const transfer = () =>
       icon="i-lucide-rotate-ccw"
       size="sm"
       color="slate"
-      variant="faded"
+      variant="outline"
       :disabled="isBusy"
       @click="reopen"
     />
@@ -170,7 +181,7 @@ const transfer = () =>
       icon="i-lucide-arrow-left-right"
       size="sm"
       color="slate"
-      variant="faded"
+      variant="outline"
       :aria-label="t('GTI_CHAT.TRANSFER')"
       :disabled="isBusy"
       @click="openTransfer"
@@ -180,7 +191,7 @@ const transfer = () =>
       icon="i-lucide-list-checks"
       size="sm"
       color="slate"
-      variant="faded"
+      variant="outline"
       :aria-label="t('GTI.TASKS.NEW_FOR_CONVERSATION')"
       @click="taskModalRef.open(null, { conversationDisplayId: chat.id })"
     />
@@ -208,6 +219,15 @@ const transfer = () =>
             v-model="transferAgentId"
             :options="agentOptions"
             :placeholder="t('GTI_CHAT.AGENT_PLACEHOLDER')"
+          />
+        </label>
+        <label class="flex flex-col gap-1 text-sm text-n-slate-12">
+          {{ t('GTI_TICKETS.TRANSFER.NOTE') }}
+          <textarea
+            v-model="transferNote"
+            rows="2"
+            class="!mb-0 text-sm"
+            :placeholder="t('GTI_TICKETS.TRANSFER.NOTE_PLACEHOLDER')"
           />
         </label>
       </div>

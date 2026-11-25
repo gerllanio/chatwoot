@@ -1,0 +1,89 @@
+{
+  "GTI_TICKETS": {
+    "CARD": {
+      "YOU": "Tú:",
+      "NO_MESSAGES": "Sin mensajes",
+      "AGENT": "👤 {name}"
+    },
+    "PEEK": {
+      "TITLE": "👁 Espiando",
+      "WAITING": "esperando hace {time}",
+      "FINISH": "Finalizar"
+    },
+    "HEADER": {
+      "CONTACT_INFO": "Datos del contacto"
+    },
+    "TRANSFER": {
+      "NOTE": "Mensaje para el compañero (nota interna)",
+      "NOTE_PLACEHOLDER": "Ej.: el cliente quiere renegociar la factura"
+    },
+    "DRAWER": {
+      "CLOSE": "Cerrar datos del contacto",
+      "EDIT_CONTACT": "Editar contacto",
+      "PRIMATA": "Primata · Cliente",
+      "COMPANY": "Empresa",
+      "PRIMATA_SOON": "Integración con Primata próximamente.",
+      "OPEN_PRIMATA": "Abrir ticket en Primata",
+      "TAGS": "Etiquetas",
+      "NOTES": "Observaciones",
+      "NOTE_PLACEHOLDER": "Ej.: prefiere contacto por la tarde",
+      "SAVE_NOTE": "Guardar observación",
+      "NOTE_SAVED": "Observación guardada",
+      "NOTE_FAILED": "No se pudo guardar la observación",
+      "INFO": "Información",
+      "CHANNEL": "Canal",
+      "CONNECTION": "Conexión",
+      "TICKET": "Ticket",
+      "OPENED_AT": "Abierto a las",
+      "HISTORY": "Historial de atenciones",
+      "NO_HISTORY": "Sin atenciones anteriores",
+      "NO_QUEUE": "Sin cola",
+      "STATUS_OPEN": "Abierto",
+      "STATUS_RESOLVED": "Resuelto"
+    },
+    "COMPOSER": {
+      "REPLY": "Responder",
+      "NOTE": "🔒 Nota interna",
+      "ATTACH": "Adjuntar documento, foto o video",
+      "TAKE_PHOTO": "Tomar foto",
+      "DOCUMENT": "Documento",
+      "GALLERY": "Fotos y videos de la galería",
+      "PHOTO": "Tomar foto",
+      "VIDEO": "Grabar video",
+      "RECORD": "Grabar audio",
+      "SIGN": "Firmar con mi nombre",
+      "HINTS": "Enter envía · Shift+Enter salto de línea · 🎤 graba audio · 📷 toma foto"
+    },
+    "PENDING": {
+      "RESOLVED": "Ticket resuelto. Reábralo para responder.",
+      "WAITING": "Este ticket está esperando en la cola",
+      "ACCEPT": "Aceptar atención"
+    },
+    "NEW": {
+      "TITLE": "Nueva atención",
+      "CONTACT": "Contacto",
+      "CONTACT_PLACEHOLDER": "Escriba nombre, teléfono o correo",
+      "CHANGE": "Cambiar",
+      "REGISTER": "Registrar nuevo contacto",
+      "REGISTER_NAMED": "Registrar nuevo contacto \"{name}\"",
+      "NAME": "Nombre*",
+      "PHONE": "WhatsApp / teléfono*",
+      "PHONE_PLACEHOLDER": "(98) 9 0000-0000",
+      "EMAIL": "Correo",
+      "COMPANY": "Empresa",
+      "BACK": "← Elegir contacto existente",
+      "CONNECTION": "Conexión",
+      "QUEUE": "Cola",
+      "NO_QUEUE": "Sin cola",
+      "FIRST_MESSAGE": "Primer mensaje (opcional)",
+      "FIRST_MESSAGE_PLACEHOLDER": "¡Hola! Soy {name} de GTI.",
+      "CANCEL": "Cancelar",
+      "START": "Iniciar atención",
+      "REQUIRED": "Elija un contacto (o complete nombre y teléfono) y la conexión",
+      "NOT_REACHABLE": "Este contacto no puede ser atendido por esa conexión",
+      "CREATED": "Atención con {name} iniciada",
+      "CREATED_NEW": "Contacto {name} registrado y atención iniciada",
+      "FAILED": "No se pudo iniciar la atención"
+    }
+  }
+}

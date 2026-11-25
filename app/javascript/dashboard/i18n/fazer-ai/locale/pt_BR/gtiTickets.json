@@ -1,0 +1,89 @@
+{
+  "GTI_TICKETS": {
+    "CARD": {
+      "YOU": "Você:",
+      "NO_MESSAGES": "Sem mensagens",
+      "AGENT": "👤 {name}"
+    },
+    "PEEK": {
+      "TITLE": "👁 Espiando",
+      "WAITING": "aguardando há {time}",
+      "FINISH": "Finalizar"
+    },
+    "HEADER": {
+      "CONTACT_INFO": "Dados do contato"
+    },
+    "TRANSFER": {
+      "NOTE": "Mensagem para o colega (nota interna)",
+      "NOTE_PLACEHOLDER": "Ex.: cliente quer renegociar boleto"
+    },
+    "DRAWER": {
+      "CLOSE": "Fechar dados do contato",
+      "EDIT_CONTACT": "Editar contato",
+      "PRIMATA": "Primata · Cliente",
+      "COMPANY": "Empresa",
+      "PRIMATA_SOON": "Integração com o Primata em breve.",
+      "OPEN_PRIMATA": "Abrir chamado no Primata",
+      "TAGS": "Tags",
+      "NOTES": "Observações",
+      "NOTE_PLACEHOLDER": "Ex.: prefere contato à tarde; falar com o gerente Paulo",
+      "SAVE_NOTE": "Salvar observação",
+      "NOTE_SAVED": "Observação salva",
+      "NOTE_FAILED": "Não foi possível salvar a observação",
+      "INFO": "Informações",
+      "CHANNEL": "Canal",
+      "CONNECTION": "Conexão",
+      "TICKET": "Ticket",
+      "OPENED_AT": "Aberto às",
+      "HISTORY": "Histórico de atendimentos",
+      "NO_HISTORY": "Sem atendimentos anteriores",
+      "NO_QUEUE": "Sem fila",
+      "STATUS_OPEN": "Aberto",
+      "STATUS_RESOLVED": "Resolvido"
+    },
+    "COMPOSER": {
+      "REPLY": "Responder",
+      "NOTE": "🔒 Nota interna",
+      "ATTACH": "Anexar documento, foto ou vídeo",
+      "TAKE_PHOTO": "Tirar foto",
+      "DOCUMENT": "Documento",
+      "GALLERY": "Fotos e vídeos da galeria",
+      "PHOTO": "Tirar foto",
+      "VIDEO": "Gravar vídeo",
+      "RECORD": "Gravar áudio",
+      "SIGN": "Assinar com meu nome",
+      "HINTS": "Enter envia · Shift+Enter quebra linha · 🎤 grava áudio · 📷 tira foto"
+    },
+    "PENDING": {
+      "RESOLVED": "Ticket resolvido. Reabra para responder.",
+      "WAITING": "Este ticket está aguardando na fila",
+      "ACCEPT": "Aceitar atendimento"
+    },
+    "NEW": {
+      "TITLE": "Novo atendimento",
+      "CONTACT": "Contato",
+      "CONTACT_PLACEHOLDER": "Digite nome, telefone ou e-mail",
+      "CHANGE": "Trocar",
+      "REGISTER": "Cadastrar novo contato",
+      "REGISTER_NAMED": "Cadastrar novo contato \"{name}\"",
+      "NAME": "Nome*",
+      "PHONE": "WhatsApp / telefone*",
+      "PHONE_PLACEHOLDER": "(98) 9 0000-0000",
+      "EMAIL": "E-mail",
+      "COMPANY": "Empresa",
+      "BACK": "← Escolher contato existente",
+      "CONNECTION": "Conexão",
+      "QUEUE": "Fila",
+      "NO_QUEUE": "Sem fila",
+      "FIRST_MESSAGE": "Primeira mensagem (opcional)",
+      "FIRST_MESSAGE_PLACEHOLDER": "Olá! Aqui é {name} da GTI.",
+      "CANCEL": "Cancelar",
+      "START": "Iniciar atendimento",
+      "REQUIRED": "Escolha um contato (ou preencha nome e telefone) e a conexão",
+      "NOT_REACHABLE": "Este contato não pode ser atendido por essa conexão",
+      "CREATED": "Atendimento com {name} iniciado",
+      "CREATED_NEW": "Contato {name} cadastrado e atendimento iniciado",
+      "FAILED": "Não foi possível iniciar o atendimento"
+    }
+  }
+}

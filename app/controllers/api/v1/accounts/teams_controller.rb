@@ -3,7 +3,7 @@ class Api::V1::Accounts::TeamsController < Api::V1::Accounts::BaseController
   before_action :check_authorization
 
   def index
-    @teams = Current.account.teams
+    @teams = Current.account.teams.includes(:gti_setting)
   end
 
   def show; end

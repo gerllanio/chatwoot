@@ -16,10 +16,13 @@ import DropdownContainer from 'next/dropdown-menu/base/DropdownContainer.vue';
 import DropdownBody from 'next/dropdown-menu/base/DropdownBody.vue';
 import DropdownSection from 'next/dropdown-menu/base/DropdownSection.vue';
 import DropdownItem from 'next/dropdown-menu/base/DropdownItem.vue';
+import GtiAttachMenu from 'dashboard/components/widgets/gti/GtiAttachMenu.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 export default {
   name: 'ReplyBottomPanel',
   components: {
+    GtiAttachMenu,
     NextButton,
     FileUpload,
     VideoCallButton,
@@ -171,6 +174,7 @@ export default {
     useKeyboardEvents(keyboardEvents);
 
     return {
+      gtiClassicMode: useGtiClassicMode(),
       setSignatureFlagForInbox,
       fetchSignatureFlagFromUISettings,
       uploadRef,
@@ -186,6 +190,19 @@ export default {
       return {
         'is-note-mode': this.isNote,
       };
+    },
+    // GTI composer: the panel's buttons join the reply box's single row
+    // (emoji, 📎, 📷 · editor · send or mic), so its root steps aside.
+    gtiRootClass() {
+      return this.gtiClassicMode ? ['flex justify-between p-3'] : ['contents'];
+    },
+    gtiShowMic() {
+      return (
+        !this.gtiClassicMode &&
+        this.isSendDisabled &&
+        !this.isRecordingAudio &&
+        this.showAudioRecorderButton
+      );
     },
     showAttachButton() {
       if (this.isEditorDisabled) return false;
@@ -290,8 +307,8 @@ export default {
 </script>
 
 <template>
-  <div class="flex justify-between p-3" :class="wrapClass">
-    <div class="left-wrap">
+  <div :class="[gtiRootClass, wrapClass]">
+    <div class="left-wrap" :class="{ 'order-2 pb-0.5': !gtiClassicMode }">
       <NextButton
         v-if="!isEditorDisabled"
         v-tooltip.top-end="$t('CONVERSATION.REPLYBOX.TIP_EMOJI_ICON')"
@@ -318,7 +335,7 @@ export default {
         @input-file="onFileUpload"
       >
         <NextButton
-          v-if="showAttachButton"
+          v-if="showAttachButton && gtiClassicMode"
           v-tooltip.top-end="$t('CONVERSATION.REPLYBOX.TIP_ATTACH_ICON')"
           icon="i-ph-paperclip"
           slate
@@ -326,8 +343,13 @@ export default {
           sm
         />
       </FileUpload>
+      <GtiAttachMenu
+        v-if="showAttachButton && !gtiClassicMode"
+        :on-files="onFileUpload"
+        :accept="allowedFileTypes"
+      />
       <NextButton
-        v-if="showAudioRecorderButton"
+        v-if="showAudioRecorderButton && (gtiClassicMode || isRecordingAudio)"
         v-tooltip.top-end="$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_ICON')"
         :icon="!isRecordingAudio ? 'i-ph-microphone' : 'i-ph-microphone-slash'"
         slate
@@ -345,7 +367,7 @@ export default {
         @click="toggleAudioRecorderPlayPause"
       />
       <NextButton
-        v-if="showMessageSignatureButton"
+        v-if="showMessageSignatureButton && gtiClassicMode"
         v-tooltip.top-end="signatureToggleTooltip"
         icon="i-ph-signature"
         :color="sendWithSignature ? 'blue' : 'slate'"
@@ -404,7 +426,55 @@ export default {
         @click="toggleInsertArticle"
       />
     </div>
-    <div class="right-wrap">
+    <div v-if="!gtiClassicMode" class="flex order-4 gap-1.5">
+      <button
+        v-if="gtiShowMic"
+        v-tooltip.top="$t('GTI_TICKETS.COMPOSER.RECORD')"
+        type="button"
+        class="inline-flex items-center justify-center p-0 text-white border-0 rounded-full size-[2.625rem] bg-n-gti-green hover:brightness-90"
+        :aria-label="$t('GTI_TICKETS.COMPOSER.RECORD')"
+        @click="toggleAudioRecorder"
+      >
+        <span class="i-lucide-mic size-5" />
+      </button>
+      <button
+        v-else
+        v-tooltip.top="sendButtonText"
+        type="submit"
+        class="inline-flex items-center justify-center p-0 text-white border-0 rounded-full size-[2.625rem] hover:brightness-90 disabled:opacity-50"
+        :class="
+          isRecordingAudio
+            ? 'bg-n-gti-danger'
+            : isNote
+              ? 'bg-n-amber-9'
+              : 'bg-n-gti-green'
+        "
+        :aria-label="sendButtonText"
+        :disabled="isSendDisabled"
+        @click="onSend"
+      >
+        <span class="i-lucide-send-horizontal size-5" />
+      </button>
+    </div>
+    <div
+      v-if="!gtiClassicMode"
+      class="flex flex-wrap items-center order-last w-full gap-3 mt-0.5 text-[0.71875rem] text-n-slate-11"
+    >
+      <label
+        v-if="showMessageSignatureButton"
+        class="inline-flex items-center gap-1.5 cursor-pointer"
+      >
+        <input
+          type="checkbox"
+          class="!m-0"
+          :checked="sendWithSignature"
+          @change="toggleMessageSignature"
+        />
+        {{ $t('GTI_TICKETS.COMPOSER.SIGN') }}
+      </label>
+      <span>{{ $t('GTI_TICKETS.COMPOSER.HINTS') }}</span>
+    </div>
+    <div v-else class="right-wrap">
       <div v-if="showScheduleOptions && !isNote" class="flex">
         <NextButton
           :label="sendButtonText"

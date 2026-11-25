@@ -18,6 +18,16 @@ import { useI18n } from 'vue-i18n';
 import { copyTextToClipboard } from 'shared/helpers/clipboard';
 import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiConversationActions from '../gti/GtiConversationActions.vue';
+import { useUISettings } from 'dashboard/composables/useUISettings';
+import { useMapGetter } from 'dashboard/composables/store';
+import Icon from 'dashboard/components-next/icon/Icon.vue';
+import {
+  gtiAvatarColor,
+  gtiChannelBadge,
+  gtiChannelName,
+  gtiInitials,
+  gtiTeamColor,
+} from 'dashboard/helper/gtiTicketCard';
 
 const props = defineProps({
   chat: {
@@ -37,6 +47,8 @@ const conversationHeader = ref(null);
 const { width } = useElementSize(conversationHeader);
 const { isAWebWidgetInbox, isAnEmailChannel } = useInbox();
 const gtiClassicMode = useGtiClassicMode();
+const { uiSettings, updateUISettings } = useUISettings();
+const teams = useMapGetter('teams/getTeams');
 
 const currentChat = computed(() => store.getters.getSelectedChat);
 const accountId = computed(() => store.getters.getCurrentAccountId);
@@ -113,6 +125,19 @@ const gtiAssigneeText = computed(() => {
     : t('GTI_CHAT.WAITING_AGENT');
 });
 
+// GTI header: queue in its own colour, channel badge on the avatar and an
+// ⓘ button that opens the contact drawer.
+const gtiTeamColorValue = computed(() => {
+  const id = props.chat.meta?.team?.id;
+  return gtiTeamColor((teams.value || []).find(team => team.id === id));
+});
+const gtiBadge = computed(() => gtiChannelBadge(inbox.value?.channel_type));
+const toggleGtiContactDrawer = () => {
+  updateUISettings({
+    is_contact_sidebar_open: !uiSettings.value?.is_contact_sidebar_open,
+  });
+};
+
 const copyConversationId = async () => {
   try {
     await copyTextToClipboard(String(props.chat.id));
@@ -126,7 +151,12 @@ const copyConversationId = async () => {
 <template>
   <div
     ref="conversationHeader"
-    class="flex flex-col gap-3 items-center justify-between flex-1 w-full min-w-0 xl:flex-row px-3 pt-3 pb-2 h-24 xl:h-12"
+    class="flex flex-col gap-3 items-center justify-between flex-1 w-full min-w-0 xl:flex-row px-3"
+    :class="
+      gtiClassicMode
+        ? 'pt-3 pb-2 h-24 xl:h-12'
+        : 'py-2 h-auto xl:min-h-[3.875rem] border-b border-n-weak bg-n-solid-1'
+    "
   >
     <div
       class="flex items-center justify-start w-full xl:w-auto max-w-full min-w-0 xl:flex-1"
@@ -136,7 +166,32 @@ const copyConversationId = async () => {
         :back-url="backButtonUrl"
         class="me-2"
       />
+      <div
+        v-if="!gtiClassicMode"
+        class="relative flex-shrink-0 size-[2.625rem]"
+      >
+        <img
+          v-if="currentContact.thumbnail"
+          :src="currentContact.thumbnail"
+          :alt="currentContact.name"
+          class="object-cover rounded-full size-full"
+        />
+        <span
+          v-else
+          class="flex items-center justify-center font-semibold text-white rounded-full size-full"
+          :class="gtiAvatarColor(currentContact.id)"
+        >
+          {{ gtiInitials(currentContact.name) }}
+        </span>
+        <span
+          class="absolute flex items-center justify-center border-2 rounded-full -end-1 -bottom-1 size-[1.125rem] border-n-solid-1"
+          :class="gtiBadge.bg"
+        >
+          <span class="text-white size-2.5" :class="gtiBadge.icon" />
+        </span>
+      </div>
       <Avatar
+        v-else
         :name="currentContact.name"
         :src="currentContact.thumbnail"
         :size="32"
@@ -166,13 +221,23 @@ const copyConversationId = async () => {
           <span class="truncate">{{ gtiAssigneeText }}</span>
           <template v-if="chat.meta?.team">
             <span>•</span>
-            <span class="font-semibold truncate text-n-brand">
+            <span
+              class="font-semibold truncate"
+              :class="{ 'text-n-brand': !gtiTeamColorValue }"
+              :style="gtiTeamColorValue ? { color: gtiTeamColorValue } : null"
+            >
               {{ chat.meta.team.name }}
             </span>
           </template>
           <template v-if="inbox?.name">
             <span>•</span>
             <span class="truncate">{{ inbox.name }}</span>
+          </template>
+          <template v-if="gtiChannelName(inbox?.channel_type)">
+            <span>•</span>
+            <span class="truncate">{{
+              gtiChannelName(inbox?.channel_type)
+            }}</span>
           </template>
           <span>•</span>
           <button
@@ -225,6 +290,16 @@ const copyConversationId = async () => {
         class="hidden md:flex"
       />
       <GtiConversationActions v-if="!gtiClassicMode" :chat="currentChat" />
+      <button
+        v-if="!gtiClassicMode"
+        v-tooltip.top="t('GTI_TICKETS.HEADER.CONTACT_INFO')"
+        type="button"
+        class="inline-flex items-center justify-center p-0 border rounded-md size-[2.125rem] border-n-weak bg-n-solid-1 text-n-slate-11 hover:text-n-gti-green"
+        :aria-label="t('GTI_TICKETS.HEADER.CONTACT_INFO')"
+        @click="toggleGtiContactDrawer"
+      >
+        <Icon icon="i-lucide-info" class="size-[1.125rem]" />
+      </button>
       <ConversationCallButton :inbox="inbox" :chat="currentChat" />
       <MoreActions :conversation-id="currentChat.id" />
     </div>

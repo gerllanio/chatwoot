@@ -7,9 +7,7 @@ import MessagePreview from './MessagePreview.vue';
 import InboxName from '../InboxName.vue';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
-import GtiCardActions from '../gti/GtiCardActions.vue';
-import GtiCardMeta from '../gti/GtiCardMeta.vue';
-import { isGtiActiveConversation } from 'dashboard/helper/gtiTicketTabs';
+import GtiTicketCard from '../gti/GtiTicketCard.vue';
 import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
 import CardPinIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPinIcon.vue';
@@ -116,7 +114,25 @@ watch(
 </script>
 
 <template>
+  <GtiTicketCard
+    v-if="!gtiClassicMode"
+    :chat="chat"
+    :current-contact="currentContact"
+    :assignee="assignee"
+    :inbox="inbox"
+    :selected="selected"
+    :is-active-chat="isActiveChat"
+    :typing-preview="typingPreview"
+    :has-group-activity="hasGroupActivity"
+    @click="$emit('click', $event)"
+    @contextmenu="$emit('contextmenu', $event)"
+    @select-conversation="
+      (id, inboxId) => emit('selectConversation', id, inboxId)
+    "
+    @de-select-conversation="id => emit('deSelectConversation', id)"
+  />
   <div
+    v-else
     class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-alpha-1 dark:hover:bg-n-alpha-3 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="{
       'active animate-card-select bg-n-background !border-n-surface-1':
@@ -229,13 +245,6 @@ watch(
           {{ $t(`CHAT_LIST.NO_MESSAGES`) }}
         </span>
       </p>
-      <GtiCardMeta
-        v-if="!gtiClassicMode"
-        :chat="chat"
-        :inbox="inbox"
-        :assignee="assignee"
-        class="mx-2 mt-0.5"
-      />
       <div
         class="absolute flex flex-col ltr:right-3 rtl:left-3"
         :class="showMetaSection ? 'top-8' : 'top-4'"
@@ -267,11 +276,6 @@ watch(
           <SLACardLabel :chat="chat" class="ltr:mr-1 rtl:ml-1" />
         </template>
       </CardLabels>
-      <GtiCardActions
-        v-if="!gtiClassicMode && isGtiActiveConversation(chat)"
-        :chat="chat"
-        class="mx-2 mt-1.5"
-      />
     </div>
   </div>
 </template>

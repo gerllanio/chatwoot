@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import ConversationCard from '../ConversationCard.vue';
+import { setGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 const defaultChat = {
   id: 1,
@@ -32,6 +33,19 @@ const mountComponent = (chat, currentContact = {}, props = {}) =>
   });
 
 describe('ConversationCard', () => {
+  // These describe the upstream card; the GTI layout swaps in GtiTicketCard.
+  beforeEach(() => setGtiClassicMode(true));
+  afterAll(() => setGtiClassicMode(false));
+
+  it('renders the GTI ticket card in the Work layout', () => {
+    setGtiClassicMode(false);
+    const wrapper = mountComponent({});
+
+    expect(wrapper.findComponent({ name: 'GtiTicketCard' }).exists()).toBe(
+      true
+    );
+  });
+
   it('does not reserve the labels row when only a persisted SLA policy id is present', () => {
     const wrapper = mountComponent({ sla_policy_id: 1, applied_sla: null });
 

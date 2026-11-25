@@ -22,8 +22,8 @@ const props = defineProps({
 
 const router = useRouter();
 const store = useStore();
-// In the GTI layout the card's chips (GtiCardMeta) already name the inbox and
-// the assignee, so the condensed card's upstream meta row would repeat them.
+// In the GTI layout every conversation uses the prototype ticket card
+// (GtiTicketCard, inside ConversationCard), which names the inbox and assignee itself.
 const gtiClassicMode = useGtiClassicMode();
 
 const selectConversation = inject('selectConversation');
@@ -222,7 +222,7 @@ const onTogglePin = () => {
 <template>
   <!-- Expanded layout: wide screen + expanded setting -->
   <ConversationCardExpanded
-    v-if="showExpanded"
+    v-if="showExpanded && gtiClassicMode"
     :chat="source"
     :current-contact="currentContact"
     :assignee="assignee"

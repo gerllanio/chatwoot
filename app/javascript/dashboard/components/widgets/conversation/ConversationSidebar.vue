@@ -5,6 +5,8 @@ import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useWindowSize } from '@vueuse/core';
 import { vOnClickOutside } from '@vueuse/components';
 import wootConstants from 'dashboard/constants/globals';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
+import GtiContactDrawer from 'dashboard/components/widgets/gti/GtiContactDrawer.vue';
 
 defineProps({
   currentChat: {
@@ -14,6 +16,7 @@ defineProps({
 });
 
 const { uiSettings, updateUISettings } = useUISettings();
+const gtiClassicMode = useGtiClassicMode();
 const { width: windowWidth } = useWindowSize();
 
 const activeTab = computed(() => {
@@ -51,8 +54,11 @@ const closeContactPanel = () => {
         ],
       },
     ]"
-    class="bg-n-surface-2 h-full overflow-hidden flex flex-col fixed top-0 z-40 w-full max-w-sm transition-transform duration-300 ease-in-out ltr:right-0 rtl:left-0 md:static md:w-[320px] md:min-w-[320px] ltr:border-l rtl:border-r border-n-weak 2xl:min-w-[360px] 2xl:w-[360px] shadow-lg md:shadow-none"
+    class="bg-n-surface-2 h-full overflow-hidden flex flex-col fixed top-0 z-40 w-full max-w-sm transition-transform duration-300 ease-in-out ltr:right-0 rtl:left-0 md:static ltr:border-l rtl:border-r border-n-weak shadow-lg md:shadow-none"
     :class="[
+      gtiClassicMode
+        ? 'md:w-[320px] md:min-w-[320px] 2xl:min-w-[360px] 2xl:w-[360px]'
+        : 'md:w-[18.75rem] md:min-w-[18.75rem]',
       {
         'md:flex': activeTab === 0,
         'md:hidden': activeTab !== 0,
@@ -60,7 +66,12 @@ const closeContactPanel = () => {
     ]"
   >
     <div class="flex flex-1 overflow-auto">
+      <GtiContactDrawer
+        v-if="!gtiClassicMode && activeTab === 0"
+        :chat="currentChat"
+      />
       <ContactPanel
+        v-else
         v-show="activeTab === 0"
         :conversation-id="currentChat.id"
         :inbox-id="currentChat.inbox_id"

@@ -30,6 +30,8 @@ import Banner from 'dashboard/components/ui/Banner.vue';
 import WhatsappNumberMissingBanner from './WhatsappNumberMissingBanner.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 import GtiContactHistory from 'dashboard/components/widgets/gti/GtiContactHistory.vue';
+import GtiPendingBar from 'dashboard/components/widgets/gti/GtiPendingBar.vue';
+import { isGtiReplyBlocked } from 'dashboard/helper/gtiTicketCard';
 import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import { GTI_CHAT_WALLPAPER } from 'dashboard/helper/gtiChat';
 import NextButton from 'dashboard/components-next/button/Button.vue';
@@ -97,6 +99,7 @@ export default {
   components: {
     MessageList,
     ReplyBox,
+    GtiPendingBar,
     Banner,
     WhatsappNumberMissingBanner,
     ContactConversationLink,
@@ -240,6 +243,10 @@ export default {
   },
 
   computed: {
+    // GTI: a waiting or resolved ticket shows the prototype bar, not the composer.
+    gtiReplyBlocked() {
+      return !this.gtiClassicMode && isGtiReplyBlocked(this.currentChat);
+    },
     ...mapGetters({
       currentChat: 'getSelectedChat',
       currentUserId: 'getCurrentUserID',
@@ -1233,9 +1240,10 @@ export default {
           </div>
         </div>
       </Transition>
+      <GtiPendingBar v-if="gtiReplyBlocked" :chat="currentChat" />
       <Transition v-bind="foldTransition">
         <div
-          v-show="!isReplyFolded"
+          v-show="!isReplyFolded && !gtiReplyBlocked"
           class="grid grid-rows-[var(--fold-rows,1fr)]"
         >
           <div class="min-h-0 min-w-0">
