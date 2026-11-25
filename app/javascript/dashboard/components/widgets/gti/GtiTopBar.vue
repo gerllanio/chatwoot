@@ -12,6 +12,7 @@ const { t } = useI18n();
 const { accountScopedRoute } = useAccount();
 const currentUser = useMapGetter('getCurrentUser');
 const unreadCount = useMapGetter('notifications/getUnreadCount');
+const globalConfig = useMapGetter('globalConfig/get');
 
 const userName = computed(
   () => currentUser.value?.available_name || currentUser.value?.name || ''
@@ -26,7 +27,7 @@ const userName = computed(
       :to="accountScopedRoute('home')"
       class="flex items-center gap-2 text-white"
     >
-      <img src="/brand-assets/logo_dark.svg" alt="GTI" class="h-7" />
+      <img :src="globalConfig.logoDark" alt="GTI" class="h-7" />
       <span class="text-base font-bold">{{ t('GTI.TOPBAR.PRODUCT') }}</span>
       <span class="hidden text-xs opacity-75 sm:inline">
         {{ t('GTI.TOPBAR.TAGLINE') }}
