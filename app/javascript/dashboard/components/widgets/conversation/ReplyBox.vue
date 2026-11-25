@@ -74,6 +74,11 @@ import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 import { LocalStorage } from 'shared/helpers/localStorage';
 import { emitter } from 'shared/helpers/mitt';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
+import {
+  applyGtiNameSignature,
+  gtiNameSignature,
+} from 'dashboard/helper/gtiSignature';
 const EmojiIconPicker = defineAsyncComponent(
   () =>
     import('dashboard/components-next/emoji-icon-picker/EmojiIconPicker.vue')
@@ -178,6 +183,7 @@ export default {
     });
 
     return {
+      gtiClassicMode: useGtiClassicMode(),
       uiSettings,
       isEditorHotKeyEnabled,
       fetchSignatureFlagFromUISettings,
@@ -589,6 +595,8 @@ export default {
       return !this.isPrivate && this.sendWithSignature;
     },
     messageSignature() {
+      // GTI: the signature is the agent's name, like Ticketz ("*Kaue:*").
+      if (!this.gtiClassicMode) return gtiNameSignature(this.currentUser);
       return this.getSignatureForInbox(this.inboxId);
     },
     isSignatureAvailable() {
@@ -1001,6 +1009,9 @@ export default {
     applySignatureToMessage(message) {
       if (!this.sendWithSignature || !this.messageSignature) {
         return message;
+      }
+      if (!this.gtiClassicMode) {
+        return applyGtiNameSignature(message, this.messageSignature);
       }
       const signatureSettings = {
         position: this.signaturePosition,
