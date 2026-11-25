@@ -58,6 +58,15 @@ const switchAccount = accountId => {
 const userName = computed(
   () => currentUser.value?.available_name || currentUser.value?.name || ''
 );
+const userInitials = computed(() =>
+  userName.value
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0])
+    .join('')
+    .toUpperCase()
+);
 const userLabel = computed(() =>
   t('GTI.TOPBAR.USER_ROLE', {
     name: userName.value,
@@ -102,7 +111,7 @@ const toggleTheme = () => {
       :title="t('GTI.TOPBAR.MENU')"
       @click="toggleSidebar"
     >
-      <span class="i-lucide-menu size-5" />
+      <span class="i-material-symbols-menu size-6" />
     </button>
     <router-link
       :to="accountScopedRoute('home')"
@@ -126,7 +135,14 @@ const toggleTheme = () => {
       :title="isDark ? t('GTI.TOPBAR.LIGHT_MODE') : t('GTI.TOPBAR.DARK_MODE')"
       @click="toggleTheme"
     >
-      <span :class="isDark ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-5" />
+      <span
+        :class="
+          isDark
+            ? 'i-material-symbols-light-mode'
+            : 'i-material-symbols-dark-mode'
+        "
+        class="size-5"
+      />
     </button>
     <div class="[&_button]:!text-white [&_button]:!size-[2.375rem]">
       <GtiVolumeControl />
@@ -137,7 +153,7 @@ const toggleTheme = () => {
       :aria-label="t('GTI.TOPBAR.NOTIFICATIONS')"
       :title="t('GTI.TOPBAR.NOTIFICATIONS')"
     >
-      <span class="i-lucide-bell size-5" />
+      <span class="i-material-symbols-notifications size-5" />
       <span
         v-if="unreadCount"
         class="absolute top-1 end-1 px-[0.3125rem] text-[0.625rem] font-bold leading-4 text-white rounded-full bg-n-ruby-9"
@@ -154,16 +170,20 @@ const toggleTheme = () => {
           :title="t('GTI.TOPBAR.USER_MENU')"
           @click="toggle"
         >
+          <Avatar
+            v-if="currentUser?.avatar_url"
+            :name="userName"
+            :src="currentUser.avatar_url"
+            :status="currentUserAvailability"
+            :size="28"
+            rounded-full
+          />
+          <!-- Prototype .av: initials on the GTI green, 28px, 12px semibold. -->
           <span
-            class="flex items-center justify-center rounded-full ring-2 ring-n-gti-green bg-n-gti-green"
+            v-else
+            class="flex items-center justify-center text-xs font-semibold text-white rounded-full size-7 bg-n-gti-green"
           >
-            <Avatar
-              :name="userName"
-              :src="currentUser?.avatar_url"
-              :status="currentUserAvailability"
-              :size="28"
-              rounded-full
-            />
+            {{ userInitials }}
           </span>
           <span class="hidden text-sm sm:inline">{{ userLabel }}</span>
         </button>

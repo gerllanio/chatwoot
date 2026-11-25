@@ -16,6 +16,7 @@ import CmdBarConversationSnooze from 'dashboard/routes/dashboard/commands/CmdBar
 import { emitter } from 'shared/helpers/mitt';
 import SidepanelSwitch from 'dashboard/components-next/Conversation/SidepanelSwitch.vue';
 import ConversationSidebar from 'dashboard/components/widgets/conversation/ConversationSidebar.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 export default {
   components: {
@@ -69,6 +70,7 @@ export default {
     );
 
     return {
+      gtiClassicMode: useGtiClassicMode(),
       uiSettings,
       updateUISettings,
       isOnExpandedLayout,
@@ -267,7 +269,8 @@ export default {
       :inbox-id="inboxId"
       :is-on-expanded-layout="isOnExpandedLayout"
     >
-      <SidepanelSwitch v-if="currentChat.id" />
+      <!-- GTI: the ⓘ button in the header opens the contact drawer instead. -->
+      <SidepanelSwitch v-if="gtiClassicMode && currentChat.id" />
     </ConversationBox>
     <ConversationSidebar v-if="shouldShowSidebar" :current-chat="currentChat" />
     <CmdBarConversationSnooze />

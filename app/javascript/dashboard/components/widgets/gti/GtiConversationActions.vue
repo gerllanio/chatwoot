@@ -6,7 +6,6 @@ import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import { useAlert, useAssignmentError } from 'dashboard/composables';
 import { useMapGetter } from 'dashboard/composables/store';
-import Button from 'dashboard/components-next/button/Button.vue';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import GtiTaskModal from 'dashboard/components/widgets/gti/GtiTaskModal.vue';
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
@@ -20,6 +19,14 @@ const props = defineProps({
 
 const store = useStore();
 const { t } = useI18n();
+
+// Prototype buttons: .btn (white, line border), .btn.ok (--ok green) and .ib2 (34px icon).
+const GTI_BTN =
+  'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border rounded-md disabled:opacity-50 bg-white border-n-gti-line text-n-slate-12 hover:bg-n-gti-panel2';
+const GTI_BTN_OK =
+  'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border rounded-md disabled:opacity-50 bg-n-gti-ok border-n-gti-ok text-white hover:brightness-95';
+const GTI_ICON_BTN =
+  'inline-flex items-center justify-center p-0 border rounded-md size-[2.125rem] bg-white border-n-gti-line text-n-gti-muted hover:text-n-gti-green disabled:opacity-50';
 const currentUser = useMapGetter('getCurrentUser');
 const teams = useMapGetter('teams/getTeams');
 
@@ -136,65 +143,67 @@ const transfer = () =>
 
 <template>
   <div class="flex items-center gap-1.5">
-    <Button
+    <button
       v-if="has(GTI_CHAT_ACTIONS.ACCEPT)"
-      :label="t('GTI_CHAT.ACCEPT')"
-      icon="i-lucide-check"
-      size="sm"
-      color="blue"
+      type="button"
+      :class="GTI_BTN_OK"
       :disabled="isBusy"
       @click="accept"
-    />
-    <Button
+    >
+      <span class="i-material-symbols-check size-4" />
+      {{ t('GTI_CHAT.ACCEPT') }}
+    </button>
+    <button
       v-if="has(GTI_CHAT_ACTIONS.RETURN)"
       v-tooltip.bottom="t('GTI_CHAT.RETURN_HINT')"
-      :label="t('GTI_CHAT.RETURN')"
-      icon="i-lucide-undo-2"
-      size="sm"
-      color="slate"
-      variant="outline"
+      type="button"
+      :class="GTI_BTN"
       :disabled="isBusy"
       @click="returnToQueue"
-    />
-    <Button
+    >
+      <span class="i-material-symbols-undo size-4" />
+      {{ t('GTI_CHAT.RETURN') }}
+    </button>
+    <button
       v-if="has(GTI_CHAT_ACTIONS.RESOLVE)"
-      :label="t('GTI_CHAT.RESOLVE')"
-      icon="i-lucide-check"
-      size="sm"
-      color="blue"
+      type="button"
+      :class="GTI_BTN_OK"
       :disabled="isBusy"
       @click="resolve"
-    />
-    <Button
+    >
+      <span class="i-material-symbols-check size-4" />
+      {{ t('GTI_CHAT.RESOLVE') }}
+    </button>
+    <button
       v-if="has(GTI_CHAT_ACTIONS.REOPEN)"
-      :label="t('GTI_CHAT.REOPEN')"
-      icon="i-lucide-rotate-ccw"
-      size="sm"
-      color="slate"
-      variant="outline"
+      type="button"
+      :class="GTI_BTN"
       :disabled="isBusy"
       @click="reopen"
-    />
-    <Button
+    >
+      <span class="i-material-symbols-undo size-4" />
+      {{ t('GTI_CHAT.REOPEN') }}
+    </button>
+    <button
       v-if="has(GTI_CHAT_ACTIONS.TRANSFER)"
       v-tooltip.bottom="t('GTI_CHAT.TRANSFER')"
-      icon="i-lucide-arrow-left-right"
-      size="sm"
-      color="slate"
-      variant="outline"
+      type="button"
+      :class="GTI_ICON_BTN"
       :aria-label="t('GTI_CHAT.TRANSFER')"
       :disabled="isBusy"
       @click="openTransfer"
-    />
-    <Button
+    >
+      <span class="i-material-symbols-swap-horiz size-[1.125rem]" />
+    </button>
+    <button
       v-tooltip.bottom="t('GTI.TASKS.NEW_FOR_CONVERSATION')"
-      icon="i-lucide-list-checks"
-      size="sm"
-      color="slate"
-      variant="outline"
+      type="button"
+      :class="GTI_ICON_BTN"
       :aria-label="t('GTI.TASKS.NEW_FOR_CONVERSATION')"
       @click="taskModalRef.open(null, { conversationDisplayId: chat.id })"
-    />
+    >
+      <span class="i-material-symbols-assignment-turned-in size-[1.125rem]" />
+    </button>
     <GtiTaskModal ref="taskModalRef" />
     <Dialog
       ref="transferDialogRef"

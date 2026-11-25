@@ -33,3 +33,11 @@
     --blue-12: 180 241 205;
   }
 }
+
+// GTI "Work": the prototype's type, the operating system font (Segoe UI on Windows),
+// instead of upstream's Inter. Upstream sets Inter on many utility classes, so the
+// override has to reach every descendant.
+.gti-font,
+.gti-font * {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+}

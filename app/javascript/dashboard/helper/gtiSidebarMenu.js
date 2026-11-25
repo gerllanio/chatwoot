@@ -61,7 +61,7 @@ const flatConversations = (conversation, t) => {
   return {
     ...item,
     label: t('GTI.SIDEBAR.TICKETS'),
-    icon: 'i-lucide-messages-square',
+    icon: 'i-material-symbols-chat',
     to: home?.to,
     activeOn: CONVERSATION_ROUTES,
   };
@@ -108,7 +108,7 @@ export const buildGtiMenu = (
       ? {
           name: 'Gti Mail',
           label: t('GTI.SIDEBAR.MAIL'),
-          icon: 'i-lucide-mail',
+          icon: 'i-material-symbols-mail',
           to: mailRoute,
         }
       : null,
@@ -116,7 +116,7 @@ export const buildGtiMenu = (
       ? {
           name: 'Gti Tasks',
           label: t('GTI.SIDEBAR.TASKS'),
-          icon: 'i-lucide-list-checks',
+          icon: 'i-material-symbols-assignment-turned-in',
           to: tasksRoute,
         }
       : null,
@@ -126,7 +126,7 @@ export const buildGtiMenu = (
       ? {
           name: 'Kanban',
           label: t('GTI.SIDEBAR.KANBAN'),
-          icon: 'i-lucide-kanban',
+          icon: 'i-material-symbols-view-kanban',
           to: kanbanRoute,
         }
       : renamed(findByName(upstreamItems, 'Kanban'), {
@@ -136,33 +136,34 @@ export const buildGtiMenu = (
       ? {
           name: 'Gti Monitor',
           label: t('GTI.SIDEBAR.MONITOR'),
-          icon: 'i-lucide-monitor',
+          icon: 'i-material-symbols-monitor',
           to: monitorRoute,
         }
       : null,
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.canned, {
       name: 'Gti Quick Replies',
       label: t('GTI.SIDEBAR.QUICK_REPLIES'),
-      icon: 'i-lucide-zap',
+      icon: 'i-material-symbols-bolt',
     }),
     renamed(findByName(upstreamItems, 'Contacts'), {
+      icon: 'i-material-symbols-group',
       label: t('GTI.SIDEBAR.CONTACTS'),
     }),
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.labels, {
       name: 'Gti Tags',
       label: t('GTI.SIDEBAR.TAGS'),
-      icon: 'i-lucide-tag',
+      icon: 'i-material-symbols-sell',
     }),
     renamed(findByName(upstreamItems, 'InternalChat'), {
       label: t('GTI.SIDEBAR.INTERNAL_CHAT'),
-      icon: 'i-lucide-message-square-more',
+      icon: 'i-material-symbols-forum',
     }),
     findByName(upstreamItems, 'Calls'),
     helpRoute
       ? {
           name: 'Gti Help',
           label: t('GTI.SIDEBAR.HELP'),
-          icon: 'i-lucide-circle-help',
+          icon: 'i-material-symbols-help-outline',
           to: helpRoute,
         }
       : null,
@@ -173,11 +174,12 @@ export const buildGtiMenu = (
       ? {
           name: 'Gti Panel',
           label: t('GTI.SIDEBAR.PANEL'),
-          icon: 'i-lucide-layout-dashboard',
+          icon: 'i-material-symbols-dashboard',
           to: panelRoute,
         }
       : null,
     renamed(findByName(upstreamItems, 'Reports'), {
+      icon: 'i-material-symbols-bar-chart',
       label: t('GTI.SIDEBAR.REPORTS'),
     }),
     // Ticketz-style campaigns replace upstream's, which need WhatsApp Cloud templates.
@@ -185,34 +187,36 @@ export const buildGtiMenu = (
       ? {
           name: 'Gti Campaigns',
           label: t('GTI.SIDEBAR.CAMPAIGNS'),
-          icon: 'i-lucide-megaphone',
+          icon: 'i-material-symbols-campaign',
           to: campaignsRoute,
         }
       : renamed(findByName(upstreamItems, 'Campaigns'), {
+          icon: 'i-material-symbols-campaign',
           label: t('GTI.SIDEBAR.CAMPAIGNS'),
         }),
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.inboxes, {
       name: 'Gti Connections',
       label: t('GTI.SIDEBAR.CONNECTIONS'),
-      icon: 'i-lucide-link',
+      icon: 'i-material-symbols-link',
     }),
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.teams, {
       name: 'Gti Queues',
       label: t('GTI.SIDEBAR.QUEUES'),
-      icon: 'i-lucide-list-ordered',
+      icon: 'i-material-symbols-sort',
     }),
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.agents, {
       name: 'Gti Users',
       label: t('GTI.SIDEBAR.USERS'),
-      icon: 'i-lucide-users',
+      icon: 'i-material-symbols-person',
     }),
     renamed(findByName(upstreamItems, 'Companies'), {
+      icon: 'i-material-symbols-domain',
       label: t('GTI.SIDEBAR.COMPANIES'),
     }),
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.integrations, {
       name: 'Gti Integrations',
       label: t('GTI.SIDEBAR.INTEGRATIONS'),
-      icon: 'i-lucide-blocks',
+      icon: 'i-material-symbols-extension',
     }),
     findByName(upstreamItems, 'Captain'),
     findByName(upstreamItems, 'Portals'),
@@ -220,7 +224,7 @@ export const buildGtiMenu = (
       ? {
           name: 'Gti Settings',
           label: t('GTI.SIDEBAR.SETTINGS'),
-          icon: 'i-lucide-sliders-horizontal',
+          icon: 'i-material-symbols-settings',
           to: settingsRoute,
         }
       : null,

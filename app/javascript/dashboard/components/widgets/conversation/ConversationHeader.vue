@@ -47,6 +47,8 @@ const conversationHeader = ref(null);
 const { width } = useElementSize(conversationHeader);
 const { isAWebWidgetInbox, isAnEmailChannel } = useInbox();
 const gtiClassicMode = useGtiClassicMode();
+// Prototype header subline: "Atribuído a X · Fila · Canal".
+const GTI_SEPARATOR = '·';
 const { uiSettings, updateUISettings } = useUISettings();
 const teams = useMapGetter('teams/getTeams');
 
@@ -216,11 +218,11 @@ const copyConversationId = async () => {
 
         <div
           v-if="!gtiClassicMode"
-          class="flex items-center max-w-full gap-1 overflow-hidden text-xs text-n-slate-11 whitespace-nowrap"
+          class="flex items-center max-w-full gap-1 overflow-hidden text-xs text-n-gti-muted whitespace-nowrap"
         >
           <span class="truncate">{{ gtiAssigneeText }}</span>
           <template v-if="chat.meta?.team">
-            <span>•</span>
+            <span>{{ GTI_SEPARATOR }}</span>
             <span
               class="font-semibold truncate"
               :class="{ 'text-n-brand': !gtiTeamColorValue }"
@@ -229,24 +231,12 @@ const copyConversationId = async () => {
               {{ chat.meta.team.name }}
             </span>
           </template>
-          <template v-if="inbox?.name">
-            <span>•</span>
-            <span class="truncate">{{ inbox.name }}</span>
-          </template>
           <template v-if="gtiChannelName(inbox?.channel_type)">
-            <span>•</span>
+            <span>{{ GTI_SEPARATOR }}</span>
             <span class="truncate">{{
               gtiChannelName(inbox?.channel_type)
             }}</span>
           </template>
-          <span>•</span>
-          <button
-            type="button"
-            class="shrink-0 text-n-slate-11 hover:text-n-slate-12 !p-0"
-            @click="copyConversationId"
-          >
-            {{ `#${chat.id}` }}
-          </button>
         </div>
         <div
           v-else
@@ -294,11 +284,11 @@ const copyConversationId = async () => {
         v-if="!gtiClassicMode"
         v-tooltip.top="t('GTI_TICKETS.HEADER.CONTACT_INFO')"
         type="button"
-        class="inline-flex items-center justify-center p-0 border rounded-md size-[2.125rem] border-n-weak bg-n-solid-1 text-n-slate-11 hover:text-n-gti-green"
+        class="inline-flex items-center justify-center p-0 border rounded-md size-[2.125rem] border-n-gti-line bg-white text-n-gti-muted hover:text-n-gti-green"
         :aria-label="t('GTI_TICKETS.HEADER.CONTACT_INFO')"
         @click="toggleGtiContactDrawer"
       >
-        <Icon icon="i-lucide-info" class="size-[1.125rem]" />
+        <Icon icon="i-material-symbols-info" class="size-[1.125rem]" />
       </button>
       <ConversationCallButton :inbox="inbox" :chat="currentChat" />
       <MoreActions :conversation-id="currentChat.id" />

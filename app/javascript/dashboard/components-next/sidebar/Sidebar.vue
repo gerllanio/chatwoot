@@ -1267,6 +1267,19 @@ const { isAdmin } = useAdmin();
           <SidebarGroup v-bind="item" />
         </template>
       </ul>
+      <!-- GTI: version block at the end of the list, scrolling with it (prototype .ver). -->
+      <div
+        v-if="!gtiClassicMode && !isEffectivelyCollapsed"
+        class="w-full px-[1.125rem] pt-3.5 pb-[1.125rem] text-[0.6875rem] leading-relaxed mt-2.5 border-t border-n-gti-line text-n-gti-muted"
+      >
+        <b>{{ t('GTI.SIDEBAR.PRODUCT_VERSION') }}</b>
+        <br />
+        {{
+          t('GTI.SIDEBAR.BASE_VERSION', { version: globalConfig.appVersion })
+        }}
+        <br />
+        {{ t('GTI.SIDEBAR.COPYRIGHT') }}
+      </div>
     </nav>
     <section
       class="flex relative flex-col flex-shrink-0 gap-1 justify-between items-center"
@@ -1298,18 +1311,6 @@ const { isAdmin } = useAdmin();
           :is-collapsed="isEffectivelyCollapsed"
           @open-key-shortcut-modal="emit('openKeyShortcutModal')"
         />
-      </div>
-      <div
-        v-if="!gtiClassicMode && !isEffectivelyCollapsed"
-        class="w-full px-[1.125rem] pt-3.5 pb-[1.125rem] text-[0.6875rem] leading-relaxed border-t border-n-weak text-n-slate-10"
-      >
-        <b>{{ t('GTI.SIDEBAR.PRODUCT_VERSION') }}</b>
-        <br />
-        {{
-          t('GTI.SIDEBAR.BASE_VERSION', { version: globalConfig.appVersion })
-        }}
-        <br />
-        {{ t('GTI.SIDEBAR.COPYRIGHT') }}
       </div>
       <div
         v-if="gtiClassicMode && !isEffectivelyCollapsed"

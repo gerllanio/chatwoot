@@ -140,21 +140,21 @@ const bubbleClass = message => {
     <button
       v-tooltip.top="t('GTI.TICKETS.FINISH')"
       type="button"
-      class="inline-flex items-center justify-center p-0 border rounded-full size-[1.875rem] border-n-weak bg-n-solid-1 text-n-slate-11 hover:bg-n-ruby-3 hover:text-n-ruby-11 hover:border-n-ruby-6 disabled:opacity-50"
+      class="inline-flex items-center justify-center p-0 border rounded-full size-[1.875rem] border-n-gti-line bg-white text-n-gti-muted hover:bg-n-ruby-3 hover:text-n-ruby-11 hover:border-n-ruby-6 disabled:opacity-50"
       :aria-label="t('GTI.TICKETS.FINISH')"
       :disabled="isBusy"
       @click="finishConversation"
     >
-      <Icon icon="i-lucide-x" class="size-4" />
+      <Icon icon="i-material-symbols-close" class="size-[1.0625rem]" />
     </button>
     <button
       v-tooltip.top="t('GTI.TICKETS.PEEK')"
       type="button"
-      class="inline-flex items-center justify-center p-0 border rounded-full size-[1.875rem] border-n-weak bg-n-solid-1 text-n-slate-11 hover:bg-n-gti-blue/10 hover:text-n-gti-blue hover:border-n-gti-blue/40"
+      class="inline-flex items-center justify-center p-0 border rounded-full size-[1.875rem] border-n-gti-line bg-white text-n-gti-muted hover:bg-n-gti-blue/10 hover:text-n-gti-blue hover:border-n-gti-blue/40"
       :aria-label="t('GTI.TICKETS.PEEK')"
       @click="peekConversation"
     >
-      <Icon icon="i-lucide-eye" class="size-4" />
+      <Icon icon="i-material-symbols-visibility" class="size-[1.0625rem]" />
     </button>
     <button
       v-if="canAccept"
@@ -165,7 +165,7 @@ const bubbleClass = message => {
       :disabled="isBusy"
       @click="acceptConversation"
     >
-      <Icon icon="i-lucide-check" class="size-4" />
+      <Icon icon="i-material-symbols-check" class="size-[1.0625rem]" />
     </button>
     <Dialog ref="peekDialogRef" width="xl" overflow-y-auto>
       <div class="flex flex-col gap-3">

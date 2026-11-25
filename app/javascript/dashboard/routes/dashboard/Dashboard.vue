@@ -142,7 +142,10 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col flex-grow min-h-0 overflow-hidden">
+  <div
+    class="flex flex-col flex-grow min-h-0 overflow-hidden"
+    :class="{ 'gti-font': !gtiClassicMode }"
+  >
     <GtiTopBar
       v-if="!gtiClassicMode"
       @toggle-mobile-sidebar="toggleMobileSidebar"

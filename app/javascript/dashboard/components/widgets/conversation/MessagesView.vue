@@ -1155,7 +1155,7 @@ export default {
           :conversation="currentChat"
         />
         <ContactConversationLink
-          v-if="olderConversation && listLoadingStatus"
+          v-if="gtiClassicMode && olderConversation && listLoadingStatus"
           direction="older"
           :conversation="olderConversation"
           :to="
@@ -1190,7 +1190,7 @@ export default {
       </template>
       <template #after>
         <ContactConversationLink
-          v-if="newerConversation"
+          v-if="gtiClassicMode && newerConversation"
           direction="newer"
           :conversation="newerConversation"
           :to="

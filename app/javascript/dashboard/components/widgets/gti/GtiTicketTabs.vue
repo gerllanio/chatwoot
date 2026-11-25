@@ -40,7 +40,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['tabChange', 'filtersModal']);
+const emit = defineEmits(['tabChange']);
 
 const showAll = defineModel('showAll', {
   type: Boolean,
@@ -62,17 +62,17 @@ const sections = computed(() => [
   {
     key: GTI_LIST_SECTIONS.OPEN,
     label: t('GTI.TICKETS.OPEN'),
-    icon: 'i-lucide-inbox',
+    icon: 'i-material-symbols-inbox',
   },
   {
     key: GTI_LIST_SECTIONS.RESOLVED,
     label: t('GTI.TICKETS.RESOLVED'),
-    icon: 'i-lucide-check',
+    icon: 'i-material-symbols-check',
   },
   {
     key: GTI_LIST_SECTIONS.SEARCH,
     label: t('GTI.TICKETS.SEARCH'),
-    icon: 'i-lucide-search',
+    icon: 'i-material-symbols-search',
   },
 ]);
 
@@ -172,7 +172,7 @@ useKeyboardEvents({
     <div class="flex items-center gap-2 px-3 py-2">
       <Button
         :label="t('GTI.TICKETS.NEW')"
-        icon="i-lucide-plus"
+        icon="i-material-symbols-add"
         size="sm"
         class="!bg-n-brand !text-white hover:!brightness-110"
         @click="newTicketModalRef.open()"
@@ -193,7 +193,7 @@ useKeyboardEvents({
       >
         <Button
           :label="t('GTI.TICKETS.QUEUES', { count: teams.length })"
-          icon="i-lucide-list-filter"
+          icon="i-material-symbols-filter-list"
           size="sm"
           variant="outline"
           color="slate"
@@ -207,15 +207,6 @@ useKeyboardEvents({
         />
       </div>
       <div class="relative">
-        <Button
-          v-tooltip.top-end="t('GTI.TICKETS.ADVANCED_FILTERS')"
-          :aria-label="t('GTI.TICKETS.ADVANCED_FILTERS')"
-          icon="i-lucide-sliders-horizontal"
-          size="sm"
-          variant="ghost"
-          color="slate"
-          @click="emit('filtersModal')"
-        />
         <!-- Upstream's advanced filter modal teleports here while the GTI header replaces ChatListHeader. -->
         <div
           id="conversationFilterTeleportTarget"

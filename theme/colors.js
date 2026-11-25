@@ -253,6 +253,11 @@ export const colors = {
       'note-line': '#F1D36B',
       warn: '#E08A00',
       danger: '#D64545',
+      // Prototype --ok (Resolver/Aceitar), --line (borders), --muted (secondary text), --panel2.
+      ok: '#1F9D55',
+      line: '#DFE6EE',
+      muted: '#64748B',
+      panel2: '#F6F9FC',
       // Channel badges on the ticket avatar.
       wa: '#25D366',
       ig: '#D6249F',

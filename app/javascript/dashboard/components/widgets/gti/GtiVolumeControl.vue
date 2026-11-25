@@ -27,7 +27,9 @@ const muted = ref(isGtiAlertMuted());
 
 const isSilent = computed(() => muted.value || volumePercent.value === 0);
 const volumeIcon = computed(() =>
-  isSilent.value ? 'i-lucide-volume-x' : 'i-lucide-volume-2'
+  isSilent.value
+    ? 'i-material-symbols-volume-off'
+    : 'i-material-symbols-volume-up'
 );
 
 const onVolumeInput = event => {
