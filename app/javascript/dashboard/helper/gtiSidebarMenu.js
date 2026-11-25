@@ -73,6 +73,7 @@ export const buildGtiMenu = (
   {
     monitorRoute,
     kanbanRoute,
+    mailRoute,
     helpRoute,
     tasksRoute,
     panelRoute,
@@ -95,6 +96,14 @@ export const buildGtiMenu = (
 
   const attendanceItems = [
     flatConversations(findByName(upstreamItems, 'Conversation'), t),
+    mailRoute
+      ? {
+          name: 'Gti Mail',
+          label: t('GTI.SIDEBAR.MAIL'),
+          icon: 'i-lucide-mail',
+          to: mailRoute,
+        }
+      : null,
     tasksRoute
       ? {
           name: 'Gti Tasks',

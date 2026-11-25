@@ -33,6 +33,7 @@ import {
 } from 'dashboard/helper/sidebarSort';
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
 import { useGtiOpenTasksCount } from 'dashboard/composables/useGtiOpenTasksCount';
+import { useGtiMailUnread } from 'dashboard/composables/useGtiMailUnread';
 import { useAdmin } from 'dashboard/composables/useAdmin';
 import { setGtiClassicMode, useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
@@ -1051,16 +1052,22 @@ const currentUser = useMapGetter('getCurrentUser');
 const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
 const gtiClassicMode = useGtiClassicMode();
 const { count: gtiOpenTasks } = useGtiOpenTasksCount();
+const { unreadCount: gtiMailUnread } = useGtiMailUnread();
 const withGtiCounts = items =>
-  items.map(item =>
-    item.name === 'Gti Tasks' ? { ...item, gtiCount: gtiOpenTasks.value } : item
-  );
+  items.map(item => {
+    if (item.name === 'Gti Tasks')
+      return { ...item, gtiCount: gtiOpenTasks.value };
+    if (item.name === 'Gti Mail')
+      return { ...item, gtiCount: gtiMailUnread.value };
+    return item;
+  });
 const gtiMenuItems = computed(() =>
   gtiClassicMode.value
     ? menuItems.value
     : withGtiCounts(
         buildGtiMenu(menuItems.value, t, {
           kanbanRoute: accountScopedRoute('gti_kanban'),
+          mailRoute: accountScopedRoute('gti_mail'),
           helpRoute: accountScopedRoute('gti_help'),
           tasksRoute: accountScopedRoute('gti_tasks'),
           panelRoute: accountScopedRoute('gti_panel'),
