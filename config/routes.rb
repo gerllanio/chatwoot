@@ -505,6 +505,9 @@ Rails.application.routes.draw do
                 patch :update
               end
             end
+            resource :gti_settings, only: [:show, :update], module: :teams do
+              delete :media, action: :destroy_media
+            end
           end
 
           # Assignment V2 Routes

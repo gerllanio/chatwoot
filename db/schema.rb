@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_25_201227) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_25_201619) do
   create_schema "whatsapp_connector"
 
   # These extensions should be enabled to support this database
@@ -1517,6 +1517,17 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_25_201227) do
     t.index ["account_id", "assignee_id"], name: "index_gti_tasks_on_account_id_and_assignee_id"
     t.index ["account_id", "completed_at", "due_at"], name: "index_gti_tasks_on_account_id_and_completed_at_and_due_at"
     t.index ["conversation_id"], name: "index_gti_tasks_on_conversation_id"
+  end
+
+  create_table "gti_team_settings", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "team_id", null: false
+    t.string "color"
+    t.text "greeting_message"
+    t.text "out_of_hours_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_gti_team_settings_on_team_id", unique: true
   end
 
   create_table "inbox_assignment_policies", force: :cascade do |t|

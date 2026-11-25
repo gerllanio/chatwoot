@@ -1,0 +1,28 @@
+{
+  "GTI_TEAM_SETTINGS": {
+    "TITLE": "Saudação da fila",
+    "DESCRIPTION": "Enviada ao cliente no WhatsApp quando a conversa entra nesta fila.",
+    "COLOR": "Cor da fila",
+    "GREETING": "Mensagem de saudação",
+    "GREETING_PLACEHOLDER": "Ex.: Olá {{firstname}}, você está no setor {{queue}}. Logo um atendente vai responder.",
+    "VARIABLES": "Variáveis: {variables}",
+    "MEDIA": {
+      "LABEL": "Imagem ou áudio",
+      "HELP": "Opcional. A imagem vai junto com a mensagem; o áudio é enviado logo depois (áudio gravado chega como mensagem de voz).",
+      "UPLOAD": "Enviar imagem ou áudio",
+      "RECORD": "Gravar áudio",
+      "STOP": "Parar gravação",
+      "REMOVE": "Remover",
+      "INVALID": "Escolha uma imagem ou um arquivo de áudio.",
+      "RECORD_ERROR": "Não foi possível gravar o áudio. Verifique a permissão do microfone."
+    },
+    "OUT_OF_HOURS": "Mensagem fora do expediente",
+    "OUT_OF_HOURS_PLACEHOLDER": "Ex.: Estamos fechados agora, {{firstname}}. Respondemos assim que abrirmos.",
+    "OUT_OF_HOURS_HELP": "Enviada no lugar da saudação enquanto a conexão está fora do horário de atendimento.",
+    "SAVE": "Salvar saudação",
+    "API": {
+      "SUCCESS": "Saudação da fila salva",
+      "ERROR": "Não foi possível salvar a saudação da fila. Tente de novo."
+    }
+  }
+}

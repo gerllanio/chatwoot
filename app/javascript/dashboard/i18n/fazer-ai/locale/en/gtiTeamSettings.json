@@ -1,0 +1,28 @@
+{
+  "GTI_TEAM_SETTINGS": {
+    "TITLE": "Queue greeting",
+    "DESCRIPTION": "Sent to the customer on WhatsApp when the conversation enters this queue.",
+    "COLOR": "Queue color",
+    "GREETING": "Greeting message",
+    "GREETING_PLACEHOLDER": "E.g.: Hi {{firstname}}, you are in {{queue}}. An agent will reply shortly.",
+    "VARIABLES": "Variables: {variables}",
+    "MEDIA": {
+      "LABEL": "Image or audio",
+      "HELP": "Optional. An image goes with the message; an audio is sent right after it (recorded audio arrives as a voice note).",
+      "UPLOAD": "Upload image or audio",
+      "RECORD": "Record audio",
+      "STOP": "Stop recording",
+      "REMOVE": "Remove",
+      "INVALID": "Choose an image or an audio file.",
+      "RECORD_ERROR": "Could not record the audio. Check the microphone permission."
+    },
+    "OUT_OF_HOURS": "Out-of-hours message",
+    "OUT_OF_HOURS_PLACEHOLDER": "E.g.: We are closed now, {{firstname}}. We will reply when we open.",
+    "OUT_OF_HOURS_HELP": "Sent instead of the greeting while the connection is outside its working hours.",
+    "SAVE": "Save greeting",
+    "API": {
+      "SUCCESS": "Queue greeting saved",
+      "ERROR": "Could not save the queue greeting. Try again."
+    }
+  }
+}

@@ -6,12 +6,18 @@ import TeamForm from '../TeamForm.vue';
 import router from '../../../../index';
 import PageHeader from '../../SettingsSubPageHeader.vue';
 import Spinner from 'shared/components/Spinner.vue';
+import GtiTeamGreeting from 'dashboard/components/widgets/gti/GtiTeamGreeting.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 export default {
   components: {
     TeamForm,
     PageHeader,
     Spinner,
+    GtiTeamGreeting,
+  },
+  setup() {
+    return { gtiClassicMode: useGtiClassicMode() };
   },
   data() {
     return {
@@ -71,6 +77,10 @@ export default {
         :form-data="teamData"
       />
       <Spinner v-else />
+      <GtiTeamGreeting
+        v-if="showTeamForm && !gtiClassicMode"
+        :team-id="teamData.id"
+      />
     </div>
   </div>
 </template>

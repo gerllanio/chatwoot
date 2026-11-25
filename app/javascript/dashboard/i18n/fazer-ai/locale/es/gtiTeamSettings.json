@@ -1,0 +1,28 @@
+{
+  "GTI_TEAM_SETTINGS": {
+    "TITLE": "Saludo de la cola",
+    "DESCRIPTION": "Se envía al cliente por WhatsApp cuando la conversación entra en esta cola.",
+    "COLOR": "Color de la cola",
+    "GREETING": "Mensaje de saludo",
+    "GREETING_PLACEHOLDER": "Ej.: Hola {{firstname}}, estás en {{queue}}. Un agente responderá pronto.",
+    "VARIABLES": "Variables: {variables}",
+    "MEDIA": {
+      "LABEL": "Imagen o audio",
+      "HELP": "Opcional. La imagen va con el mensaje; el audio se envía justo después (el audio grabado llega como nota de voz).",
+      "UPLOAD": "Subir imagen o audio",
+      "RECORD": "Grabar audio",
+      "STOP": "Detener grabación",
+      "REMOVE": "Quitar",
+      "INVALID": "Elige una imagen o un archivo de audio.",
+      "RECORD_ERROR": "No se pudo grabar el audio. Revisa el permiso del micrófono."
+    },
+    "OUT_OF_HOURS": "Mensaje fuera de horario",
+    "OUT_OF_HOURS_PLACEHOLDER": "Ej.: Estamos cerrados ahora, {{firstname}}. Responderemos al abrir.",
+    "OUT_OF_HOURS_HELP": "Se envía en lugar del saludo mientras la conexión está fuera de su horario de atención.",
+    "SAVE": "Guardar saludo",
+    "API": {
+      "SUCCESS": "Saludo de la cola guardado",
+      "ERROR": "No se pudo guardar el saludo de la cola. Inténtalo de nuevo."
+    }
+  }
+}
