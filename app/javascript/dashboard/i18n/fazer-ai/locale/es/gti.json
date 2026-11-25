@@ -19,7 +19,8 @@
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin",
       "MONITOR": "Monitor (TV)",
-      "HELP": "Ayuda"
+      "HELP": "Ayuda",
+      "TASKS": "Tareas"
     },
     "TICKETS": {
       "ATTENDING": "Atendiendo",
@@ -113,6 +114,35 @@
           "BODY": "En Conexiones, abre la bandeja de WhatsApp (nativo) y escanea el nuevo código QR desde Dispositivos vinculados en el celular."
         }
       }
+    },
+    "TASKS": {
+      "TITLE": "Tareas",
+      "SUBTITLE": "Pendientes del equipo, con responsable y plazo.",
+      "ONLY_MINE": "Solo las mías",
+      "STATUS": {
+        "PENDING": "Pendientes",
+        "COMPLETED": "Completadas"
+      },
+      "FORM": {
+        "TITLE": "Tarea",
+        "TITLE_PLACEHOLDER": "Ej.: devolver la llamada del cliente",
+        "ASSIGNEE": "Responsable",
+        "ME": "Yo",
+        "PRIORITY": "Prioridad",
+        "DUE": "Plazo",
+        "CREATE": "Crear"
+      },
+      "PRIORITY": {
+        "HIGH": "Alta",
+        "MEDIUM": "Media",
+        "LOW": "Baja"
+      },
+      "CREATED": "Tarea creada",
+      "DELETED": "Tarea eliminada",
+      "DELETE": "Eliminar tarea",
+      "LOADING": "Cargando tareas…",
+      "EMPTY": "No hay tareas aquí.",
+      "CONVERSATION": "Conversación #{id}"
     }
   }
 }

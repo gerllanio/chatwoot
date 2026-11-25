@@ -10,6 +10,10 @@ on:
       - 'app/**/gti/**'
       - 'app/models/attachment.rb'
       - 'app/models/concerns/gti_*.rb'
+      - 'app/models/gti_*.rb'
+      - 'app/controllers/api/v1/accounts/gti_*.rb'
+      - 'db/migrate/*_gti_*.rb'
+      - 'spec/**/gti_*'
       - 'spec/**/gti/**'
       - '.github/workflows/gti_specs.yml'
   workflow_dispatch:
@@ -49,6 +53,6 @@ jobs:
       - name: Prepare database
         run: bundle exec rake db:create db:schema:load
       - name: Rubocop
-        run: bundle exec rubocop app/services/gti app/jobs/gti app/models/attachment.rb app/models/concerns/gti_audio_transcription.rb spec/services/gti spec/jobs/gti
+        run: bundle exec rubocop app/services/gti app/jobs/gti app/models/attachment.rb app/models/concerns/gti_audio_transcription.rb app/models/gti_task.rb app/controllers/api/v1/accounts/gti_tasks_controller.rb spec/services/gti spec/jobs/gti spec/models/gti_task_spec.rb spec/controllers/api/v1/accounts/gti_tasks_controller_spec.rb
       - name: Run GTI specs
-        run: bundle exec rspec spec/services/gti spec/jobs/gti spec/models/attachment_spec.rb
+        run: bundle exec rspec spec/services/gti spec/jobs/gti spec/models/attachment_spec.rb spec/models/gti_task_spec.rb spec/controllers/api/v1/accounts/gti_tasks_controller_spec.rb

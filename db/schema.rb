@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_17_164815) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_25_143831) do
   create_schema "whatsapp_connector"
 
   # These extensions should be enabled to support this database
@@ -1434,6 +1434,23 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_17_164815) do
     t.index ["group_contact_id", "contact_id"], name: "index_group_members_on_group_contact_id_and_contact_id", unique: true
     t.index ["group_contact_id", "is_active"], name: "index_group_members_on_group_contact_id_and_is_active"
     t.index ["group_contact_id"], name: "index_group_members_on_group_contact_id"
+  end
+
+  create_table "gti_tasks", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.bigint "assignee_id"
+    t.bigint "created_by_id"
+    t.bigint "conversation_id"
+    t.integer "priority", default: 1, null: false
+    t.datetime "due_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "assignee_id"], name: "index_gti_tasks_on_account_id_and_assignee_id"
+    t.index ["account_id", "completed_at", "due_at"], name: "index_gti_tasks_on_account_id_and_completed_at_and_due_at"
+    t.index ["conversation_id"], name: "index_gti_tasks_on_conversation_id"
   end
 
   create_table "inbox_assignment_policies", force: :cascade do |t|

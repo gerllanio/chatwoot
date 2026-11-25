@@ -1,6 +1,7 @@
 import { frontendURL } from '../../../helper/URLHelper';
 import GtiMonitor from './GtiMonitor.vue';
 import GtiHelp from './GtiHelp.vue';
+import GtiTasks from './GtiTasks.vue';
 
 export default {
   routes: [
@@ -19,6 +20,14 @@ export default {
         permissions: ['administrator', 'agent'],
       },
       component: GtiHelp,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/tasks'),
+      name: 'gti_tasks',
+      meta: {
+        permissions: ['administrator', 'agent'],
+      },
+      component: GtiTasks,
     },
   ],
 };

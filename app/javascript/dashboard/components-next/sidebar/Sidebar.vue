@@ -1041,6 +1041,7 @@ const gtiMenuItems = computed(() =>
   buildGtiMenu(menuItems.value, t, {
     monitorRoute: accountScopedRoute('gti_monitor'),
     helpRoute: accountScopedRoute('gti_help'),
+    tasksRoute: accountScopedRoute('gti_tasks'),
   })
 );
 </script>

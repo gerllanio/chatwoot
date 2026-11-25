@@ -19,7 +19,8 @@
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin",
       "MONITOR": "TV monitor",
-      "HELP": "Help"
+      "HELP": "Help",
+      "TASKS": "Tasks"
     },
     "TICKETS": {
       "ATTENDING": "Attending",
@@ -113,6 +114,35 @@
           "BODY": "Under Connections, open the native WhatsApp inbox and scan the new QR code from Linked devices on the phone."
         }
       }
+    },
+    "TASKS": {
+      "TITLE": "Tasks",
+      "SUBTITLE": "Team to-dos with an owner and a due date.",
+      "ONLY_MINE": "Only mine",
+      "STATUS": {
+        "PENDING": "Pending",
+        "COMPLETED": "Completed"
+      },
+      "FORM": {
+        "TITLE": "Task",
+        "TITLE_PLACEHOLDER": "E.g.: call the customer back",
+        "ASSIGNEE": "Owner",
+        "ME": "Me",
+        "PRIORITY": "Priority",
+        "DUE": "Due",
+        "CREATE": "Create"
+      },
+      "PRIORITY": {
+        "HIGH": "High",
+        "MEDIUM": "Medium",
+        "LOW": "Low"
+      },
+      "CREATED": "Task created",
+      "DELETED": "Task deleted",
+      "DELETE": "Delete task",
+      "LOADING": "Loading tasks…",
+      "EMPTY": "No tasks here.",
+      "CONVERSATION": "Conversation #{id}"
     }
   }
 }

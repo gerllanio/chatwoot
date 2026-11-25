@@ -19,7 +19,8 @@
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin",
       "MONITOR": "Monitor (TV)",
-      "HELP": "Ajuda"
+      "HELP": "Ajuda",
+      "TASKS": "Tarefas"
     },
     "TICKETS": {
       "ATTENDING": "Atendendo",
@@ -113,6 +114,35 @@
           "BODY": "Em Conexões, abra a caixa do WhatsApp (nativo) e leia o novo QR Code no celular, em Aparelhos conectados."
         }
       }
+    },
+    "TASKS": {
+      "TITLE": "Tarefas",
+      "SUBTITLE": "Pendências da equipe, com responsável e prazo.",
+      "ONLY_MINE": "Só as minhas",
+      "STATUS": {
+        "PENDING": "Pendentes",
+        "COMPLETED": "Concluídas"
+      },
+      "FORM": {
+        "TITLE": "Tarefa",
+        "TITLE_PLACEHOLDER": "Ex.: retornar a ligação do cliente",
+        "ASSIGNEE": "Responsável",
+        "ME": "Eu",
+        "PRIORITY": "Prioridade",
+        "DUE": "Prazo",
+        "CREATE": "Criar"
+      },
+      "PRIORITY": {
+        "HIGH": "Alta",
+        "MEDIUM": "Média",
+        "LOW": "Baixa"
+      },
+      "CREATED": "Tarefa criada",
+      "DELETED": "Tarefa excluída",
+      "DELETE": "Excluir tarefa",
+      "LOADING": "Carregando tarefas…",
+      "EMPTY": "Nenhuma tarefa aqui.",
+      "CONVERSATION": "Conversa #{id}"
     }
   }
 }

@@ -32,7 +32,7 @@ const renamed = (item, overrides) => {
 export const buildGtiMenu = (
   upstreamItems,
   t,
-  { monitorRoute, helpRoute } = {}
+  { monitorRoute, helpRoute, tasksRoute } = {}
 ) => {
   const settings = findByName(upstreamItems, 'Settings');
   const settingsChildren = settings?.children || [];
@@ -49,6 +49,14 @@ export const buildGtiMenu = (
       label: t('GTI.SIDEBAR.TICKETS'),
       icon: 'i-lucide-messages-square',
     }),
+    tasksRoute
+      ? {
+          name: 'Gti Tasks',
+          label: t('GTI.SIDEBAR.TASKS'),
+          icon: 'i-lucide-list-checks',
+          to: tasksRoute,
+        }
+      : null,
     renamed(findByName(upstreamItems, 'Inbox'), {
       label: t('GTI.SIDEBAR.NOTIFICATIONS'),
       icon: 'i-lucide-bell',
