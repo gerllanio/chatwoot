@@ -31,6 +31,7 @@ import {
   resolveSidebarSort,
   sortSidebarItems,
 } from 'dashboard/helper/sidebarSort';
+import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
 
 const props = defineProps({
   isMobileSidebarOpen: {
@@ -1030,6 +1031,9 @@ const menuItems = computed(() => {
 
   return items;
 });
+
+const globalConfig = useMapGetter('globalConfig/get');
+const gtiMenuItems = computed(() => buildGtiMenu(menuItems.value, t));
 </script>
 
 <template>
@@ -1161,7 +1165,7 @@ const menuItems = computed(() => {
         :class="{ 'items-center': isEffectivelyCollapsed }"
       >
         <SidebarGroup
-          v-for="item in menuItems"
+          v-for="item in gtiMenuItems"
           :key="item.name"
           v-bind="item"
         />
@@ -1196,6 +1200,12 @@ const menuItems = computed(() => {
           @open-key-shortcut-modal="emit('openKeyShortcutModal')"
         />
       </div>
+      <p
+        v-if="!isEffectivelyCollapsed"
+        class="w-full px-3 pb-2 m-0 text-xs text-n-slate-10 truncate"
+      >
+        {{ t('GTI.SIDEBAR.VERSION', { version: globalConfig.appVersion }) }}
+      </p>
     </section>
     <!-- Resize Handle (desktop only) -->
     <div

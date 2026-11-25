@@ -1,0 +1,35 @@
+// GTI "Work" brand: the "blue" scale is the dashboard's primary colour, so it is
+// remapped to GTI green (#00A656, from the GTI logo). Steps follow the same
+// light-to-dark structure as upstream's Radix-based scale in _next-colors.scss.
+// scss-lint:disable PropertySortOrder
+@layer base {
+  :root {
+    --blue-1: 250 254 252;
+    --blue-2: 243 251 246;
+    --blue-3: 228 246 235;
+    --blue-4: 211 240 222;
+    --blue-5: 192 231 207;
+    --blue-6: 168 220 189;
+    --blue-7: 136 205 165;
+    --blue-8: 88 184 136;
+    --blue-9: 0 166 86;
+    --blue-10: 0 149 77;
+    --blue-11: 0 122 63;
+    --blue-12: 22 58 41;
+  }
+
+  .dark {
+    --blue-1: 13 21 17;
+    --blue-2: 17 27 22;
+    --blue-3: 18 45 32;
+    --blue-4: 16 59 40;
+    --blue-5: 22 73 50;
+    --blue-6: 31 88 62;
+    --blue-7: 39 105 74;
+    --blue-8: 46 125 87;
+    --blue-9: 0 166 86;
+    --blue-10: 31 179 104;
+    --blue-11: 74 214 145;
+    --blue-12: 180 241 205;
+  }
+}

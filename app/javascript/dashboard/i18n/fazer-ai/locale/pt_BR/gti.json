@@ -1,0 +1,22 @@
+{
+  "GTI": {
+    "SIDEBAR": {
+      "TICKETS": "Atendimentos",
+      "NOTIFICATIONS": "Notificações",
+      "KANBAN": "Kanban",
+      "QUICK_REPLIES": "Respostas rápidas",
+      "CONTACTS": "Contatos",
+      "TAGS": "Tags",
+      "INTERNAL_CHAT": "Chat interno",
+      "REPORTS": "Relatórios",
+      "CAMPAIGNS": "Campanhas",
+      "CONNECTIONS": "Conexões",
+      "QUEUES": "Filas",
+      "USERS": "Usuários",
+      "COMPANIES": "Empresas",
+      "INTEGRATIONS": "Integrações",
+      "SETTINGS": "Configurações",
+      "VERSION": "Work {version} · GTI Tecnologia"
+    }
+  }
+}
