@@ -32,6 +32,7 @@ import {
   sortSidebarItems,
 } from 'dashboard/helper/sidebarSort';
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
+import { useGtiOpenTasksCount } from 'dashboard/composables/useGtiOpenTasksCount';
 import { useAdmin } from 'dashboard/composables/useAdmin';
 import { setGtiClassicMode, useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
@@ -1049,18 +1050,25 @@ const globalConfig = useMapGetter('globalConfig/get');
 const currentUser = useMapGetter('getCurrentUser');
 const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
 const gtiClassicMode = useGtiClassicMode();
+const { count: gtiOpenTasks } = useGtiOpenTasksCount();
+const withGtiCounts = items =>
+  items.map(item =>
+    item.name === 'Gti Tasks' ? { ...item, gtiCount: gtiOpenTasks.value } : item
+  );
 const gtiMenuItems = computed(() =>
   gtiClassicMode.value
     ? menuItems.value
-    : buildGtiMenu(menuItems.value, t, {
-        kanbanRoute: accountScopedRoute('gti_kanban'),
-        helpRoute: accountScopedRoute('gti_help'),
-        tasksRoute: accountScopedRoute('gti_tasks'),
-        panelRoute: accountScopedRoute('gti_panel'),
-        campaignsRoute: accountScopedRoute('gti_campaigns'),
-        contactListsRoute: accountScopedRoute('gti_contact_lists'),
-        settingsRoute: accountScopedRoute('gti_settings'),
-      })
+    : withGtiCounts(
+        buildGtiMenu(menuItems.value, t, {
+          kanbanRoute: accountScopedRoute('gti_kanban'),
+          helpRoute: accountScopedRoute('gti_help'),
+          tasksRoute: accountScopedRoute('gti_tasks'),
+          panelRoute: accountScopedRoute('gti_panel'),
+          campaignsRoute: accountScopedRoute('gti_campaigns'),
+          contactListsRoute: accountScopedRoute('gti_contact_lists'),
+          settingsRoute: accountScopedRoute('gti_settings'),
+        })
+      )
 );
 // Agents see none of the admin pages, so the heading only shows for admins.
 const { isAdmin } = useAdmin();

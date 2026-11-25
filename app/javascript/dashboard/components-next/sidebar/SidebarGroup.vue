@@ -18,6 +18,7 @@ const props = defineProps({
   activeOn: { type: Array, default: () => [] },
   children: { type: Array, default: undefined },
   getterKeys: { type: Object, default: () => ({}) },
+  gtiCount: { type: Number, default: 0 },
 });
 
 const {
@@ -293,6 +294,7 @@ watch(
         :label
         :to="linkTo"
         :getter-keys="getterKeys"
+        :gti-count="gtiCount"
         :is-active="isActive"
         :has-active-child="hasActiveChild"
         :expandable="hasChildren"

@@ -14,6 +14,7 @@ const props = defineProps({
   isActive: { type: Boolean, default: false },
   hasActiveChild: { type: Boolean, default: false },
   getterKeys: { type: Object, default: () => ({}) },
+  gtiCount: { type: Number, default: 0 },
 });
 
 const emit = defineEmits(['toggle']);
@@ -85,6 +86,12 @@ const onClick = event => {
         }"
       >
         {{ label }}
+      </span>
+      <span
+        v-if="gtiCount && !gtiClassicMode"
+        class="inline-grid h-5 min-w-5 place-items-center rounded-full bg-n-gti-blue px-1.5 text-xxs font-semibold leading-3 text-white flex-shrink-0"
+      >
+        {{ gtiCount > 99 ? '99+' : gtiCount }}
       </span>
       <span
         v-if="dynamicCount && !expandable"
