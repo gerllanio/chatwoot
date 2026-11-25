@@ -29,6 +29,7 @@ import ContactConversationLink from './ContactConversationLink.vue';
 import Banner from 'dashboard/components/ui/Banner.vue';
 import WhatsappNumberMissingBanner from './WhatsappNumberMissingBanner.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+import GtiContactHistory from 'dashboard/components/widgets/gti/GtiContactHistory.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import CollapsedReplyBar from './CollapsedReplyBar.vue';
 import ResizableEditorWrapper from './ResizableEditorWrapper.vue';
@@ -98,6 +99,7 @@ export default {
     WhatsappNumberMissingBanner,
     ContactConversationLink,
     Spinner,
+    GtiContactHistory,
     NextButton,
     CollapsedReplyBar,
     ResizableEditorWrapper,
@@ -1132,6 +1134,10 @@ export default {
           :conversation-id="currentChat.id"
           :exhausted="historyExhausted"
           :single-conversation="inbox.lock_to_single_conversation"
+        />
+        <GtiContactHistory
+          v-if="listLoadingStatus && currentChat.meta?.sender?.id"
+          :conversation="currentChat"
         />
         <ContactConversationLink
           v-if="olderConversation && listLoadingStatus"

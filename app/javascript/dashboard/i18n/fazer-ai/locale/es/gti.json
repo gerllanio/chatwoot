@@ -47,6 +47,15 @@
       "MUTE": "Silenciar",
       "TEST": "Probar sonido",
       "DEVICE_NOTIFICATIONS": "Avisos en Windows y en el celular"
+    },
+    "HISTORY": {
+      "SHOW": "Ver historial del contacto",
+      "HIDE": "Ocultar historial",
+      "LOADING": "Cargando historial…",
+      "EMPTY": "Este contacto no tiene atenciones anteriores.",
+      "SEPARATOR": "Atención #{id} · {date}",
+      "CURRENT": "Atención actual #{id}",
+      "ATTACHMENT": "📎 Adjunto"
     }
   }
 }

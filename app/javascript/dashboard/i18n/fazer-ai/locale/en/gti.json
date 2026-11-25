@@ -47,6 +47,15 @@
       "MUTE": "Mute",
       "TEST": "Test sound",
       "DEVICE_NOTIFICATIONS": "Desktop and mobile notifications"
+    },
+    "HISTORY": {
+      "SHOW": "Show contact history",
+      "HIDE": "Hide history",
+      "LOADING": "Loading history…",
+      "EMPTY": "This contact has no previous conversations.",
+      "SEPARATOR": "Conversation #{id} · {date}",
+      "CURRENT": "Current conversation #{id}",
+      "ATTACHMENT": "📎 Attachment"
     }
   }
 }

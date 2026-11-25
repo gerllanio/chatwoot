@@ -47,6 +47,15 @@
       "MUTE": "Silenciar",
       "TEST": "Testar som",
       "DEVICE_NOTIFICATIONS": "Avisos no Windows e no celular"
+    },
+    "HISTORY": {
+      "SHOW": "Ver histórico do contato",
+      "HIDE": "Ocultar histórico",
+      "LOADING": "Carregando histórico…",
+      "EMPTY": "Este contato não tem atendimentos anteriores.",
+      "SEPARATOR": "Atendimento #{id} · {date}",
+      "CURRENT": "Atendimento atual #{id}",
+      "ATTACHMENT": "📎 Anexo"
     }
   }
 }
