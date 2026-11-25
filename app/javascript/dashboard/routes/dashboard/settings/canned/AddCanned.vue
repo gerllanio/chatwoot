@@ -6,6 +6,7 @@ import { useAlert } from 'dashboard/composables';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import Modal from '../../../../components/Modal.vue';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor.vue';
+import GtiEmojiButton from 'dashboard/components/widgets/gti/GtiEmojiButton.vue';
 
 export default {
   name: 'AddCanned',
@@ -13,6 +14,7 @@ export default {
     NextButton,
     Modal,
     WootMessageEditor,
+    GtiEmojiButton,
   },
   props: {
     responseContent: {
@@ -105,12 +107,13 @@ export default {
           <label :class="{ error: v$.content.$error }">
             {{ $t('CANNED_MGMT.ADD.FORM.CONTENT.LABEL') }}
           </label>
+          <GtiEmojiButton @select="content = `${content}${$event}`" />
           <div class="editor-wrap">
             <WootMessageEditor
               v-model="content"
               class="message-editor [&>div]:px-1"
               :class="{ editor_warning: v$.content.$error }"
-              channel-type="Context::Default"
+              channel-type="Channel::Whatsapp"
               enable-variables
               :enable-canned-responses="false"
               :placeholder="$t('CANNED_MGMT.ADD.FORM.CONTENT.PLACEHOLDER')"
@@ -143,10 +146,6 @@ export default {
 </template>
 
 <style scoped lang="scss">
-:deep(.ProseMirror-menubar) {
-  @apply hidden;
-}
-
 :deep(.ProseMirror-woot-style) {
   @apply min-h-[12.5rem];
 }

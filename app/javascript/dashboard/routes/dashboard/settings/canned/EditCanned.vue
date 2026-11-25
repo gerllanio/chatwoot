@@ -4,6 +4,7 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 import { useAlert } from 'dashboard/composables';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor.vue';
+import GtiEmojiButton from 'dashboard/components/widgets/gti/GtiEmojiButton.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import Modal from '../../../../components/Modal.vue';
 
@@ -12,6 +13,7 @@ export default {
     NextButton,
     Modal,
     WootMessageEditor,
+    GtiEmojiButton,
   },
   props: {
     id: { type: Number, default: null },
@@ -109,12 +111,13 @@ export default {
           <label :class="{ error: v$.content.$error }">
             {{ $t('CANNED_MGMT.EDIT.FORM.CONTENT.LABEL') }}
           </label>
+          <GtiEmojiButton @select="content = `${content}${$event}`" />
           <div class="editor-wrap">
             <WootMessageEditor
               v-model="content"
               class="message-editor [&>div]:px-1"
               :class="{ editor_warning: v$.content.$error }"
-              channel-type="Context::Default"
+              channel-type="Channel::Whatsapp"
               enable-variables
               :enable-canned-responses="false"
               :placeholder="$t('CANNED_MGMT.EDIT.FORM.CONTENT.PLACEHOLDER')"
@@ -147,10 +150,6 @@ export default {
 </template>
 
 <style scoped lang="scss">
-:deep(.ProseMirror-menubar) {
-  @apply hidden;
-}
-
 :deep(.ProseMirror-woot-style) {
   @apply min-h-[12.5rem];
 }
