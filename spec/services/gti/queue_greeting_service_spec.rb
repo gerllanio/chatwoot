@@ -20,7 +20,7 @@ RSpec.describe Gti::QueueGreetingService do
   it 'sends the greeting with the customer and queue names filled in' do
     described_class.new(conversation: conversation, setting: setting).perform
 
-    expect(sent.map(&:content)).to eq(['Você está no setor comercial, Maria!'])
+    expect(sent.map(&:content)).to eq(['Você está no setor Comercial, Maria!'])
   end
 
   it 'sends an image as the caption of the greeting' do
@@ -37,7 +37,7 @@ RSpec.describe Gti::QueueGreetingService do
 
     described_class.new(conversation: conversation, setting: setting).perform
 
-    expect(sent.map(&:content)).to eq(['Você está no setor comercial, Maria!', nil])
+    expect(sent.map(&:content)).to eq(['Você está no setor Comercial, Maria!', nil])
     expect(sent.last.attachments.first).to have_attributes(file_type: 'audio', meta: { 'is_recorded_audio' => true })
   end
 

@@ -24,7 +24,13 @@ class Gti::ContactListImportService
   private
 
   def rows
-    CSV.parse(csv.to_s.delete_prefix(BYTE_ORDER_MARK), headers: true, header_converters: ->(header) { header.to_s.strip.downcase })
+    CSV.parse(utf8_csv.delete_prefix(BYTE_ORDER_MARK), headers: true, header_converters: ->(header) { header.to_s.strip.downcase })
+  end
+
+  # Uploads arrive as binary; Excel on Windows often saves CSV as Latin-1.
+  def utf8_csv
+    text = csv.to_s.dup.force_encoding(Encoding::UTF_8)
+    text.valid_encoding? ? text : text.force_encoding(Encoding::ISO_8859_1).encode(Encoding::UTF_8)
   end
 
   def value(row, headers)

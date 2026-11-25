@@ -9,8 +9,7 @@ class Gti::CampaignSendService
   SENDABLE_NUMBER = /\A\d{10,15}\z/
 
   def perform
-    raise ArgumentError, "número inválido: #{shipping.number}" unless shipping.number.to_s.match?(SENDABLE_NUMBER)
-
+    ensure_sendable_number!
     contact_inbox = find_or_create_contact_inbox
     conversation = latest_conversation(contact_inbox) || create_conversation(contact_inbox)
     message = conversation.messages.new(
@@ -23,6 +22,12 @@ class Gti::CampaignSendService
   end
 
   private
+
+  def ensure_sendable_number!
+    return if shipping.number.to_s.match?(SENDABLE_NUMBER)
+
+    raise ArgumentError, "número inválido: #{shipping.number}"
+  end
 
   delegate :campaign, to: :shipping
   delegate :inbox, :account, to: :campaign
