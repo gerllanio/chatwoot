@@ -165,11 +165,21 @@ onMounted(() => {
           {{ t('GTI_CAMPAIGNS.SUBTITLE') }}
         </p>
       </div>
-      <Button
-        :label="t('GTI_CAMPAIGNS.NEW')"
-        icon="i-lucide-plus"
-        @click="openForm(null)"
-      />
+      <div class="flex flex-wrap items-center gap-2">
+        <Button
+          :label="t('GTI_CAMPAIGNS.NEW')"
+          icon="i-lucide-plus"
+          @click="openForm(null)"
+        />
+        <router-link :to="{ name: 'gti_contact_lists' }">
+          <Button
+            :label="t('GTI_CAMPAIGNS.SIDEBAR.CONTACT_LISTS')"
+            icon="i-lucide-list"
+            color="slate"
+            variant="faded"
+          />
+        </router-link>
+      </div>
     </header>
 
     <p v-if="isLoading" class="m-0 text-sm text-n-slate-10">

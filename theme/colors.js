@@ -229,6 +229,9 @@ export const colors = {
     brand: '#00A656',
     // GTI "Work": WhatsApp-style chat (wallpaper, incoming and outgoing bubbles).
     gti: {
+      // Prototype page background (--bg) behind the white cards.
+      bg: '#F0F5FA',
+      'bg-dark': '#0D131C',
       navy: '#1E293B',
       green: '#00A656',
       blue: '#046BD2',

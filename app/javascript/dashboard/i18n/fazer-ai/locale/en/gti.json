@@ -25,7 +25,10 @@
       "TASKS": "Tasks",
       "PANEL": "Panel",
       "ADMIN_SECTION": "Administration",
-      "ADMIN_TAG": "ADMIN"
+      "ADMIN_TAG": "ADMIN",
+      "PRODUCT_VERSION": "Work 1.0.0",
+      "BASE_VERSION": "Chatwoot base {version} · fazer.ai",
+      "COPYRIGHT": "© GTI Tecnologia"
     },
     "TICKETS": {
       "ATTENDING": "Attending",
@@ -184,7 +187,13 @@
       "LIGHT_MODE": "Light mode",
       "USER_ROLE": "{name} · {role}",
       "ROLE_ADMIN": "Administrator",
-      "ROLE_AGENT": "Agent"
+      "ROLE_AGENT": "Agent",
+      "USER_MENU": "Account menu",
+      "MY_PROFILE": "My profile",
+      "SWITCH_COMPANY": "Switch company",
+      "SUPER_ADMIN": "Super Admin",
+      "CLASSIC_MODE": "Chatwoot mode (classic)",
+      "LOGOUT": "Log out"
     },
     "CLASSIC": {
       "ENTER": "Open classic Chatwoot mode",

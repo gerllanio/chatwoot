@@ -19,6 +19,7 @@ const props = defineProps({
   children: { type: Array, default: undefined },
   getterKeys: { type: Object, default: () => ({}) },
   gtiCount: { type: Number, default: 0 },
+  gtiCountTone: { type: String, default: 'blue' },
 });
 
 const {
@@ -295,6 +296,7 @@ watch(
         :to="linkTo"
         :getter-keys="getterKeys"
         :gti-count="gtiCount"
+        :gti-count-tone="gtiCountTone"
         :is-active="isActive"
         :has-active-child="hasActiveChild"
         :expandable="hasChildren"

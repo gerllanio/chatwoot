@@ -78,7 +78,6 @@ export const buildGtiMenu = (
     tasksRoute,
     panelRoute,
     campaignsRoute,
-    contactListsRoute,
     settingsRoute,
   } = {}
 ) => {
@@ -112,10 +111,7 @@ export const buildGtiMenu = (
           to: tasksRoute,
         }
       : null,
-    renamed(findByName(upstreamItems, 'Inbox'), {
-      label: t('GTI.SIDEBAR.NOTIFICATIONS'),
-      icon: 'i-lucide-bell',
-    }),
+    // Notifications live in the top bar's bell, as in the prototype.
     // GTI's own board (stages, queues and TV mode) replaces fazer.ai's funnels.
     kanbanRoute
       ? {
@@ -186,14 +182,6 @@ export const buildGtiMenu = (
       : renamed(findByName(upstreamItems, 'Campaigns'), {
           label: t('GTI.SIDEBAR.CAMPAIGNS'),
         }),
-    contactListsRoute
-      ? {
-          name: 'Gti Contact Lists',
-          label: t('GTI_CAMPAIGNS.SIDEBAR.CONTACT_LISTS'),
-          icon: 'i-lucide-list',
-          to: contactListsRoute,
-        }
-      : null,
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.inboxes, {
       name: 'Gti Connections',
       label: t('GTI.SIDEBAR.CONNECTIONS'),

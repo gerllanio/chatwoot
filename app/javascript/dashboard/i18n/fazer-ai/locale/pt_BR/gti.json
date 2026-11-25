@@ -25,7 +25,10 @@
       "TASKS": "Tarefas",
       "PANEL": "Painel",
       "ADMIN_SECTION": "Administração",
-      "ADMIN_TAG": "ADMIN"
+      "ADMIN_TAG": "ADMIN",
+      "PRODUCT_VERSION": "Work 1.0.0",
+      "BASE_VERSION": "Base Chatwoot {version} · fazer.ai",
+      "COPYRIGHT": "© GTI Tecnologia"
     },
     "TICKETS": {
       "ATTENDING": "Atendendo",
@@ -184,7 +187,13 @@
       "LIGHT_MODE": "Modo claro",
       "USER_ROLE": "{name} · {role}",
       "ROLE_ADMIN": "Administrador",
-      "ROLE_AGENT": "Atendente"
+      "ROLE_AGENT": "Atendente",
+      "USER_MENU": "Menu da conta",
+      "MY_PROFILE": "Meu perfil",
+      "SWITCH_COMPANY": "Trocar empresa",
+      "SUPER_ADMIN": "Super Admin",
+      "CLASSIC_MODE": "Modo Chatwoot (clássico)",
+      "LOGOUT": "Sair"
     },
     "CLASSIC": {
       "ENTER": "Abrir o modo Chatwoot (clássico)",

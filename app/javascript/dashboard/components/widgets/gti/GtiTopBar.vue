@@ -12,7 +12,17 @@ import { useSidebarResize } from 'dashboard/components-next/sidebar/provider';
 import { LocalStorage } from 'shared/helpers/localStorage';
 import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
 import { setColorTheme } from 'dashboard/helper/themeHelper';
+import Auth from 'dashboard/api/auth';
+import { setGtiClassicMode } from 'dashboard/helper/gtiMode';
 import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
+import SidebarProfileMenuStatus from 'dashboard/components-next/sidebar/SidebarProfileMenuStatus.vue';
+import {
+  DropdownBody,
+  DropdownContainer,
+  DropdownItem,
+  DropdownSection,
+  DropdownSeparator,
+} from 'dashboard/components-next/dropdown-menu/base';
 import GtiVolumeControl from './GtiVolumeControl.vue';
 
 const emit = defineEmits(['toggleMobileSidebar']);
@@ -29,6 +39,21 @@ const { snapToCollapsed, snapToExpanded, COLLAPSED_THRESHOLD, DEFAULT_WIDTH } =
 const currentUser = useMapGetter('getCurrentUser');
 const unreadCount = useMapGetter('notifications/getUnreadCount');
 const globalConfig = useMapGetter('globalConfig/get');
+const currentAccountId = useMapGetter('getCurrentAccountId');
+const currentUserAvailability = useMapGetter('getCurrentUserAvailability');
+
+const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
+// Companies (accounts) this user belongs to, for "Trocar empresa".
+const otherAccounts = computed(() =>
+  (currentUser.value?.accounts || []).filter(
+    account => account.id !== currentAccountId.value
+  )
+);
+// A full page load, as upstream's account switcher does, so every store
+// starts clean for the other company.
+const switchAccount = accountId => {
+  window.location.href = `/app/accounts/${accountId}/dashboard`;
+};
 
 const userName = computed(
   () => currentUser.value?.available_name || currentUser.value?.name || ''
@@ -68,11 +93,11 @@ const toggleTheme = () => {
 
 <template>
   <header
-    class="flex items-center flex-shrink-0 h-14 gap-2 px-3 text-white border-b-[3px] bg-n-gti-navy border-n-gti-green"
+    class="relative z-20 flex items-center flex-shrink-0 h-14 gap-2 px-3 text-white border-b-[3px] bg-n-gti-navy border-n-gti-green"
   >
     <button
       type="button"
-      class="flex items-center justify-center text-white rounded-md size-9 hover:bg-white/15"
+      class="flex items-center justify-center text-white rounded-full size-[2.375rem] hover:bg-white/15"
       :aria-label="t('GTI.TOPBAR.MENU')"
       :title="t('GTI.TOPBAR.MENU')"
       @click="toggleSidebar"
@@ -81,18 +106,20 @@ const toggleTheme = () => {
     </button>
     <router-link
       :to="accountScopedRoute('home')"
-      class="flex items-center gap-2 text-white"
+      class="flex items-center gap-2 text-white whitespace-nowrap"
     >
-      <img :src="globalConfig.logoDark" alt="GTI" class="h-8" />
-      <span class="text-lg font-bold">{{ t('GTI.TOPBAR.PRODUCT') }}</span>
-      <span class="hidden text-xs opacity-75 sm:inline">
+      <img :src="globalConfig.logoDark" alt="GTI" class="h-[1.875rem] w-auto" />
+      <span class="text-[1.0625rem] font-bold">
+        {{ t('GTI.TOPBAR.PRODUCT') }}
+      </span>
+      <span class="hidden text-xs font-medium opacity-80 sm:inline">
         {{ t('GTI.TOPBAR.TAGLINE') }}
       </span>
     </router-link>
     <span class="flex-1" />
     <button
       type="button"
-      class="flex items-center justify-center text-white rounded-full size-8 hover:bg-white/15"
+      class="flex items-center justify-center text-white rounded-full size-[2.375rem] hover:bg-white/15"
       :aria-label="
         isDark ? t('GTI.TOPBAR.LIGHT_MODE') : t('GTI.TOPBAR.DARK_MODE')
       "
@@ -101,36 +128,86 @@ const toggleTheme = () => {
     >
       <span :class="isDark ? 'i-lucide-sun' : 'i-lucide-moon'" class="size-5" />
     </button>
-    <div class="[&_button]:!text-white">
+    <div class="[&_button]:!text-white [&_button]:!size-[2.375rem]">
       <GtiVolumeControl />
     </div>
     <router-link
       :to="accountScopedRoute('inbox_view')"
-      class="relative flex items-center justify-center text-white rounded-full size-8 hover:bg-white/15"
+      class="relative flex items-center justify-center text-white rounded-full size-[2.375rem] hover:bg-white/15"
       :aria-label="t('GTI.TOPBAR.NOTIFICATIONS')"
+      :title="t('GTI.TOPBAR.NOTIFICATIONS')"
     >
       <span class="i-lucide-bell size-5" />
       <span
         v-if="unreadCount"
-        class="absolute top-0 end-0 px-1 text-[0.625rem] font-bold leading-4 rounded-full bg-n-ruby-9"
+        class="absolute top-1 end-1 px-[0.3125rem] text-[0.625rem] font-bold leading-4 text-white rounded-full bg-n-ruby-9"
       >
-        {{ unreadCount }}
+        {{ unreadCount > 99 ? '99+' : unreadCount }}
       </span>
     </router-link>
-    <div
-      class="flex items-center gap-2 py-1 ps-1 pe-3 rounded-full bg-white/10"
-    >
-      <span
-        class="flex items-center justify-center rounded-full ring-2 ring-n-gti-green bg-n-gti-green"
-      >
-        <Avatar
-          :name="userName"
-          :src="currentUser?.avatar_url"
-          :size="26"
-          rounded-full
+    <DropdownContainer class="relative">
+      <template #trigger="{ toggle, isOpen }">
+        <button
+          type="button"
+          class="flex items-center gap-2 py-1 border-0 rounded-full ps-1 pe-2 sm:pe-3 bg-white/10 hover:bg-white/20 text-white whitespace-nowrap"
+          :class="{ 'bg-white/20': isOpen }"
+          :title="t('GTI.TOPBAR.USER_MENU')"
+          @click="toggle"
+        >
+          <span
+            class="flex items-center justify-center rounded-full ring-2 ring-n-gti-green bg-n-gti-green"
+          >
+            <Avatar
+              :name="userName"
+              :src="currentUser?.avatar_url"
+              :status="currentUserAvailability"
+              :size="28"
+              rounded-full
+            />
+          </span>
+          <span class="hidden text-sm sm:inline">{{ userLabel }}</span>
+        </button>
+      </template>
+      <DropdownBody class="top-11 z-50 w-72 ltr:right-0 rtl:left-0">
+        <SidebarProfileMenuStatus />
+        <DropdownSeparator />
+        <DropdownItem
+          :label="t('GTI.TOPBAR.MY_PROFILE')"
+          icon="i-lucide-user-pen"
+          :link="{ name: 'profile_settings_index' }"
         />
-      </span>
-      <span class="hidden text-sm sm:inline">{{ userLabel }}</span>
-    </div>
+        <template v-if="otherAccounts.length">
+          <DropdownSeparator />
+          <DropdownSection :title="t('GTI.TOPBAR.SWITCH_COMPANY')">
+            <DropdownItem
+              v-for="account in otherAccounts"
+              :key="account.id"
+              :label="account.name"
+              icon="i-lucide-building-2"
+              :click="() => switchAccount(account.id)"
+            />
+          </DropdownSection>
+        </template>
+        <DropdownSeparator />
+        <DropdownItem
+          v-if="isSuperAdmin"
+          :label="t('GTI.TOPBAR.SUPER_ADMIN')"
+          icon="i-lucide-castle"
+          link="/super_admin"
+          native-link
+          target="_blank"
+        />
+        <DropdownItem
+          :label="t('GTI.TOPBAR.CLASSIC_MODE')"
+          icon="i-lucide-layout-panel-left"
+          :click="() => setGtiClassicMode(true)"
+        />
+        <DropdownItem
+          :label="t('GTI.TOPBAR.LOGOUT')"
+          icon="i-lucide-power"
+          :click="Auth.logout"
+        />
+      </DropdownBody>
+    </DropdownContainer>
   </header>
 </template>

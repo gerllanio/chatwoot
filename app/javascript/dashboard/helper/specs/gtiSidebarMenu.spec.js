@@ -34,9 +34,8 @@ describe('buildGtiMenu', () => {
   it('puts the attendance items first, in the GTI order', () => {
     const names = buildGtiMenu(upstreamMenu(), t).map(item => item.name);
 
-    expect(names.slice(0, 7)).toEqual([
+    expect(names.slice(0, 6)).toEqual([
       'Conversation',
-      'Inbox',
       'Kanban',
       'Gti Quick Replies',
       'Contacts',
@@ -123,16 +122,19 @@ describe('buildGtiMenu', () => {
     expect(tickets.activeOn).toContain('conversation_through_inbox');
   });
 
-  it('replaces upstream campaigns with the GTI ones and adds contact lists after them', () => {
+  it('replaces upstream campaigns with the GTI ones', () => {
     const names = buildGtiMenu(upstreamMenu(), t, {
       campaignsRoute: '/gti/campaigns',
-      contactListsRoute: '/gti/contact-lists',
     }).map(item => item.name);
 
     expect(names).not.toContain('Campaigns');
-    expect(names.indexOf('Gti Contact Lists')).toBe(
-      names.indexOf('Gti Campaigns') + 1
-    );
+    expect(names).toContain('Gti Campaigns');
+  });
+
+  it('leaves notifications to the top bar bell', () => {
+    const names = buildGtiMenu(upstreamMenu(), t).map(item => item.name);
+
+    expect(names).not.toContain('Inbox');
   });
 
   it('points Kanban at the GTI board when its route is given', () => {

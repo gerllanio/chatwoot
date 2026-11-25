@@ -15,6 +15,7 @@ const props = defineProps({
   hasActiveChild: { type: Boolean, default: false },
   getterKeys: { type: Object, default: () => ({}) },
   gtiCount: { type: Number, default: 0 },
+  gtiCountTone: { type: String, default: 'blue' },
 });
 
 const emit = defineEmits(['toggle']);
@@ -22,13 +23,23 @@ const emit = defineEmits(['toggle']);
 // GTI "Work": the active page is highlighted in green with a bar on the
 // leading edge, as in the prototype.
 const gtiClassicMode = useGtiClassicMode();
+// Prototype .nav: full-width rows (10px 18px, 14px gap, 14px text) with a
+// 3px leading bar on the active one.
 const gtiItemClass = computed(() => {
-  const base = 'border-s-[3px] rounded-s-none';
+  const base =
+    '!h-auto !gap-3.5 !rounded-none !py-2.5 !px-[1.125rem] border-s-[3px] text-sm';
   if (props.isActive || props.hasActiveChild) {
     return `${base} border-n-brand bg-n-brand/10 text-n-brand font-semibold`;
   }
-  return `${base} border-transparent text-n-slate-11 hover:bg-n-alpha-2`;
+  return `${base} border-transparent text-n-slate-12 hover:bg-n-slate-2`;
 });
+const GTI_COUNT_TONES = {
+  red: 'bg-n-ruby-9',
+  blue: 'bg-n-gti-blue',
+};
+const gtiCountClass = computed(
+  () => GTI_COUNT_TONES[props.gtiCountTone] || GTI_COUNT_TONES.blue
+);
 
 const router = useRouter();
 const showBadge = useMapGetter(props.getterKeys.badge);
@@ -69,7 +80,11 @@ const onClick = event => {
     @click.stop="onClick"
   >
     <div v-if="icon" class="relative flex items-center gap-2">
-      <Icon v-if="icon" :icon="icon" class="size-4" />
+      <Icon
+        v-if="icon"
+        :icon="icon"
+        :class="gtiClassicMode ? 'size-4' : 'size-5'"
+      />
       <span
         v-if="showBadge"
         class="size-2 -top-px ltr:-right-px rtl:-left-px bg-n-brand absolute rounded-full border border-n-solid-2"
@@ -80,21 +95,26 @@ const onClick = event => {
     >
       <span
         class="truncate"
-        :class="{
-          'text-body-main': !isActive,
-          'font-medium text-sm': isActive || hasActiveChild,
-        }"
+        :class="
+          gtiClassicMode
+            ? {
+                'text-body-main': !isActive,
+                'font-medium text-sm': isActive || hasActiveChild,
+              }
+            : 'text-sm'
+        "
       >
         {{ label }}
       </span>
       <span
         v-if="gtiCount && !gtiClassicMode"
-        class="inline-grid h-5 min-w-5 place-items-center rounded-full bg-n-gti-blue px-1.5 text-xxs font-semibold leading-3 text-white flex-shrink-0"
+        class="inline-grid h-[1.125rem] min-w-5 place-items-center rounded-full px-1.5 text-[0.6875rem] font-semibold leading-3 text-white flex-shrink-0"
+        :class="gtiCountClass"
       >
         {{ gtiCount > 99 ? '99+' : gtiCount }}
       </span>
       <span
-        v-if="dynamicCount && !expandable"
+        v-if="dynamicCount && !expandable && gtiClassicMode"
         class="inline-grid h-5 min-w-5 place-items-center rounded-full bg-n-slate-4 px-1 text-xxs font-medium leading-3 text-n-slate-12 dark:bg-n-slate-5 flex-shrink-0"
       >
         {{ count }}

@@ -34,6 +34,7 @@ import {
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
 import { useGtiOpenTasksCount } from 'dashboard/composables/useGtiOpenTasksCount';
 import { useGtiMailUnread } from 'dashboard/composables/useGtiMailUnread';
+import { useGtiWaitingCount } from 'dashboard/composables/useGtiWaitingCount';
 import { useAdmin } from 'dashboard/composables/useAdmin';
 import { setGtiClassicMode, useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
@@ -1053,14 +1054,31 @@ const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
 const gtiClassicMode = useGtiClassicMode();
 const { count: gtiOpenTasks } = useGtiOpenTasksCount();
 const { unreadCount: gtiMailUnread } = useGtiMailUnread();
+const { count: gtiWaiting } = useGtiWaitingCount();
+const internalChatUnread = useMapGetter('internalChat/getUnreadCount');
+// Prototype pills: red for customers waiting in the queue, blue for the rest.
+const GTI_MENU_COUNTS = {
+  Conversation: () => ({ gtiCount: gtiWaiting.value, gtiCountTone: 'red' }),
+  'Gti Mail': () => ({ gtiCount: gtiMailUnread.value }),
+  'Gti Tasks': () => ({ gtiCount: gtiOpenTasks.value }),
+  InternalChat: () => ({ gtiCount: internalChatUnread.value || 0 }),
+};
 const withGtiCounts = items =>
   items.map(item => {
-    if (item.name === 'Gti Tasks')
-      return { ...item, gtiCount: gtiOpenTasks.value };
-    if (item.name === 'Gti Mail')
-      return { ...item, gtiCount: gtiMailUnread.value };
-    return item;
+    const counts = GTI_MENU_COUNTS[item.name];
+    return counts ? { ...item, ...counts() } : item;
   });
+// Prototype drawer: 236px open, 60px when the top bar's ☰ folds it.
+const GTI_SIDEBAR_WIDTH = 236;
+const GTI_SIDEBAR_MINI_WIDTH = 60;
+const sidebarStyle = computed(() => {
+  if (isMobile.value) return undefined;
+  if (gtiClassicMode.value) return { width: `${sidebarWidth.value}px` };
+  const width = isEffectivelyCollapsed.value
+    ? GTI_SIDEBAR_MINI_WIDTH
+    : GTI_SIDEBAR_WIDTH;
+  return { width: `${width}px` };
+});
 const gtiMenuItems = computed(() =>
   gtiClassicMode.value
     ? menuItems.value
@@ -1072,7 +1090,6 @@ const gtiMenuItems = computed(() =>
           tasksRoute: accountScopedRoute('gti_tasks'),
           panelRoute: accountScopedRoute('gti_panel'),
           campaignsRoute: accountScopedRoute('gti_campaigns'),
-          contactListsRoute: accountScopedRoute('gti_contact_lists'),
           settingsRoute: accountScopedRoute('gti_settings'),
         })
       )
@@ -1093,8 +1110,9 @@ const { isAdmin } = useAdmin();
         ],
       },
     ]"
-    class="bg-n-background flex flex-col text-sm pb-px fixed top-0 ltr:left-0 rtl:right-0 h-full z-40 w-[200px] md:w-auto md:relative md:flex-shrink-0 md:ltr:translate-x-0 md:rtl:translate-x-0 ltr:border-r rtl:border-l border-n-weak"
+    class="flex flex-col text-sm pb-px fixed top-0 ltr:left-0 rtl:right-0 h-full z-40 w-[200px] md:w-auto md:relative md:flex-shrink-0 md:ltr:translate-x-0 md:rtl:translate-x-0 ltr:border-r rtl:border-l border-n-weak"
     :class="[
+      gtiClassicMode ? 'bg-n-background' : 'bg-n-solid-1',
       {
         'shadow-lg md:shadow-none': isMobileSidebarOpen,
         'ltr:-translate-x-full rtl:translate-x-full': !isMobileSidebarOpen,
@@ -1102,9 +1120,10 @@ const { isAdmin } = useAdmin();
           !isResizing,
       },
     ]"
-    :style="isMobile ? undefined : { width: `${sidebarWidth}px` }"
+    :style="sidebarStyle"
   >
     <section
+      v-if="gtiClassicMode"
       class="grid"
       :class="isEffectivelyCollapsed ? 'mt-3 mb-6 gap-4' : 'mt-1 mb-4 gap-2'"
     >
@@ -1204,11 +1223,17 @@ const { isAdmin } = useAdmin();
     </section>
     <nav
       class="grid overflow-y-scroll flex-grow gap-2 pb-5 no-scrollbar min-w-0"
-      :class="isEffectivelyCollapsed ? 'px-1' : 'px-2'"
+      :class="[
+        isEffectivelyCollapsed ? 'px-1' : 'px-2',
+        { '!px-0 pt-1.5': !gtiClassicMode && !isEffectivelyCollapsed },
+      ]"
     >
       <ul
-        class="flex flex-col gap-1 m-0 list-none min-w-0"
-        :class="{ 'items-center': isEffectivelyCollapsed }"
+        class="flex flex-col m-0 list-none min-w-0"
+        :class="{
+          'items-center': isEffectivelyCollapsed,
+          'gap-1': gtiClassicMode,
+        }"
       >
         <template
           v-for="{ sectionLabel, ...item } in gtiMenuItems"
@@ -1216,7 +1241,7 @@ const { isAdmin } = useAdmin();
         >
           <li
             v-if="sectionLabel && isAdmin && !isEffectivelyCollapsed"
-            class="flex items-center gap-1.5 px-2 pt-3 pb-1 text-xs font-semibold tracking-wide uppercase text-n-slate-10 select-none"
+            class="flex items-center gap-1.5 px-[1.125rem] pt-3.5 pb-1.5 text-[0.6875rem] tracking-[0.06em] uppercase text-n-slate-10 select-none"
           >
             {{ sectionLabel }}
             <span
@@ -1238,6 +1263,7 @@ const { isAdmin } = useAdmin();
       class="flex relative flex-col flex-shrink-0 gap-1 justify-between items-center"
     >
       <div
+        v-if="gtiClassicMode"
         class="pointer-events-none absolute inset-x-0 -top-[1.938rem] h-8 bg-gradient-to-t from-n-background to-transparent"
       />
       <SidebarChangelogCard
@@ -1255,6 +1281,7 @@ const { isAdmin } = useAdmin();
         "
       />
       <div
+        v-if="gtiClassicMode"
         class="px-1 py-1.5 flex-shrink-0 flex w-full z-50 gap-2 items-center border-t border-n-weak shadow-[0px_-2px_4px_0px_rgba(27,28,29,0.02)]"
         :class="isEffectivelyCollapsed ? 'justify-center' : 'justify-between'"
       >
@@ -1264,7 +1291,19 @@ const { isAdmin } = useAdmin();
         />
       </div>
       <div
-        v-if="!isEffectivelyCollapsed"
+        v-if="!gtiClassicMode && !isEffectivelyCollapsed"
+        class="w-full px-[1.125rem] pt-3.5 pb-[1.125rem] text-[0.6875rem] leading-relaxed border-t border-n-weak text-n-slate-10"
+      >
+        <b>{{ t('GTI.SIDEBAR.PRODUCT_VERSION') }}</b>
+        <br />
+        {{
+          t('GTI.SIDEBAR.BASE_VERSION', { version: globalConfig.appVersion })
+        }}
+        <br />
+        {{ t('GTI.SIDEBAR.COPYRIGHT') }}
+      </div>
+      <div
+        v-if="gtiClassicMode && !isEffectivelyCollapsed"
         class="flex items-center justify-between w-full gap-2 px-3 pb-2"
       >
         <GtiVolumeControl v-if="gtiClassicMode" />
@@ -1294,6 +1333,7 @@ const { isAdmin } = useAdmin();
     <GtiMessageAlerts />
     <!-- Resize Handle (desktop only) -->
     <div
+      v-if="gtiClassicMode"
       class="hidden md:block absolute top-0 h-full w-1 cursor-col-resize z-40 ltr:right-0 rtl:left-0 group"
       @mousedown="onResizeStart"
       @touchstart="onResizeStart"
