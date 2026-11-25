@@ -81,6 +81,7 @@ export const buildGtiTicketTabs = ({ allowedAssignees, stats, showAll, t }) => {
   return tabs;
 };
 
-// A waiting conversation is open and nobody took it yet.
-export const isGtiWaitingConversation = chat =>
-  chat.status === STATUS_TYPE.OPEN && !chat.meta?.assignee;
+// Cards that carry the ✕ / 👁 / ✓ quick actions: every conversation still in
+// progress (waiting or being attended), never a resolved one.
+export const isGtiActiveConversation = chat =>
+  [STATUS_TYPE.OPEN, STATUS_TYPE.PENDING].includes(chat.status);

@@ -5,7 +5,7 @@ import {
   gtiSectionOfTab,
   filtersToGtiTab,
   gtiTabToFilters,
-  isGtiWaitingConversation,
+  isGtiActiveConversation,
 } from '../gtiTicketTabs';
 
 const t = key => key;
@@ -126,16 +126,14 @@ describe('buildGtiTicketTabs', () => {
   });
 });
 
-describe('isGtiWaitingConversation', () => {
-  it('is true only for open conversations nobody took', () => {
-    expect(isGtiWaitingConversation({ status: 'open', meta: {} })).toBe(true);
+describe('isGtiActiveConversation', () => {
+  it('is true for conversations still in progress, assigned or not', () => {
+    expect(isGtiActiveConversation({ status: 'open', meta: {} })).toBe(true);
     expect(
-      isGtiWaitingConversation({
-        status: 'open',
-        meta: { assignee: { id: 1 } },
-      })
-    ).toBe(false);
-    expect(isGtiWaitingConversation({ status: 'resolved', meta: {} })).toBe(
+      isGtiActiveConversation({ status: 'open', meta: { assignee: { id: 1 } } })
+    ).toBe(true);
+    expect(isGtiActiveConversation({ status: 'pending', meta: {} })).toBe(true);
+    expect(isGtiActiveConversation({ status: 'resolved', meta: {} })).toBe(
       false
     );
   });

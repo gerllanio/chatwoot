@@ -1,6 +1,6 @@
 <script setup>
-// Ticketz-style quick actions on a waiting conversation (see
-// isGtiWaitingConversation): finish it, peek at it without taking it, or accept it.
+// Ticketz-style quick actions on a conversation in progress (see
+// isGtiActiveConversation): finish it, peek at it without taking it, or accept it.
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
@@ -30,6 +30,10 @@ const isPeekLoading = ref(false);
 const isBusy = ref(false);
 
 const contactName = computed(() => props.chat.meta?.sender?.name || '');
+// Accept is offered unless the conversation is already mine.
+const canAccept = computed(
+  () => props.chat.meta?.assignee?.id !== currentUser.value?.id
+);
 
 const finishConversation = async () => {
   isBusy.value = true;
@@ -127,6 +131,7 @@ const bubbleClass = message => {
       @click.stop="peekConversation"
     />
     <Button
+      v-if="canAccept"
       v-tooltip.top="t('GTI.TICKETS.ACCEPT')"
       icon="i-lucide-check"
       size="xs"

@@ -9,7 +9,7 @@ import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
 import GtiCardActions from '../gti/GtiCardActions.vue';
 import GtiCardMeta from '../gti/GtiCardMeta.vue';
-import { isGtiWaitingConversation } from 'dashboard/helper/gtiTicketTabs';
+import { isGtiActiveConversation } from 'dashboard/helper/gtiTicketTabs';
 import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
 import CardPinIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPinIcon.vue';
@@ -268,7 +268,7 @@ watch(
         </template>
       </CardLabels>
       <GtiCardActions
-        v-if="!gtiClassicMode && isGtiWaitingConversation(chat)"
+        v-if="!gtiClassicMode && isGtiActiveConversation(chat)"
         :chat="chat"
         class="mx-2 mt-1.5"
       />
