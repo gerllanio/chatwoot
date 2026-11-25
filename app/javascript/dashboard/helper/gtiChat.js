@@ -8,9 +8,9 @@ import wootConstants from 'dashboard/constants/globals';
 
 export const GTI_BUBBLE_VARIANTS = {
   [MESSAGE_VARIANTS.USER]:
-    'bg-gti-in dark:bg-gti-in-dark text-n-slate-12 shadow-sm',
+    'bg-n-gti-in dark:bg-n-gti-in-dark text-n-slate-12 shadow-sm',
   [MESSAGE_VARIANTS.AGENT]:
-    'bg-gti-out dark:bg-gti-out-dark text-n-slate-12 shadow-sm',
+    'bg-n-gti-out dark:bg-n-gti-out-dark text-n-slate-12 shadow-sm',
 };
 
 export const GTI_BUBBLE_ORIENTATION = {
@@ -50,4 +50,4 @@ export const gtiChatActions = chat => {
 // WhatsApp-like wallpaper behind the messages: beige (dark navy at night) with
 // a faint dot grid.
 export const GTI_CHAT_WALLPAPER =
-  'bg-gti-chat dark:bg-gti-chat-dark bg-[radial-gradient(rgba(127,127,127,0.07)_1px,transparent_1px)] bg-[length:1.125rem_1.125rem]';
+  'bg-n-gti-chat dark:bg-n-gti-chat-dark bg-[radial-gradient(rgba(127,127,127,0.07)_1px,transparent_1px)] bg-[length:1.125rem_1.125rem]';

@@ -21,7 +21,7 @@ const userName = computed(
 
 <template>
   <header
-    class="flex items-center flex-shrink-0 h-12 gap-3 px-3 text-white border-b-[3px] bg-gti-navy border-gti-green"
+    class="flex items-center flex-shrink-0 h-12 gap-3 px-3 text-white border-b-[3px] bg-n-gti-navy border-n-gti-green"
   >
     <router-link
       :to="accountScopedRoute('home')"
