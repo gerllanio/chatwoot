@@ -50,4 +50,4 @@ export const gtiChatActions = chat => {
 // WhatsApp-like wallpaper behind the messages: beige (dark navy at night) with
 // a faint dot grid.
 export const GTI_CHAT_WALLPAPER =
-  'bg-n-gti-chat dark:bg-n-gti-chat-dark bg-[radial-gradient(rgba(127,127,127,0.07)_1px,transparent_1px)] bg-[length:1.125rem_1.125rem]';
+  '!bg-n-gti-chat dark:!bg-n-gti-chat-dark bg-[radial-gradient(rgba(127,127,127,0.07)_1px,transparent_1px)] bg-[length:1.125rem_1.125rem]';
