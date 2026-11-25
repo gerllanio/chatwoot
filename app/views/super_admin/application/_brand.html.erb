@@ -12,12 +12,12 @@
   <%= link_to image_tag("/brand-assets/logo_thumbnail.svg", alt: "", class: "size-8"), super_admin_root_path, class: "shrink-0", tabindex: -1, aria: { hidden: true } %>
   <div class="min-w-0 whitespace-nowrap">
     <div class="leading-5">
-      <%= link_to "Chatwoot", super_admin_root_path, class: "text-sm font-medium text-n-slate-12" %>
+      <%= link_to GlobalConfig.get_value("INSTALLATION_NAME").presence || "Work", super_admin_root_path, class: "text-sm font-medium text-n-slate-12" %>
     </div>
     <%# A line of its own and a smaller size: the fork's full version ("v4.19.0-fazer-ai-pro.154")
         does not fit next to the name. The fork publishes CE and Pro notes on one public page;
         Pro's repository is private. %>
-    <%= link_to "https://fazer.ai/chatwoot-release-notes",
+    <%= link_to "https://gtiplus.com.br",
                 target: "_blank", rel: "noopener noreferrer",
                 title: update_available ? t("super_admin.navigation.update_available", version: latest_version) : t("super_admin.navigation.release_notes"),
                 class: "flex items-center gap-1 text-xxs leading-4 tabular-nums text-n-slate-10 transition-colors hover:text-n-slate-12 hover:underline" do %>

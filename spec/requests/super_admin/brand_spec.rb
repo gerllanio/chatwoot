@@ -8,10 +8,10 @@ RSpec.describe 'Super Admin sidebar version' do
     sign_in(super_admin, scope: :super_admin)
   end
 
-  it 'shows the full fork version and links to the fork release notes' do
+  it 'shows the full fork version and links to the GTI site' do
     get '/super_admin'
 
-    link = Nokogiri::HTML(response.body).at_css('a[href="https://fazer.ai/chatwoot-release-notes"]')
+    link = Nokogiri::HTML(response.body).at_css('a[href="https://gtiplus.com.br"]')
     expect(link.text.squish).to eq('v4.19.0-fazer-ai-pro.154')
     expect(response.body).not_to include('github.com/chatwoot/chatwoot/releases')
   end

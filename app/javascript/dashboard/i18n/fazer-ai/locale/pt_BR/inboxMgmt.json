@@ -79,7 +79,7 @@
             },
             "MARK_AS_READ": {
               "LABEL": "Marcar mensagens como lidas no WhatsApp",
-              "DESCRIPTION": "Ao responder pelo Chatwoot, a conversa também aparece como lida no celular."
+              "DESCRIPTION": "Ao responder pelo Work, a conversa também aparece como lida no celular."
             },
             "PRESENCE_SUBSCRIBE": {
               "LABEL": "Mostrar quando o contato está online",
@@ -154,7 +154,7 @@
       "WHATSAPP_PROVIDER_URL_PLACEHOLDER": "Digite a URL do provedor",
       "WHATSAPP_PROVIDER_URL_ERROR": "Por favor, insira uma URL válida",
       "WHATSAPP_MARK_AS_READ_TITLE": "Confirmações de leitura",
-      "WHATSAPP_MARK_AS_READ_SUBHEADER": "Se essa opção estiver desativada, ao visualizar uma mensagem pelo Chatwoot, não será enviada uma confirmação de leitura para o remetente. As suas mensagens ainda poderão receber confirmações de leitura.",
+      "WHATSAPP_MARK_AS_READ_SUBHEADER": "Se essa opção estiver desativada, ao visualizar uma mensagem pelo Work, não será enviada uma confirmação de leitura para o remetente. As suas mensagens ainda poderão receber confirmações de leitura.",
       "WHATSAPP_MARK_AS_READ_LABEL": "Enviar confirmações de leitura",
       "WHATSAPP_PRESENCE_SUBSCRIBE_TITLE": "Indicadores de digitação do contato",
       "WHATSAPP_PRESENCE_SUBSCRIBE_SUBHEADER": "Quando ativado, você verá indicadores de digitação na conversa quando um contato do WhatsApp estiver digitando ou gravando áudio. Requer reconectar o canal para entrar em vigor.",

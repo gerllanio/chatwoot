@@ -5,7 +5,7 @@
   <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="turbo-visit-control" content="reload">
-  <title><%= content_for(:title) %> - <%= application_title %></title>
+  <title><%= content_for(:title) %> - <%= GlobalConfig.get_value("INSTALLATION_NAME").presence || "Work" %></title>
   <%= render "theme" %>
   <%= render "font_preload", file: "Inter/InterVariable.woff2" %>
   <%= render "stylesheet" %>
