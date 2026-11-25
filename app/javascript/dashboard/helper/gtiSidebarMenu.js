@@ -29,7 +29,11 @@ const renamed = (item, overrides) => {
   return { ...item, ...overrides };
 };
 
-export const buildGtiMenu = (upstreamItems, t, { monitorRoute } = {}) => {
+export const buildGtiMenu = (
+  upstreamItems,
+  t,
+  { monitorRoute, helpRoute } = {}
+) => {
   const settings = findByName(upstreamItems, 'Settings');
   const settingsChildren = settings?.children || [];
   const promotedNames = Object.values(PROMOTED_SETTINGS);
@@ -78,6 +82,14 @@ export const buildGtiMenu = (upstreamItems, t, { monitorRoute } = {}) => {
       icon: 'i-lucide-message-square-more',
     }),
     findByName(upstreamItems, 'Calls'),
+    helpRoute
+      ? {
+          name: 'Gti Help',
+          label: t('GTI.SIDEBAR.HELP'),
+          icon: 'i-lucide-circle-help',
+          to: helpRoute,
+        }
+      : null,
   ];
 
   const adminItems = [

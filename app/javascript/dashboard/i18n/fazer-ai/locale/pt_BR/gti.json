@@ -18,7 +18,8 @@
       "SETTINGS": "Configurações",
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin",
-      "MONITOR": "Monitor (TV)"
+      "MONITOR": "Monitor (TV)",
+      "HELP": "Ajuda"
     },
     "TICKETS": {
       "ATTENDING": "Atendendo",
@@ -71,6 +72,47 @@
       "NO_QUEUE": "Sem fila",
       "NONE": "—",
       "RATIO": "{online}/{total}"
+    },
+    "HELP": {
+      "TITLE": "Ajuda",
+      "SUBTITLE": "Como fazer as tarefas do dia a dia no Work.",
+      "SUPPORT_TITLE": "Suporte interno GTI",
+      "SUPPORT_BODY": "Dúvidas ou problemas no sistema? Fale com a equipe de TI.",
+      "SUPPORT_EMAIL": "suporte@gtiplus.com.br",
+      "TOPICS": {
+        "ACCEPT": {
+          "TITLE": "Aceitar um atendimento",
+          "BODY": "Em Atendimentos, abra a aba Aguardando e clique no ✓ do cartão. A conversa vai para a sua aba Atendendo."
+        },
+        "PEEK": {
+          "TITLE": "Espiar antes de aceitar",
+          "BODY": "O 👁 do cartão mostra as mensagens sem avisar o cliente e sem tirar a conversa da fila."
+        },
+        "TRANSFER": {
+          "TITLE": "Transferir para outra fila ou atendente",
+          "BODY": "Dentro da conversa, use os campos Atendente e Time (fila) no painel da direita."
+        },
+        "QUICK_REPLIES": {
+          "TITLE": "Respostas rápidas",
+          "BODY": "Digite / no campo de mensagem e escolha a resposta. Cadastre novas em Respostas rápidas."
+        },
+        "NOTES": {
+          "TITLE": "Nota interna",
+          "BODY": "Use a aba Nota privada do campo de mensagem: só a equipe vê, o cliente não recebe."
+        },
+        "HISTORY": {
+          "TITLE": "Histórico do contato",
+          "BODY": "No topo da conversa, clique em Ver histórico do contato para ler os atendimentos anteriores em cinza."
+        },
+        "AUDIO": {
+          "TITLE": "Áudios transcritos",
+          "BODY": "Os áudios recebidos ganham o texto transcrito logo abaixo, para ler sem precisar ouvir."
+        },
+        "WHATSAPP_QR": {
+          "TITLE": "Reconectar o WhatsApp",
+          "BODY": "Em Conexões, abra a caixa do WhatsApp (nativo) e leia o novo QR Code no celular, em Aparelhos conectados."
+        }
+      }
     }
   }
 }

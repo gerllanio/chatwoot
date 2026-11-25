@@ -1040,6 +1040,7 @@ const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
 const gtiMenuItems = computed(() =>
   buildGtiMenu(menuItems.value, t, {
     monitorRoute: accountScopedRoute('gti_monitor'),
+    helpRoute: accountScopedRoute('gti_help'),
   })
 );
 </script>

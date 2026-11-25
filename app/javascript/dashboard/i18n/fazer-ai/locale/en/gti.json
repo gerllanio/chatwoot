@@ -18,7 +18,8 @@
       "SETTINGS": "Settings",
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin",
-      "MONITOR": "TV monitor"
+      "MONITOR": "TV monitor",
+      "HELP": "Help"
     },
     "TICKETS": {
       "ATTENDING": "Attending",
@@ -71,6 +72,47 @@
       "NO_QUEUE": "No queue",
       "NONE": "—",
       "RATIO": "{online}/{total}"
+    },
+    "HELP": {
+      "TITLE": "Help",
+      "SUBTITLE": "How to do everyday tasks in Work.",
+      "SUPPORT_TITLE": "GTI internal support",
+      "SUPPORT_BODY": "Questions or problems with the system? Talk to the IT team.",
+      "SUPPORT_EMAIL": "suporte@gtiplus.com.br",
+      "TOPICS": {
+        "ACCEPT": {
+          "TITLE": "Accept a conversation",
+          "BODY": "In Tickets, open the Waiting tab and click ✓ on the card. The conversation moves to your Attending tab."
+        },
+        "PEEK": {
+          "TITLE": "Peek before accepting",
+          "BODY": "The 👁 on the card shows the messages without notifying the customer or taking the conversation out of the queue."
+        },
+        "TRANSFER": {
+          "TITLE": "Transfer to another queue or agent",
+          "BODY": "Inside the conversation, use the Agent and Team (queue) fields on the right panel."
+        },
+        "QUICK_REPLIES": {
+          "TITLE": "Quick replies",
+          "BODY": "Type / in the message box and pick a reply. Add new ones under Quick replies."
+        },
+        "NOTES": {
+          "TITLE": "Internal note",
+          "BODY": "Use the Private note tab of the message box: only the team sees it, the customer does not."
+        },
+        "HISTORY": {
+          "TITLE": "Contact history",
+          "BODY": "At the top of the conversation, click Show contact history to read previous conversations in grey."
+        },
+        "AUDIO": {
+          "TITLE": "Transcribed audio",
+          "BODY": "Incoming audio gets its transcription right below, so you can read it without listening."
+        },
+        "WHATSAPP_QR": {
+          "TITLE": "Reconnect WhatsApp",
+          "BODY": "Under Connections, open the native WhatsApp inbox and scan the new QR code from Linked devices on the phone."
+        }
+      }
     }
   }
 }

@@ -18,7 +18,8 @@
       "SETTINGS": "Configuración",
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin",
-      "MONITOR": "Monitor (TV)"
+      "MONITOR": "Monitor (TV)",
+      "HELP": "Ayuda"
     },
     "TICKETS": {
       "ATTENDING": "Atendiendo",
@@ -71,6 +72,47 @@
       "NO_QUEUE": "Sin cola",
       "NONE": "—",
       "RATIO": "{online}/{total}"
+    },
+    "HELP": {
+      "TITLE": "Ayuda",
+      "SUBTITLE": "Cómo hacer las tareas diarias en Work.",
+      "SUPPORT_TITLE": "Soporte interno GTI",
+      "SUPPORT_BODY": "¿Dudas o problemas con el sistema? Habla con el equipo de TI.",
+      "SUPPORT_EMAIL": "suporte@gtiplus.com.br",
+      "TOPICS": {
+        "ACCEPT": {
+          "TITLE": "Aceptar una atención",
+          "BODY": "En Atenciones, abre la pestaña En espera y haz clic en ✓ en la tarjeta. La conversación pasa a tu pestaña Atendiendo."
+        },
+        "PEEK": {
+          "TITLE": "Espiar antes de aceptar",
+          "BODY": "El 👁 de la tarjeta muestra los mensajes sin avisar al cliente ni sacar la conversación de la cola."
+        },
+        "TRANSFER": {
+          "TITLE": "Transferir a otra cola o agente",
+          "BODY": "Dentro de la conversación, usa los campos Agente y Equipo (cola) del panel derecho."
+        },
+        "QUICK_REPLIES": {
+          "TITLE": "Respuestas rápidas",
+          "BODY": "Escribe / en el campo de mensaje y elige la respuesta. Crea nuevas en Respuestas rápidas."
+        },
+        "NOTES": {
+          "TITLE": "Nota interna",
+          "BODY": "Usa la pestaña Nota privada del campo de mensaje: solo el equipo la ve, el cliente no la recibe."
+        },
+        "HISTORY": {
+          "TITLE": "Historial del contacto",
+          "BODY": "Arriba de la conversación, haz clic en Ver historial del contacto para leer las atenciones anteriores en gris."
+        },
+        "AUDIO": {
+          "TITLE": "Audios transcritos",
+          "BODY": "Los audios recibidos muestran su transcripción justo debajo, para leerlos sin escucharlos."
+        },
+        "WHATSAPP_QR": {
+          "TITLE": "Reconectar WhatsApp",
+          "BODY": "En Conexiones, abre la bandeja de WhatsApp (nativo) y escanea el nuevo código QR desde Dispositivos vinculados en el celular."
+        }
+      }
     }
   }
 }
