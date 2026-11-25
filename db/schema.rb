@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_25_143831) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_25_200855) do
   create_schema "whatsapp_connector"
 
   # These extensions should be enabled to support this database
@@ -1434,6 +1434,59 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_25_143831) do
     t.index ["group_contact_id", "contact_id"], name: "index_group_members_on_group_contact_id_and_contact_id", unique: true
     t.index ["group_contact_id", "is_active"], name: "index_group_members_on_group_contact_id_and_is_active"
     t.index ["group_contact_id"], name: "index_group_members_on_group_contact_id"
+  end
+
+  create_table "gti_campaign_shippings", force: :cascade do |t|
+    t.bigint "gti_campaign_id", null: false
+    t.bigint "contact_id"
+    t.bigint "conversation_id"
+    t.string "name"
+    t.string "number", null: false
+    t.text "message"
+    t.integer "status", default: 0, null: false
+    t.string "error"
+    t.datetime "delivered_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gti_campaign_id", "status"], name: "index_gti_campaign_shippings_on_gti_campaign_id_and_status"
+  end
+
+  create_table "gti_campaigns", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "inbox_id", null: false
+    t.bigint "gti_contact_list_id"
+    t.bigint "created_by_id"
+    t.string "name", null: false
+    t.jsonb "messages", default: [], null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "scheduled_at"
+    t.datetime "completed_at"
+    t.integer "min_interval_seconds", default: 20, null: false
+    t.integer "max_interval_seconds", default: 40, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "status"], name: "index_gti_campaigns_on_account_id_and_status"
+    t.index ["gti_contact_list_id"], name: "index_gti_campaigns_on_gti_contact_list_id"
+  end
+
+  create_table "gti_contact_list_items", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "gti_contact_list_id", null: false
+    t.string "name"
+    t.string "number", null: false
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gti_contact_list_id", "number"], name: "index_gti_contact_list_items_on_gti_contact_list_id_and_number", unique: true
+  end
+
+  create_table "gti_contact_lists", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name", null: false
+    t.integer "items_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_gti_contact_lists_on_account_id"
   end
 
   create_table "gti_tasks", force: :cascade do |t|

@@ -12,6 +12,8 @@ on:
       - 'app/models/concerns/gti_*.rb'
       - 'app/models/gti_*.rb'
       - 'app/controllers/api/v1/accounts/gti_*.rb'
+      - 'app/controllers/api/v1/accounts/gti_*/**'
+      - 'app/controllers/concerns/gti_*.rb'
       - 'db/migrate/*_gti_*.rb'
       - 'spec/**/gti_*'
       - 'spec/**/gti/**'
@@ -53,6 +55,6 @@ jobs:
       - name: Prepare database
         run: bundle exec rake db:create db:schema:load
       - name: Rubocop
-        run: bundle exec rubocop app/services/gti app/jobs/gti app/models/attachment.rb app/models/concerns/gti_audio_transcription.rb app/models/gti_task.rb app/controllers/api/v1/accounts/gti_tasks_controller.rb spec/services/gti spec/jobs/gti spec/models/gti_task_spec.rb spec/controllers/api/v1/accounts/gti_tasks_controller_spec.rb
+        run: bundle exec rubocop app/services/gti app/jobs/gti app/models/attachment.rb app/models/concerns/gti_audio_transcription.rb app/models/gti_*.rb app/controllers/api/v1/accounts/gti_* app/controllers/concerns/gti_*.rb db/migrate/*_gti_*.rb spec/factories/gti_*.rb spec/services/gti spec/jobs/gti spec/models/gti_*_spec.rb spec/controllers/api/v1/accounts/gti_*_spec.rb
       - name: Run GTI specs
-        run: bundle exec rspec spec/services/gti spec/jobs/gti spec/models/attachment_spec.rb spec/models/gti_task_spec.rb spec/controllers/api/v1/accounts/gti_tasks_controller_spec.rb
+        run: bundle exec rspec spec/services/gti spec/jobs/gti spec/models/attachment_spec.rb spec/models/gti_*_spec.rb spec/controllers/api/v1/accounts/gti_*_spec.rb

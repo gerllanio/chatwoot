@@ -177,6 +177,17 @@ Rails.application.routes.draw do
           end
           resources :canned_responses, only: [:index, :create, :update, :destroy]
           resources :gti_tasks, only: [:index, :create, :update, :destroy]
+          resources :gti_contact_lists, only: [:index, :show, :create, :update, :destroy] do
+            post :import, on: :member
+            resources :items, only: [:index, :create, :update, :destroy], module: :gti_contact_lists
+          end
+          resources :gti_campaigns, only: [:index, :show, :create, :update, :destroy] do
+            member do
+              post :cancel
+              post :restart
+              get :report
+            end
+          end
           resources :automation_rules, only: [:index, :create, :show, :update, :destroy] do
             post :clone
           end
