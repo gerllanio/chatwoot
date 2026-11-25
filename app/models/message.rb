@@ -676,6 +676,8 @@ class Message < ApplicationRecord
       Current.executed_by = sender if reopened_by_contact?
       conversation.open!
     else
+      # GTI "Work": like a new Ticketz ticket, a WhatsApp customer writing again goes back to the queue (Aguardando).
+      conversation.assignee_id = nil if conversation.inbox.whatsapp?
       conversation.open!
     end
   end

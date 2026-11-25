@@ -352,6 +352,15 @@ RSpec.describe Message do
       expect(conversation.reload).to have_attributes(status: 'open', ai_assignee_type: nil, assignee_agent_bot_id: nil)
     end
 
+    it 'sends a WhatsApp conversation back to the queue when the customer writes again' do
+      inbox = create(:channel_whatsapp, sync_templates: false, validate_provider_config: false).inbox
+      agent = create(:user, account: inbox.account, role: :agent)
+      whatsapp_conversation = create(:conversation, account: inbox.account, inbox: inbox, assignee: agent, status: :resolved)
+      build(:message, message_type: :incoming, conversation: whatsapp_conversation, account: inbox.account, inbox: inbox).save!
+
+      expect(whatsapp_conversation.reload).to have_attributes(status: 'open', assignee_id: nil)
+    end
+
     it 'will not reopen if the conversation is muted' do
       conversation.resolved!
       conversation.mute!
