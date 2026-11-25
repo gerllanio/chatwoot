@@ -9,6 +9,7 @@ import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
 import GtiCardActions from '../gti/GtiCardActions.vue';
 import { isGtiWaitingConversation } from 'dashboard/helper/gtiTicketTabs';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
 import CardPinIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPinIcon.vue';
 import UnreadBadge from 'dashboard/components-next/Conversation/ConversationCard/UnreadBadge.vue';
@@ -39,6 +40,7 @@ const emit = defineEmits([
   'deSelectConversation',
 ]);
 
+const gtiClassicMode = useGtiClassicMode();
 const hovered = ref(false);
 
 const unreadCount = computed(() => props.chat.unread_count);
@@ -258,7 +260,7 @@ watch(
         </template>
       </CardLabels>
       <GtiCardActions
-        v-if="isGtiWaitingConversation(chat)"
+        v-if="!gtiClassicMode && isGtiWaitingConversation(chat)"
         :chat="chat"
         class="mx-2 mt-1.5"
       />

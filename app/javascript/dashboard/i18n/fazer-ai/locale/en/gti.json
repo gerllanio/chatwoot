@@ -143,6 +143,15 @@
       "LOADING": "Loading tasks…",
       "EMPTY": "No tasks here.",
       "CONVERSATION": "Conversation #{id}"
+    },
+    "TOPBAR": {
+      "PRODUCT": "Work",
+      "TAGLINE": "Customer service",
+      "NOTIFICATIONS": "Notifications"
+    },
+    "CLASSIC": {
+      "ENTER": "Open classic Chatwoot mode",
+      "BACK": "Back to Work"
     }
   }
 }

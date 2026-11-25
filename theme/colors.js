@@ -227,6 +227,7 @@ export const colors = {
 
     black: '#000000',
     brand: '#00A656',
+    gti: { navy: '#1E293B', green: '#00A656' },
     portal: 'var(--dynamic-portal-color)',
     'portal-soft': 'var(--dynamic-portal-color-soft)',
     'portal-faint': 'var(--dynamic-portal-color-faint)',

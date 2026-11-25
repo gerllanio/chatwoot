@@ -23,7 +23,9 @@ import ConversationList from './ConversationList.vue';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import ConversationFilter from 'next/filter/ConversationFilter.vue';
 import SaveCustomView from 'next/filter/SaveCustomView.vue';
+import ChatTypeTabs from './widgets/ChatTypeTabs.vue';
 import GtiTicketTabs from './widgets/gti/GtiTicketTabs.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import {
   GTI_TICKET_TABS,
   buildGtiTicketTabs,
@@ -239,6 +241,7 @@ const assigneeTabItems = computed(() => {
   }));
 });
 
+const gtiClassicMode = useGtiClassicMode();
 const gtiShowAll = ref(false);
 const gtiAllowedAssignees = computed(() =>
   assigneeTabItems.value.map(item => item.key)
@@ -1153,8 +1156,15 @@ watch(appliedFilters, () => resetBulkActions());
       @close="onCloseDeleteFoldersModal"
     />
 
+    <ChatTypeTabs
+      v-if="gtiClassicMode && !hasAppliedFiltersOrActiveFolders"
+      :items="assigneeTabItems"
+      :active-tab="activeAssigneeTab"
+      is-compact
+      @chat-tab-change="updateAssigneeTab"
+    />
     <GtiTicketTabs
-      v-if="!hasAppliedFiltersOrActiveFolders"
+      v-else-if="!hasAppliedFiltersOrActiveFolders"
       v-model:show-all="gtiShowAll"
       :items="gtiTicketTabs"
       :active-tab="gtiActiveTicketTab"

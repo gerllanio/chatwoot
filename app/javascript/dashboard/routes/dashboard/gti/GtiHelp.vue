@@ -2,6 +2,7 @@
 // GTI "Work" help page: short how-tos for the team and the internal support contact.
 import { useI18n } from 'vue-i18n';
 import { useMapGetter } from 'dashboard/composables/store';
+import { setGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 const TOPICS = [
   'ACCEPT',
@@ -58,6 +59,13 @@ const globalConfig = useMapGetter('globalConfig/get');
         <p class="m-0 text-xs text-n-slate-10">
           {{ t('GTI.SIDEBAR.VERSION', { version: globalConfig.appVersion }) }}
         </p>
+        <button
+          type="button"
+          class="self-start p-0 mt-2 text-xs bg-transparent border-0 text-n-slate-10 hover:text-n-brand hover:underline"
+          @click="setGtiClassicMode(true)"
+        >
+          {{ t('GTI.CLASSIC.ENTER') }}
+        </button>
       </aside>
     </div>
   </div>

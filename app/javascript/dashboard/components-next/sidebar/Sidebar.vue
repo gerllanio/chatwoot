@@ -32,6 +32,7 @@ import {
   sortSidebarItems,
 } from 'dashboard/helper/sidebarSort';
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
+import { setGtiClassicMode, useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
 import GtiMessageAlerts from 'dashboard/components/widgets/gti/GtiMessageAlerts.vue';
 
@@ -1037,12 +1038,15 @@ const menuItems = computed(() => {
 const globalConfig = useMapGetter('globalConfig/get');
 const currentUser = useMapGetter('getCurrentUser');
 const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
+const gtiClassicMode = useGtiClassicMode();
 const gtiMenuItems = computed(() =>
-  buildGtiMenu(menuItems.value, t, {
-    monitorRoute: accountScopedRoute('gti_monitor'),
-    helpRoute: accountScopedRoute('gti_help'),
-    tasksRoute: accountScopedRoute('gti_tasks'),
-  })
+  gtiClassicMode.value
+    ? menuItems.value
+    : buildGtiMenu(menuItems.value, t, {
+        monitorRoute: accountScopedRoute('gti_monitor'),
+        helpRoute: accountScopedRoute('gti_help'),
+        tasksRoute: accountScopedRoute('gti_tasks'),
+      })
 );
 </script>
 
@@ -1214,10 +1218,18 @@ const gtiMenuItems = computed(() =>
         v-if="!isEffectivelyCollapsed"
         class="flex items-center justify-between w-full gap-2 px-3 pb-2"
       >
-        <GtiVolumeControl />
+        <GtiVolumeControl v-if="gtiClassicMode" />
         <p class="flex-1 min-w-0 m-0 text-xs truncate text-n-slate-10">
           {{ t('GTI.SIDEBAR.VERSION', { version: globalConfig.appVersion }) }}
         </p>
+        <button
+          v-if="gtiClassicMode"
+          type="button"
+          class="flex-shrink-0 p-0 text-xs font-medium bg-transparent border-0 text-n-brand hover:underline"
+          @click="setGtiClassicMode(false)"
+        >
+          {{ t('GTI.CLASSIC.BACK') }}
+        </button>
         <a
           v-if="isSuperAdmin"
           href="/super_admin"
