@@ -1,0 +1,78 @@
+{
+  "GTI_MESSAGES_API": {
+    "CARD": {
+      "NAME": "API de mensajes",
+      "DESCRIPTION": "Envía mensajes de WhatsApp por Work desde n8n, Primata o cualquier sistema, en el mismo formato de Ticketz.",
+      "OPEN": "Abrir"
+    },
+    "TITLE": "Documentación para el envío de mensajes",
+    "SUBTITLE": "Mismo formato de la API de Ticketz: en el cambio, n8n y Primata solo cambian la dirección.",
+    "METHODS": {
+      "TITLE": "Métodos de envío",
+      "TEXT": "Mensajes de texto",
+      "MEDIA": "Mensajes multimedia"
+    },
+    "INSTRUCTIONS": {
+      "TITLE": "Instrucciones",
+      "TOKEN": "Antes de enviar mensajes, crea un token abajo, vinculado a la conexión que enviará los mensajes.",
+      "NUMBER": "El campo number acepta dos tipos de valor:",
+      "NUMBER_PHONE": "Número de WhatsApp: cualquier número que empiece con el código del país (Brasil = 55).",
+      "NUMBER_JID": "JID de WhatsApp: el identificador de WhatsApp; para grupos es un número largo que termina en @g.us.",
+      "SAVE_ON_TICKET": "saveOnTicket: false envía sin dejar la conversación abierta en Atenciones."
+    },
+    "TEXT": {
+      "TITLE": "1. Mensajes de texto",
+      "INFO": "Información necesaria para enviar mensajes de texto:"
+    },
+    "MEDIA": {
+      "TITLE": "2. Mensajes multimedia",
+      "INFO": "Información necesaria para enviar archivos (body se convierte en la leyenda):"
+    },
+    "FIELDS": {
+      "ENDPOINT": "Endpoint",
+      "ALT_ENDPOINT": "Endpoint alternativo",
+      "METHOD": "Método",
+      "HEADERS": "Headers",
+      "BODY": "Body",
+      "FORM_DATA": "FormData"
+    },
+    "TOKENS": {
+      "TITLE": "Tokens por conexión",
+      "DESCRIPTION": "Cada token envía por la conexión elegida. Quien tenga el token puede enviar mensajes en nombre de la empresa: guárdalo con cuidado.",
+      "NAME": "Nombre",
+      "CONNECTION": "Conexión",
+      "TOKEN": "Token",
+      "LAST_USED": "Último uso",
+      "NEVER": "Nunca",
+      "ACTIONS": "Acciones",
+      "EMPTY": "Aún no hay tokens.",
+      "NEW": "Nuevo token",
+      "NAME_PLACEHOLDER": "Ej.: n8n, Primata",
+      "SELECT_CONNECTION": "Selecciona la conexión",
+      "CREATE": "Crear",
+      "COPY": "Copiar",
+      "COPIED": "Token copiado",
+      "REGENERATE": "Generar nuevo",
+      "REGENERATED": "Nuevo token generado. Actualiza las integraciones que usaban el anterior.",
+      "REGENERATE_CONFIRM": "Haz clic de nuevo para confirmar: el token actual deja de funcionar.",
+      "DELETE": "Eliminar",
+      "DELETE_CONFIRM": "Haz clic de nuevo para confirmar la eliminación.",
+      "DELETED": "Token eliminado",
+      "CREATED": "Token creado",
+      "ERROR": "No se pudo guardar el token"
+    },
+    "TEST": {
+      "TITLE": "Prueba de envío",
+      "TOKEN": "Token",
+      "SELECT_TOKEN": "Selecciona el token",
+      "NUMBER": "Número",
+      "NUMBER_PLACEHOLDER": "5511999990000",
+      "MESSAGE": "Mensaje",
+      "CAPTION": "Leyenda (opcional)",
+      "FILE": "Archivo",
+      "SEND": "Enviar",
+      "SUCCESS": "Mensaje enviado",
+      "ERROR": "Falló el envío: {error}"
+    }
+  }
+}

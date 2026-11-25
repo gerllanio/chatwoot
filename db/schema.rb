@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_25_200855) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_25_201227) do
   create_schema "whatsapp_connector"
 
   # These extensions should be enabled to support this database
@@ -1434,6 +1434,19 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_25_200855) do
     t.index ["group_contact_id", "contact_id"], name: "index_group_members_on_group_contact_id_and_contact_id", unique: true
     t.index ["group_contact_id", "is_active"], name: "index_group_members_on_group_contact_id_and_is_active"
     t.index ["group_contact_id"], name: "index_group_members_on_group_contact_id"
+  end
+
+  create_table "gti_api_tokens", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "inbox_id", null: false
+    t.string "name", null: false
+    t.string "token", null: false
+    t.datetime "last_used_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "inbox_id"], name: "index_gti_api_tokens_on_account_id_and_inbox_id"
+    t.index ["inbox_id"], name: "index_gti_api_tokens_on_inbox_id"
+    t.index ["token"], name: "index_gti_api_tokens_on_token", unique: true
   end
 
   create_table "gti_campaign_shippings", force: :cascade do |t|

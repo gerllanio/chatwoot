@@ -177,6 +177,9 @@ Rails.application.routes.draw do
           end
           resources :canned_responses, only: [:index, :create, :update, :destroy]
           resources :gti_tasks, only: [:index, :create, :update, :destroy]
+          resources :gti_api_tokens, only: [:index, :create, :update, :destroy] do
+            post :regenerate, on: :member
+          end
           resources :gti_contact_lists, only: [:index, :show, :create, :update, :destroy] do
             post :import, on: :member
             resources :items, only: [:index, :create, :update, :destroy], module: :gti_contact_lists
@@ -837,6 +840,11 @@ Rails.application.routes.draw do
       resources :conversations, only: [:show]
     end
   end
+
+  # GTI "Work": Ticketz-compatible messages API, on Ticketz's path too so n8n and
+  # Primata only change the host on cutover.
+  post 'api/messages/send', to: 'gti/messages_api#create', as: :gti_messages_api_send
+  post 'backend/api/messages/send', to: 'gti/messages_api#create'
 
   # ----------------------------------------------------------------------
   # Routes for channel integrations

@@ -12,6 +12,7 @@ import {
 import { frontendURL } from 'dashboard/helper/URLHelper';
 import { picoSearch } from '@chatwoot/pico-search';
 import IntegrationItem from './IntegrationItem.vue';
+import GtiMessagesApiCard from 'dashboard/components/widgets/gti/GtiMessagesApiCard.vue';
 import SettingsLayout from '../SettingsLayout.vue';
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
 
@@ -86,6 +87,7 @@ usePageCommands(() =>
           v-else
           class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
         >
+          <GtiMessagesApiCard v-if="!searchQuery" />
           <IntegrationItem
             v-for="item in filteredIntegrationList"
             :id="item.id"

@@ -3,6 +3,7 @@ import GtiMonitor from './GtiMonitor.vue';
 import GtiHelp from './GtiHelp.vue';
 import GtiTasks from './GtiTasks.vue';
 import GtiPanel from './GtiPanel.vue';
+import GtiMessagesApi from './GtiMessagesApi.vue';
 import GtiSettings from './GtiSettings.vue';
 import GtiCampaigns from './GtiCampaigns.vue';
 import GtiContactLists from './GtiContactLists.vue';
@@ -41,6 +42,14 @@ export default {
         permissions: ['administrator', 'report_manage'],
       },
       component: GtiPanel,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/messages-api'),
+      name: 'gti_messages_api',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiMessagesApi,
     },
     {
       path: frontendURL('accounts/:accountId/gti/settings'),

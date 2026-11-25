@@ -1,0 +1,78 @@
+{
+  "GTI_MESSAGES_API": {
+    "CARD": {
+      "NAME": "Messages API",
+      "DESCRIPTION": "Send WhatsApp messages through Work from n8n, Primata or any system, in the same format as Ticketz.",
+      "OPEN": "Open"
+    },
+    "TITLE": "Message sending documentation",
+    "SUBTITLE": "Same format as the Ticketz API: on cutover, n8n and Primata only change the address.",
+    "METHODS": {
+      "TITLE": "Sending methods",
+      "TEXT": "Text messages",
+      "MEDIA": "Media messages"
+    },
+    "INSTRUCTIONS": {
+      "TITLE": "Instructions",
+      "TOKEN": "Before sending messages, create a token below, tied to the connection that will send them.",
+      "NUMBER": "The number field accepts two kinds of value:",
+      "NUMBER_PHONE": "WhatsApp number: any number starting with the country code (Brazil = 55).",
+      "NUMBER_JID": "WhatsApp JID: the WhatsApp identifier; for groups it is a long number ending in @g.us.",
+      "SAVE_ON_TICKET": "saveOnTicket: false sends without leaving the conversation open in Tickets."
+    },
+    "TEXT": {
+      "TITLE": "1. Text messages",
+      "INFO": "Information needed to send text messages:"
+    },
+    "MEDIA": {
+      "TITLE": "2. Media messages",
+      "INFO": "Information needed to send files (body becomes the caption):"
+    },
+    "FIELDS": {
+      "ENDPOINT": "Endpoint",
+      "ALT_ENDPOINT": "Alternative endpoint",
+      "METHOD": "Method",
+      "HEADERS": "Headers",
+      "BODY": "Body",
+      "FORM_DATA": "FormData"
+    },
+    "TOKENS": {
+      "TITLE": "Tokens per connection",
+      "DESCRIPTION": "Each token sends through the chosen connection. Whoever holds a token can send messages as the company: keep it safe.",
+      "NAME": "Name",
+      "CONNECTION": "Connection",
+      "TOKEN": "Token",
+      "LAST_USED": "Last used",
+      "NEVER": "Never",
+      "ACTIONS": "Actions",
+      "EMPTY": "No tokens yet.",
+      "NEW": "New token",
+      "NAME_PLACEHOLDER": "E.g. n8n, Primata",
+      "SELECT_CONNECTION": "Select the connection",
+      "CREATE": "Create",
+      "COPY": "Copy",
+      "COPIED": "Token copied",
+      "REGENERATE": "Regenerate",
+      "REGENERATED": "New token generated. Update the integrations that used the old one.",
+      "REGENERATE_CONFIRM": "Click again to confirm: the current token stops working.",
+      "DELETE": "Delete",
+      "DELETE_CONFIRM": "Click again to confirm the deletion.",
+      "DELETED": "Token deleted",
+      "CREATED": "Token created",
+      "ERROR": "Could not save the token"
+    },
+    "TEST": {
+      "TITLE": "Send test",
+      "TOKEN": "Token",
+      "SELECT_TOKEN": "Select the token",
+      "NUMBER": "Number",
+      "NUMBER_PLACEHOLDER": "5511999990000",
+      "MESSAGE": "Message",
+      "CAPTION": "Caption (optional)",
+      "FILE": "File",
+      "SEND": "Send",
+      "SUCCESS": "Message sent",
+      "ERROR": "Sending failed: {error}"
+    }
+  }
+}
