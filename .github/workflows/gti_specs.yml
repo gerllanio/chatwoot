@@ -1,0 +1,54 @@
+name: GTI specs
+
+# Runs the backend specs of the GTI "Work" customisations (and the upstream specs of
+# the files they touch) on the community edition, like run_foss_spec.yml does.
+
+on:
+  push:
+    branches: [gti]
+    paths:
+      - 'app/**/gti/**'
+      - 'app/models/attachment.rb'
+      - 'app/models/concerns/gti_*.rb'
+      - 'spec/**/gti/**'
+      - '.github/workflows/gti_specs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ''
+          POSTGRES_DB: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Strip enterprise code
+        run: rm -rf enterprise spec/enterprise
+      - name: Prepare database
+        run: bundle exec rake db:create db:schema:load
+      - name: Rubocop
+        run: bundle exec rubocop app/services/gti app/jobs/gti app/models/attachment.rb app/models/concerns/gti_audio_transcription.rb spec/services/gti spec/jobs/gti
+      - name: Run GTI specs
+        run: bundle exec rspec spec/services/gti spec/jobs/gti spec/models/attachment_spec.rb

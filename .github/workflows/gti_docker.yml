@@ -7,6 +7,10 @@ name: GTI Work image
 on:
   push:
     branches: [gti]
+    paths-ignore:
+      - '.github/**'
+      - 'spec/**'
+      - 'GTI.md'
   workflow_dispatch:
 
 permissions:
