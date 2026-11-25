@@ -146,4 +146,15 @@ describe('buildGtiMenu', () => {
     expect(kanban.to).toBe('/gti-kanban');
     expect(menu.filter(item => item.name === 'Kanban')).toHaveLength(1);
   });
+
+  it('opens the GTI page in place of an upstream list, without sub-items', () => {
+    const menu = buildGtiMenu(upstreamMenu(), t, {
+      pageRoutes: { 'Gti Users': '/gti/users', Contacts: '/gti/contacts' },
+    });
+
+    expect(menu.find(item => item.name === 'Gti Users').to).toBe('/gti/users');
+    const contacts = menu.find(item => item.name === 'Contacts');
+    expect(contacts.to).toBe('/gti/contacts');
+    expect(contacts.children).toBeUndefined();
+  });
 });

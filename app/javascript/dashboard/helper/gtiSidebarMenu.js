@@ -67,6 +67,14 @@ const flatConversations = (conversation, t) => {
   };
 };
 
+// GTI pages that replace an upstream list (Usuários, Filas, Conexões…): the
+// entry keeps its place and label but opens the GTI page, with no sub-items.
+const withGtiPage = (item, pageRoutes) => {
+  const route = pageRoutes[item.name];
+  if (!route) return item;
+  return { ...item, to: route, children: undefined, activeOn: undefined };
+};
+
 export const buildGtiMenu = (
   upstreamItems,
   t,
@@ -79,6 +87,7 @@ export const buildGtiMenu = (
     panelRoute,
     campaignsRoute,
     settingsRoute,
+    pageRoutes = {},
   } = {}
 ) => {
   const settings = findByName(upstreamItems, 'Settings');
@@ -251,5 +260,5 @@ export const buildGtiMenu = (
     ...attendanceItems.filter(Boolean),
     ...visibleAdminItems,
     ...newUpstreamItems,
-  ];
+  ].map(item => withGtiPage(item, pageRoutes));
 };

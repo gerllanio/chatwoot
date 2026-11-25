@@ -1091,6 +1091,15 @@ const gtiMenuItems = computed(() =>
           panelRoute: accountScopedRoute('gti_panel'),
           campaignsRoute: accountScopedRoute('gti_campaigns'),
           settingsRoute: accountScopedRoute('gti_settings'),
+          pageRoutes: {
+            'Gti Users': accountScopedRoute('gti_users'),
+            'Gti Queues': accountScopedRoute('gti_queues'),
+            'Gti Connections': accountScopedRoute('gti_connections'),
+            'Gti Quick Replies': accountScopedRoute('gti_quick_replies'),
+            'Gti Tags': accountScopedRoute('gti_tags'),
+            'Gti Integrations': accountScopedRoute('gti_integrations'),
+            Contacts: accountScopedRoute('gti_contacts'),
+          },
         })
       )
 );
