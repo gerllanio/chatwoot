@@ -1,0 +1,6 @@
+{
+  "GTI_AGENT_TEAMS": {
+    "LABEL": "Queues this user attends",
+    "HELP": "The user joins these queues and can receive their conversations."
+  }
+}

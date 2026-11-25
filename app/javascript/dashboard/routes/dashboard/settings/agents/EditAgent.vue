@@ -8,6 +8,7 @@ import { useAlert } from 'dashboard/composables';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Auth from '../../../../api/auth';
 import wootConstants from 'dashboard/constants/globals';
+import GtiAgentTeams from 'dashboard/components/widgets/gti/GtiAgentTeams.vue';
 
 const props = defineProps({
   id: {
@@ -51,6 +52,7 @@ const agentName = ref(props.name);
 const agentAvailability = ref(props.availability);
 const selectedRoleId = ref(props.customRoleId || props.type);
 const agentCredentials = ref({ email: props.email });
+const gtiTeamsRef = ref(null);
 
 const rules = {
   agentName: { required, minLength: minLength(1) },
@@ -136,6 +138,7 @@ const editAgent = async () => {
     }
 
     await store.dispatch('agents/update', payload);
+    await gtiTeamsRef.value?.save(props.id);
     useAlert(t('AGENT_MGMT.EDIT.API.SUCCESS_MESSAGE'));
     emit('close');
   } catch (error) {
@@ -203,6 +206,8 @@ const resetPassword = async () => {
           </span>
         </label>
       </div>
+
+      <GtiAgentTeams ref="gtiTeamsRef" :user-id="id" />
 
       <div class="flex flex-row justify-start w-full gap-2 px-0 py-2">
         <div class="w-[50%] ltr:text-left rtl:text-right">

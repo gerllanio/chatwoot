@@ -6,6 +6,7 @@ import { useAlert } from 'dashboard/composables';
 import { useVuelidate } from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
 import Button from 'dashboard/components-next/button/Button.vue';
+import GtiAgentTeams from 'dashboard/components/widgets/gti/GtiAgentTeams.vue';
 
 const emit = defineEmits(['close']);
 
@@ -61,6 +62,8 @@ const selectedRole = computed(() =>
   )
 );
 
+const gtiTeamsRef = ref(null);
+
 const addAgent = async () => {
   v$.value.$touch();
   if (v$.value.$invalid) return;
@@ -78,6 +81,12 @@ const addAgent = async () => {
     }
 
     await store.dispatch('agents/create', payload);
+    const created = store.getters['agents/getAgents'].find(
+      agent => agent.email === agentEmail.value
+    );
+    if (created) {
+      await gtiTeamsRef.value?.save(created.id);
+    }
     useAlert(t('AGENT_MGMT.ADD.API.SUCCESS_MESSAGE'));
     emit('close');
   } catch (error) {
@@ -146,6 +155,8 @@ const addAgent = async () => {
           />
         </label>
       </div>
+
+      <GtiAgentTeams ref="gtiTeamsRef" />
 
       <div class="flex flex-row justify-end w-full gap-2 px-0 py-2">
         <Button

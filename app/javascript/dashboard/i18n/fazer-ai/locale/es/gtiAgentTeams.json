@@ -1,0 +1,6 @@
+{
+  "GTI_AGENT_TEAMS": {
+    "LABEL": "Colas que puede atender",
+    "HELP": "El usuario se une a estas colas y puede recibir sus conversaciones."
+  }
+}

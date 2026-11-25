@@ -1,0 +1,6 @@
+{
+  "GTI_AGENT_TEAMS": {
+    "LABEL": "Filas que pode atender",
+    "HELP": "O usuário passa a fazer parte dessas filas e pode receber as conversas delas."
+  }
+}
