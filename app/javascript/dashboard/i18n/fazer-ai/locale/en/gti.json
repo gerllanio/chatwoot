@@ -16,7 +16,8 @@
       "COMPANIES": "Companies",
       "INTEGRATIONS": "Integrations",
       "SETTINGS": "Settings",
-      "VERSION": "Work {version} · GTI Tecnologia"
+      "VERSION": "Work {version} · GTI Tecnologia",
+      "SUPER_ADMIN": "Super Admin"
     }
   }
 }

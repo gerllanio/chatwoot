@@ -1033,6 +1033,8 @@ const menuItems = computed(() => {
 });
 
 const globalConfig = useMapGetter('globalConfig/get');
+const currentUser = useMapGetter('getCurrentUser');
+const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
 const gtiMenuItems = computed(() => buildGtiMenu(menuItems.value, t));
 </script>
 
@@ -1200,12 +1202,24 @@ const gtiMenuItems = computed(() => buildGtiMenu(menuItems.value, t));
           @open-key-shortcut-modal="emit('openKeyShortcutModal')"
         />
       </div>
-      <p
+      <div
         v-if="!isEffectivelyCollapsed"
-        class="w-full px-3 pb-2 m-0 text-xs text-n-slate-10 truncate"
+        class="flex items-center justify-between w-full gap-2 px-3 pb-2"
       >
-        {{ t('GTI.SIDEBAR.VERSION', { version: globalConfig.appVersion }) }}
-      </p>
+        <p class="m-0 text-xs truncate text-n-slate-10">
+          {{ t('GTI.SIDEBAR.VERSION', { version: globalConfig.appVersion }) }}
+        </p>
+        <a
+          v-if="isSuperAdmin"
+          href="/super_admin"
+          target="_blank"
+          rel="noopener"
+          class="flex items-center flex-shrink-0 gap-1 text-xs font-medium text-n-brand hover:underline"
+        >
+          <span class="i-lucide-castle size-3.5" />
+          {{ t('GTI.SIDEBAR.SUPER_ADMIN') }}
+        </a>
+      </div>
     </section>
     <!-- Resize Handle (desktop only) -->
     <div
