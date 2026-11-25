@@ -6,6 +6,13 @@
 #
 # Adding a language means adding fazer_ai.<locale>.yml. Nothing else changes.
 en:
+  gti_mail:
+    errors:
+      imap_disabled: "IMAP is not enabled for this e-mail inbox (or it uses a Google/Microsoft login, which the mail screen does not support yet)."
+      smtp_disabled: "SMTP is not enabled for this e-mail inbox, so it cannot send."
+      not_found: "Message not found on the server."
+      not_imported: "This message could not be turned into a conversation (it may come from an address the inbox ignores)."
+      server: "The e-mail server answered: %{message}"
   whatsapp_catalog:
     price: '%{unit}%{number}'
     separator: '.'

@@ -6,6 +6,13 @@
 #
 # Adding a language means adding fazer_ai.<locale>.yml. Nothing else changes.
 pt_BR:
+  gti_mail:
+    errors:
+      imap_disabled: "O IMAP não está ativado nesta caixa de e-mail (ou ela usa login Google/Microsoft, que a tela de e-mail ainda não suporta)."
+      smtp_disabled: "O SMTP não está ativado nesta caixa de e-mail, então ela não consegue enviar."
+      not_found: "Mensagem não encontrada no servidor."
+      not_imported: "Não foi possível transformar esta mensagem em atendimento (o remetente pode ser um endereço que a caixa ignora)."
+      server: "O servidor de e-mail respondeu: %{message}"
   whatsapp_catalog:
     price: '%{unit} %{number}'
     separator: ','

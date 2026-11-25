@@ -2,6 +2,7 @@ import { frontendURL } from '../../../helper/URLHelper';
 import GtiKanban from './GtiKanban.vue';
 import GtiHelp from './GtiHelp.vue';
 import GtiTasks from './GtiTasks.vue';
+import GtiMail from './GtiMail.vue';
 import GtiPanel from './GtiPanel.vue';
 import GtiMessagesApi from './GtiMessagesApi.vue';
 import GtiSettings from './GtiSettings.vue';
@@ -44,6 +45,14 @@ export default {
         permissions: ['administrator', 'agent'],
       },
       component: GtiTasks,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/mail'),
+      name: 'gti_mail',
+      meta: {
+        permissions: ['administrator', 'agent'],
+      },
+      component: GtiMail,
     },
     {
       path: frontendURL('accounts/:accountId/gti/panel'),

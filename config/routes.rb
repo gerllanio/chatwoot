@@ -177,6 +177,21 @@ Rails.application.routes.draw do
           end
           resources :canned_responses, only: [:index, :create, :update, :destroy]
           resources :gti_tasks, only: [:index, :create, :update, :destroy]
+          scope 'gti_mail', controller: 'gti_mail', as: 'gti_mail' do
+            get 'mailboxes', action: :mailboxes
+            scope 'mailboxes/:inbox_id' do
+              get 'folders', action: :folders
+              post 'folders', action: :create_folder
+              get 'messages', action: :messages
+              post 'send', action: :send_mail
+              get 'messages/:uid', action: :show
+              get 'messages/:uid/attachments/:index', action: :attachment
+              patch 'messages/:uid/seen', action: :seen
+              post 'messages/:uid/move', action: :move
+              post 'messages/:uid/conversation', action: :to_conversation
+              delete 'messages/:uid', action: :destroy
+            end
+          end
           resources :gti_api_tokens, only: [:index, :create, :update, :destroy] do
             post :regenerate, on: :member
           end
