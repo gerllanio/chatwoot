@@ -458,11 +458,11 @@ export default {
     </div>
     <div
       v-if="!gtiClassicMode"
-      class="flex flex-wrap items-center order-last w-full gap-3 mt-0.5 text-[0.71875rem] text-n-slate-11"
+      class="flex flex-wrap items-center order-last w-full gap-3 mt-[0.3125rem] text-[0.71875rem] text-n-gti-muted"
     >
       <label
         v-if="showMessageSignatureButton"
-        class="inline-flex items-center gap-1.5 cursor-pointer"
+        class="inline-flex items-center gap-1.5 cursor-pointer !text-[0.71875rem] !font-normal !leading-normal !text-n-gti-muted"
       >
         <input
           type="checkbox"

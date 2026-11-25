@@ -140,7 +140,7 @@ const bubbleClass = message => {
     <button
       v-tooltip.top="t('GTI.TICKETS.FINISH')"
       type="button"
-      class="inline-flex items-center justify-center p-0 border rounded-full size-[1.875rem] border-n-gti-line bg-white text-n-gti-muted hover:bg-n-ruby-3 hover:text-n-ruby-11 hover:border-n-ruby-6 disabled:opacity-50"
+      class="inline-flex items-center justify-center !p-0 !border !border-solid !rounded-full size-[1.875rem] border-n-gti-line bg-white text-n-gti-muted hover:bg-n-ruby-3 hover:text-n-ruby-11 hover:border-n-ruby-6 disabled:opacity-50"
       :aria-label="t('GTI.TICKETS.FINISH')"
       :disabled="isBusy"
       @click="finishConversation"
@@ -150,7 +150,7 @@ const bubbleClass = message => {
     <button
       v-tooltip.top="t('GTI.TICKETS.PEEK')"
       type="button"
-      class="inline-flex items-center justify-center p-0 border rounded-full size-[1.875rem] border-n-gti-line bg-white text-n-gti-muted hover:bg-n-gti-blue/10 hover:text-n-gti-blue hover:border-n-gti-blue/40"
+      class="inline-flex items-center justify-center !p-0 !border !border-solid !rounded-full size-[1.875rem] border-n-gti-line bg-white text-n-gti-muted hover:bg-n-gti-blue/10 hover:text-n-gti-blue hover:border-n-gti-blue/40"
       :aria-label="t('GTI.TICKETS.PEEK')"
       @click="peekConversation"
     >
@@ -160,7 +160,7 @@ const bubbleClass = message => {
       v-if="canAccept"
       v-tooltip.top="t('GTI.TICKETS.ACCEPT')"
       type="button"
-      class="inline-flex items-center justify-center p-0 text-white border rounded-full size-[1.875rem] border-n-gti-green bg-n-gti-green hover:brightness-90 disabled:opacity-50"
+      class="inline-flex items-center justify-center !p-0 text-white !border !border-solid !rounded-full size-[1.875rem] border-n-gti-green bg-n-gti-green hover:brightness-90 disabled:opacity-50"
       :aria-label="t('GTI.TICKETS.ACCEPT')"
       :disabled="isBusy"
       @click="acceptConversation"

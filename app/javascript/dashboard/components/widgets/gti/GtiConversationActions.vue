@@ -22,11 +22,11 @@ const { t } = useI18n();
 
 // Prototype buttons: .btn (white, line border), .btn.ok (--ok green) and .ib2 (34px icon).
 const GTI_BTN =
-  'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border rounded-md disabled:opacity-50 bg-white border-n-gti-line text-n-slate-12 hover:bg-n-gti-panel2';
+  'inline-flex items-center gap-1.5 !px-3 !py-1.5 text-sm font-medium !border !border-solid !rounded-md disabled:opacity-50 bg-white border-n-gti-line text-n-slate-12 hover:bg-n-gti-panel2';
 const GTI_BTN_OK =
-  'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border rounded-md disabled:opacity-50 bg-n-gti-ok border-n-gti-ok text-white hover:brightness-95';
+  'inline-flex items-center gap-1.5 !px-3 !py-1.5 text-sm font-medium !border !border-solid !rounded-md disabled:opacity-50 bg-n-gti-ok border-n-gti-ok text-white hover:brightness-95';
 const GTI_ICON_BTN =
-  'inline-flex items-center justify-center p-0 border rounded-md size-[2.125rem] bg-white border-n-gti-line text-n-gti-muted hover:text-n-gti-green disabled:opacity-50';
+  'inline-flex items-center justify-center !p-0 !border !border-solid !rounded-md size-[2.125rem] bg-white border-n-gti-line text-n-gti-muted hover:text-n-gti-green disabled:opacity-50';
 const currentUser = useMapGetter('getCurrentUser');
 const teams = useMapGetter('teams/getTeams');
 

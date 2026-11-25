@@ -284,7 +284,7 @@ const copyConversationId = async () => {
         v-if="!gtiClassicMode"
         v-tooltip.top="t('GTI_TICKETS.HEADER.CONTACT_INFO')"
         type="button"
-        class="inline-flex items-center justify-center p-0 border rounded-md size-[2.125rem] border-n-gti-line bg-white text-n-gti-muted hover:text-n-gti-green"
+        class="inline-flex items-center justify-center !p-0 !border !border-solid !rounded-md size-[2.125rem] border-n-gti-line bg-white text-n-gti-muted hover:text-n-gti-green"
         :aria-label="t('GTI_TICKETS.HEADER.CONTACT_INFO')"
         @click="toggleGtiContactDrawer"
       >
