@@ -85,8 +85,11 @@ const confirmDelete = async () => {
             <td :class="GTI_TD" class="whitespace-nowrap">
               <b class="text-n-brand">/{{ response.short_code }}</b>
             </td>
-            <td :class="GTI_TD" class="whitespace-pre-line">
-              {{ getPlainText(response.content) }}
+            <td :class="GTI_TD" class="max-w-0 w-full">
+              <span
+                class="block truncate"
+                :title="getPlainText(response.content)"
+                >{{ getPlainText(response.content) }}</span>
             </td>
             <td :class="GTI_TD">
               <div class="flex justify-end gap-1">
