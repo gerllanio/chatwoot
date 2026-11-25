@@ -1057,6 +1057,8 @@ const gtiMenuItems = computed(() =>
         helpRoute: accountScopedRoute('gti_help'),
         tasksRoute: accountScopedRoute('gti_tasks'),
         panelRoute: accountScopedRoute('gti_panel'),
+        campaignsRoute: accountScopedRoute('gti_campaigns'),
+        contactListsRoute: accountScopedRoute('gti_contact_lists'),
       })
 );
 // Agents see none of the admin pages, so the heading only shows for admins.

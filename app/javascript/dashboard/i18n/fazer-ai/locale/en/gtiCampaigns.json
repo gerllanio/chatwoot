@@ -1,0 +1,143 @@
+{
+  "GTI_CAMPAIGNS": {
+    "SIDEBAR": {
+      "CONTACT_LISTS": "Contact lists"
+    },
+    "TITLE": "Campaigns",
+    "SUBTITLE": "Bulk sends over WhatsApp (QR code), spaced out to protect the number.",
+    "NEW": "New campaign",
+    "EMPTY": "No campaigns yet.",
+    "LOADING": "Loading…",
+    "TABLE": {
+      "NAME": "Name",
+      "STATUS": "Status",
+      "LIST": "Contact list",
+      "CONNECTION": "Connection",
+      "SCHEDULED": "Scheduled for",
+      "COMPLETED": "Completed",
+      "PROGRESS": "Sends",
+      "ACTIONS": "Actions",
+      "NOT_DEFINED": "Not set",
+      "PROGRESS_VALUE": "{sent}/{total} ({percent}%)"
+    },
+    "STATUS": {
+      "INACTIVE": "Inactive",
+      "SCHEDULED": "Scheduled",
+      "IN_PROGRESS": "In progress",
+      "CANCELLED": "Cancelled",
+      "FINISHED": "Finished"
+    },
+    "ACTIONS": {
+      "EDIT": "Edit",
+      "REPORT": "Report",
+      "CANCEL": "Cancel",
+      "RESTART": "Restart",
+      "DELETE": "Delete"
+    },
+    "FORM": {
+      "TITLE_NEW": "New campaign",
+      "TITLE_EDIT": "Edit campaign",
+      "NAME": "Name",
+      "NAME_PLACEHOLDER": "E.g. December birthdays",
+      "CONNECTION": "Connection (WhatsApp)",
+      "CONNECTION_PLACEHOLDER": "Choose the connection",
+      "LIST": "Contact list",
+      "LIST_PLACEHOLDER": "Choose the list",
+      "SCHEDULED_AT": "Schedule for",
+      "SCHEDULED_HELP": "Without a date the campaign stays inactive until you schedule it.",
+      "MESSAGE_TAB": "Message {number}",
+      "MESSAGE_PLACEHOLDER": "Message text",
+      "VARIABLES_HELP": "Variables: {'{'}nome{'}'} (full name) and {'{'}primeiro_nome{'}'} (first name). Filled messages are rotated, one per contact.",
+      "MEDIA": "Attachment (optional)",
+      "MEDIA_CURRENT": "Current attachment: {name}",
+      "REMOVE_MEDIA": "Remove attachment",
+      "INTERVAL": "Interval between sends (seconds)",
+      "INTERVAL_MIN": "Minimum",
+      "INTERVAL_MAX": "Maximum",
+      "INTERVAL_HELP": "Each send waits a random time between the minimum and the maximum, so WhatsApp does not block the number.",
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "NO_WHATSAPP": "This company has no WhatsApp connection.",
+      "LIST_OPTION": "{name} ({count})"
+    },
+    "REPORT": {
+      "TITLE": "Report: {name}",
+      "TOTAL": "Total",
+      "DELIVERED": "Sent",
+      "FAILED": "Failed",
+      "PENDING": "Queued",
+      "FILTER_ALL": "All",
+      "NUMBER": "Number",
+      "CONTACT": "Contact",
+      "MESSAGE": "Message",
+      "STATUS": "Status",
+      "SENT_AT": "Sent at",
+      "OPEN_CONVERSATION": "Open conversation",
+      "EMPTY": "No sends yet.",
+      "CLOSE": "Close"
+    },
+    "SHIPPING_STATUS": {
+      "PENDING": "Queued",
+      "DELIVERED": "Sent",
+      "FAILED": "Failed"
+    },
+    "CONFIRM": {
+      "DELETE_TITLE": "Delete campaign?",
+      "DELETE_DESCRIPTION": "The campaign \"{name}\" and its report will be deleted.",
+      "CANCEL_TITLE": "Cancel campaign?",
+      "CANCEL_DESCRIPTION": "Queued sends stop. You can restart it later.",
+      "YES": "Yes",
+      "NO": "No"
+    },
+    "ALERTS": {
+      "SAVED": "Campaign saved",
+      "DELETED": "Campaign deleted",
+      "CANCELLED": "Campaign cancelled",
+      "RESTARTED": "Campaign restarted",
+      "ERROR": "Could not complete. Check the fields and try again."
+    },
+    "LISTS": {
+      "TITLE": "Contact lists",
+      "SUBTITLE": "Campaign audiences. Import a CSV with the columns name, number and email.",
+      "NEW": "New list",
+      "NAME": "Name",
+      "NAME_PLACEHOLDER": "E.g. Walk-in customers",
+      "COUNT": "Contacts",
+      "ACTIONS": "Actions",
+      "OPEN": "Open",
+      "RENAME": "Rename",
+      "DELETE": "Delete",
+      "EMPTY": "No lists yet.",
+      "CREATE": "Create",
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "CONFIRM_DELETE_TITLE": "Delete list?",
+      "CONFIRM_DELETE_DESCRIPTION": "The list \"{name}\" and its contacts will be deleted. Campaigns using it are left without a list.",
+      "SAVED": "List saved",
+      "DELETED": "List deleted"
+    },
+    "ITEMS": {
+      "BACK": "Back to lists",
+      "SEARCH": "Search name or number",
+      "ADD": "Add contact",
+      "NAME": "Name",
+      "NUMBER": "WhatsApp",
+      "NUMBER_PLACEHOLDER": "5511999999999",
+      "EMAIL": "Email",
+      "ACTIONS": "Actions",
+      "EDIT": "Edit",
+      "DELETE": "Delete",
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "EMPTY": "No contacts in this list.",
+      "IMPORT": "Import CSV",
+      "IMPORTED": "{imported} contacts imported, {skipped} skipped (repeated or without a valid number).",
+      "PREVIOUS": "Previous",
+      "NEXT": "Next",
+      "PAGE": "Page {page} of {pages}",
+      "COUNT": "{count} contacts",
+      "SAVED": "Contact saved",
+      "DELETED": "Contact removed"
+    }
+  }
+}

@@ -122,4 +122,16 @@ describe('buildGtiMenu', () => {
     expect(tickets.to).toBe('/all');
     expect(tickets.activeOn).toContain('conversation_through_inbox');
   });
+
+  it('replaces upstream campaigns with the GTI ones and adds contact lists after them', () => {
+    const names = buildGtiMenu(upstreamMenu(), t, {
+      campaignsRoute: '/gti/campaigns',
+      contactListsRoute: '/gti/contact-lists',
+    }).map(item => item.name);
+
+    expect(names).not.toContain('Campaigns');
+    expect(names.indexOf('Gti Contact Lists')).toBe(
+      names.indexOf('Gti Campaigns') + 1
+    );
+  });
 });

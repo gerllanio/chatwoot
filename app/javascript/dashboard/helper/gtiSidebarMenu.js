@@ -70,7 +70,14 @@ const flatConversations = (conversation, t) => {
 export const buildGtiMenu = (
   upstreamItems,
   t,
-  { monitorRoute, helpRoute, tasksRoute, panelRoute } = {}
+  {
+    monitorRoute,
+    helpRoute,
+    tasksRoute,
+    panelRoute,
+    campaignsRoute,
+    contactListsRoute,
+  } = {}
 ) => {
   const settings = findByName(upstreamItems, 'Settings');
   const settingsChildren = settings?.children || [];
@@ -147,9 +154,25 @@ export const buildGtiMenu = (
     renamed(findByName(upstreamItems, 'Reports'), {
       label: t('GTI.SIDEBAR.REPORTS'),
     }),
-    renamed(findByName(upstreamItems, 'Campaigns'), {
-      label: t('GTI.SIDEBAR.CAMPAIGNS'),
-    }),
+    // Ticketz-style campaigns replace upstream's, which need WhatsApp Cloud templates.
+    campaignsRoute
+      ? {
+          name: 'Gti Campaigns',
+          label: t('GTI.SIDEBAR.CAMPAIGNS'),
+          icon: 'i-lucide-megaphone',
+          to: campaignsRoute,
+        }
+      : renamed(findByName(upstreamItems, 'Campaigns'), {
+          label: t('GTI.SIDEBAR.CAMPAIGNS'),
+        }),
+    contactListsRoute
+      ? {
+          name: 'Gti Contact Lists',
+          label: t('GTI_CAMPAIGNS.SIDEBAR.CONTACT_LISTS'),
+          icon: 'i-lucide-list',
+          to: contactListsRoute,
+        }
+      : null,
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.inboxes, {
       name: 'Gti Connections',
       label: t('GTI.SIDEBAR.CONNECTIONS'),

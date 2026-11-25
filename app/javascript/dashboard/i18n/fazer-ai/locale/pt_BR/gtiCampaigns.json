@@ -1,0 +1,143 @@
+{
+  "GTI_CAMPAIGNS": {
+    "SIDEBAR": {
+      "CONTACT_LISTS": "Listas de contatos"
+    },
+    "TITLE": "Campanhas",
+    "SUBTITLE": "Disparos em massa pelo WhatsApp (QR Code), com intervalo entre envios para proteger o número.",
+    "NEW": "Nova campanha",
+    "EMPTY": "Nenhuma campanha cadastrada.",
+    "LOADING": "Carregando…",
+    "TABLE": {
+      "NAME": "Nome",
+      "STATUS": "Status",
+      "LIST": "Lista de contatos",
+      "CONNECTION": "Conexão",
+      "SCHEDULED": "Agendamento",
+      "COMPLETED": "Concluída",
+      "PROGRESS": "Envios",
+      "ACTIONS": "Ações",
+      "NOT_DEFINED": "Não definida",
+      "PROGRESS_VALUE": "{sent}/{total} ({percent}%)"
+    },
+    "STATUS": {
+      "INACTIVE": "Inativa",
+      "SCHEDULED": "Programada",
+      "IN_PROGRESS": "Em andamento",
+      "CANCELLED": "Cancelada",
+      "FINISHED": "Finalizada"
+    },
+    "ACTIONS": {
+      "EDIT": "Editar",
+      "REPORT": "Relatório",
+      "CANCEL": "Cancelar",
+      "RESTART": "Reiniciar",
+      "DELETE": "Excluir"
+    },
+    "FORM": {
+      "TITLE_NEW": "Nova campanha",
+      "TITLE_EDIT": "Editar campanha",
+      "NAME": "Nome",
+      "NAME_PLACEHOLDER": "Ex.: Aniversariantes de dezembro",
+      "CONNECTION": "Conexão (WhatsApp)",
+      "CONNECTION_PLACEHOLDER": "Escolha a conexão",
+      "LIST": "Lista de contatos",
+      "LIST_PLACEHOLDER": "Escolha a lista",
+      "SCHEDULED_AT": "Agendar para",
+      "SCHEDULED_HELP": "Sem data, a campanha fica inativa até você agendar.",
+      "MESSAGE_TAB": "Mensagem {number}",
+      "MESSAGE_PLACEHOLDER": "Texto da mensagem",
+      "VARIABLES_HELP": "Variáveis: {'{'}nome{'}'} (nome completo) e {'{'}primeiro_nome{'}'}. As mensagens preenchidas são usadas em rodízio, uma para cada contato.",
+      "MEDIA": "Anexo (opcional)",
+      "MEDIA_CURRENT": "Anexo atual: {name}",
+      "REMOVE_MEDIA": "Remover anexo",
+      "INTERVAL": "Intervalo entre envios (segundos)",
+      "INTERVAL_MIN": "Mínimo",
+      "INTERVAL_MAX": "Máximo",
+      "INTERVAL_HELP": "Cada envio espera um tempo aleatório entre o mínimo e o máximo, para o WhatsApp não bloquear o número.",
+      "SAVE": "Salvar",
+      "CANCEL": "Cancelar",
+      "NO_WHATSAPP": "Nenhuma conexão de WhatsApp nesta empresa.",
+      "LIST_OPTION": "{name} ({count})"
+    },
+    "REPORT": {
+      "TITLE": "Relatório: {name}",
+      "TOTAL": "Total",
+      "DELIVERED": "Enviados",
+      "FAILED": "Falharam",
+      "PENDING": "Na fila",
+      "FILTER_ALL": "Todos",
+      "NUMBER": "Número",
+      "CONTACT": "Contato",
+      "MESSAGE": "Mensagem",
+      "STATUS": "Status",
+      "SENT_AT": "Enviado em",
+      "OPEN_CONVERSATION": "Abrir conversa",
+      "EMPTY": "Nenhum envio ainda.",
+      "CLOSE": "Fechar"
+    },
+    "SHIPPING_STATUS": {
+      "PENDING": "Na fila",
+      "DELIVERED": "Enviado",
+      "FAILED": "Falhou"
+    },
+    "CONFIRM": {
+      "DELETE_TITLE": "Excluir campanha?",
+      "DELETE_DESCRIPTION": "A campanha \"{name}\" e o relatório dela serão apagados.",
+      "CANCEL_TITLE": "Cancelar campanha?",
+      "CANCEL_DESCRIPTION": "Os envios que ainda estão na fila param. Você pode reiniciar depois.",
+      "YES": "Sim",
+      "NO": "Não"
+    },
+    "ALERTS": {
+      "SAVED": "Campanha salva",
+      "DELETED": "Campanha excluída",
+      "CANCELLED": "Campanha cancelada",
+      "RESTARTED": "Campanha reiniciada",
+      "ERROR": "Não foi possível concluir. Confira os campos e tente de novo."
+    },
+    "LISTS": {
+      "TITLE": "Listas de contatos",
+      "SUBTITLE": "Públicos das campanhas. Importe um CSV com as colunas nome, numero e email.",
+      "NEW": "Nova lista",
+      "NAME": "Nome",
+      "NAME_PLACEHOLDER": "Ex.: Clientes do balcão",
+      "COUNT": "Contatos",
+      "ACTIONS": "Ações",
+      "OPEN": "Abrir",
+      "RENAME": "Renomear",
+      "DELETE": "Excluir",
+      "EMPTY": "Nenhuma lista cadastrada.",
+      "CREATE": "Criar",
+      "SAVE": "Salvar",
+      "CANCEL": "Cancelar",
+      "CONFIRM_DELETE_TITLE": "Excluir lista?",
+      "CONFIRM_DELETE_DESCRIPTION": "A lista \"{name}\" e os contatos dela serão apagados. Campanhas que usam a lista ficam sem lista.",
+      "SAVED": "Lista salva",
+      "DELETED": "Lista excluída"
+    },
+    "ITEMS": {
+      "BACK": "Voltar às listas",
+      "SEARCH": "Pesquisar nome ou número",
+      "ADD": "Adicionar contato",
+      "NAME": "Nome",
+      "NUMBER": "WhatsApp",
+      "NUMBER_PLACEHOLDER": "5511999999999",
+      "EMAIL": "E-mail",
+      "ACTIONS": "Ações",
+      "EDIT": "Editar",
+      "DELETE": "Excluir",
+      "SAVE": "Salvar",
+      "CANCEL": "Cancelar",
+      "EMPTY": "Nenhum contato nesta lista.",
+      "IMPORT": "Importar CSV",
+      "IMPORTED": "{imported} contatos importados, {skipped} ignorados (repetidos ou sem número válido).",
+      "PREVIOUS": "Anterior",
+      "NEXT": "Próxima",
+      "PAGE": "Página {page} de {pages}",
+      "COUNT": "{count} contatos",
+      "SAVED": "Contato salvo",
+      "DELETED": "Contato removido"
+    }
+  }
+}
