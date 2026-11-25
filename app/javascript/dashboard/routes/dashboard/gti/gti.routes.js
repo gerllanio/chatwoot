@@ -4,6 +4,9 @@ import GtiHelp from './GtiHelp.vue';
 import GtiTasks from './GtiTasks.vue';
 import GtiPanel from './GtiPanel.vue';
 import GtiSettings from './GtiSettings.vue';
+import GtiCampaigns from './GtiCampaigns.vue';
+import GtiContactLists from './GtiContactLists.vue';
+import GtiContactListItems from './GtiContactListItems.vue';
 
 export default {
   routes: [
@@ -46,6 +49,30 @@ export default {
         permissions: ['administrator'],
       },
       component: GtiSettings,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/campaigns'),
+      name: 'gti_campaigns',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiCampaigns,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/contact-lists'),
+      name: 'gti_contact_lists',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiContactLists,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/contact-lists/:listId'),
+      name: 'gti_contact_list_items',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiContactListItems,
     },
   ],
 };

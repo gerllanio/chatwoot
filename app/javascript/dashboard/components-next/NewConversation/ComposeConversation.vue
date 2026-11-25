@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useRouter, useRoute } from 'vue-router';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useInboxSignatures } from 'dashboard/composables/useInboxSignatures';
+import { useGtiDefaultInbox } from 'dashboard/composables/useGtiDefaultInbox';
 import { useAlert } from 'dashboard/composables';
 import {
   CONTACT_FIELD_LABELS,
@@ -53,6 +54,7 @@ const popoverRef = ref(null);
 const contacts = ref([]);
 const selectedContact = ref(null);
 const targetInbox = ref(null);
+const { defaultInboxFor, rememberInbox } = useGtiDefaultInbox();
 const isCreatingContact = ref(false);
 const isFetchingInboxes = ref(false);
 const isSearching = ref(false);
@@ -190,6 +192,7 @@ const handleSelectedContact = async ({ value, action, ...rest }) => {
 
 const handleTargetInbox = inbox => {
   targetInbox.value = inbox;
+  rememberInbox(inbox);
   if (!inbox) clearFormState();
   resetContacts();
 };
@@ -327,9 +330,23 @@ watch(
         ...currentContact,
         contactInboxes: mergeInboxDetails(processedInboxes, inboxesList.value),
       };
+      // GTI: a contact opened from the contacts list carries no inboxes yet.
+      if (!processedInboxes.length) {
+        handleSelectedContact(currentContact);
+      }
     }
   },
   { immediate: true, deep: true }
+);
+
+// GTI: open with the inbox this user last sent from already selected.
+watch(
+  () => selectedContact.value?.contactInboxes,
+  inboxes => {
+    if (targetInbox.value) return;
+    const preferred = defaultInboxFor(inboxes);
+    if (preferred) handleTargetInbox(preferred);
+  }
 );
 
 const navigateToGroup = ({ conversationId }) => {

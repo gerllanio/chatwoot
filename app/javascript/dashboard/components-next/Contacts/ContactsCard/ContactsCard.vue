@@ -9,6 +9,8 @@ import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
 import Flag from 'dashboard/components-next/flag/Flag.vue';
 import ContactDeleteSection from 'dashboard/components-next/Contacts/ContactsCard/ContactDeleteSection.vue';
 import Checkbox from 'dashboard/components-next/checkbox/Checkbox.vue';
+import ComposeConversation from 'dashboard/components-next/NewConversation/ComposeConversation.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import countries from 'shared/constants/countries';
 
 const props = defineProps({
@@ -25,6 +27,8 @@ const props = defineProps({
   selectable: { type: Boolean, default: false },
   isSelected: { type: Boolean, default: false },
 });
+
+const gtiClassicMode = useGtiClassicMode();
 
 const emit = defineEmits([
   'toggle',
@@ -197,6 +201,16 @@ const handleAvatarHover = isHovered => {
           </div>
         </div>
       </div>
+
+      <ComposeConversation v-if="!gtiClassicMode" :contact-id="String(id)">
+        <template #trigger>
+          <Button
+            icon="i-lucide-message-circle-plus"
+            size="xs"
+            :label="t('GTI_CONTACTS.START_CONVERSATION')"
+          />
+        </template>
+      </ComposeConversation>
 
       <Button
         icon="i-lucide-chevron-down"
