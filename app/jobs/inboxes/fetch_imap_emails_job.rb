@@ -23,7 +23,8 @@ class Inboxes::FetchImapEmailsJob < MutexApplicationJob
   private
 
   def should_fetch_email?(channel)
-    channel.imap_enabled? && !channel.reauthorization_required?
+    # GTI "Work": accounts that keep e-mail in the E-mail module do not turn it into conversations.
+    channel.imap_enabled? && !channel.reauthorization_required? && !channel.account.gti_email_mail_only?
   end
 
   def handle_unexpected_error(error, channel)

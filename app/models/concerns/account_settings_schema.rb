@@ -32,6 +32,7 @@ module AccountSettingsSchema
         'gti_rating_message': { 'type': %w[string null], 'maxLength': 2000 },
         'gti_rating_thanks_message': { 'type': %w[string null], 'maxLength': 2000 },
         'gti_rating_timeout_minutes': { 'type': %w[integer null], 'minimum': 1, 'maximum': 1440 },
+        'gti_email_mail_only': { 'type': %w[boolean null] },
         'conversation_required_attributes': {
           'type': %w[array null],
           'items': { 'type': 'string' }

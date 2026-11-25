@@ -10,6 +10,17 @@ RSpec.describe Inboxes::FetchImapEmailsJob do
   let(:microsoft_imap_email_channel) { create(:channel_email, :microsoft_email) }
 
   describe '#perform' do
+    context 'when the account keeps e-mail in the GTI E-mail module' do
+      it 'does not fetch emails' do
+        account.update!(gti_email_mail_only: true)
+        allow(Imap::FetchEmailService).to receive(:new)
+
+        described_class.perform_now(imap_email_channel)
+
+        expect(Imap::FetchEmailService).not_to have_received(:new)
+      end
+    end
+
     it 'enqueues the job' do
       expect do
         described_class.perform_later(imap_email_channel, 1)
