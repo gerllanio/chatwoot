@@ -28,8 +28,6 @@ const props = defineProps({
   isSelected: { type: Boolean, default: false },
 });
 
-const gtiClassicMode = useGtiClassicMode();
-
 const emit = defineEmits([
   'toggle',
   'updateContact',
@@ -37,6 +35,8 @@ const emit = defineEmits([
   'select',
   'avatarHover',
 ]);
+
+const gtiClassicMode = useGtiClassicMode();
 
 const { t } = useI18n();
 
