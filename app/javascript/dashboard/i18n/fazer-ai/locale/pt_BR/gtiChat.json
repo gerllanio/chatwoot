@@ -1,0 +1,23 @@
+{
+  "GTI_CHAT": {
+    "ASSIGNED_TO": "Atribuído a {name}",
+    "WAITING_AGENT": "Aguardando atendente",
+    "ACCEPT": "Aceitar",
+    "ACCEPT_FAILED": "Não foi possível aceitar este atendimento",
+    "RETURN": "Devolver",
+    "RETURN_HINT": "Devolver para a fila",
+    "RETURNED": "Atendimento devolvido para a fila",
+    "RESOLVE": "Resolver",
+    "RESOLVED": "Atendimento resolvido",
+    "REOPEN": "Reabrir",
+    "TRANSFER": "Transferir",
+    "TRANSFER_TITLE": "Transferir atendimento",
+    "TRANSFER_DESCRIPTION": "Passe este atendimento para outra fila e, se quiser, para um atendente específico.",
+    "TRANSFERRED": "Atendimento transferido",
+    "QUEUE": "Fila",
+    "QUEUE_PLACEHOLDER": "Escolha a fila",
+    "AGENT": "Atendente (opcional)",
+    "AGENT_PLACEHOLDER": "Qualquer um da fila",
+    "ACTION_FAILED": "Não foi possível atualizar este atendimento"
+  }
+}

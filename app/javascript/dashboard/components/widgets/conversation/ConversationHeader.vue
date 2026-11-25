@@ -16,6 +16,8 @@ import { useInbox } from 'dashboard/composables/useInbox';
 import { useAlert } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
 import { copyTextToClipboard } from 'shared/helpers/clipboard';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
+import GtiConversationActions from '../gti/GtiConversationActions.vue';
 
 const props = defineProps({
   chat: {
@@ -34,6 +36,7 @@ const route = useRoute();
 const conversationHeader = ref(null);
 const { width } = useElementSize(conversationHeader);
 const { isAWebWidgetInbox, isAnEmailChannel } = useInbox();
+const gtiClassicMode = useGtiClassicMode();
 
 const currentChat = computed(() => store.getters.getSelectedChat);
 const accountId = computed(() => store.getters.getCurrentAccountId);
@@ -102,6 +105,14 @@ const hasSlaPolicyId = computed(
   () => props.chat?.applied_sla?.id && !currentContact.value?.blocked
 );
 
+// GTI "Work" subline: who is attending, the queue and the connection.
+const gtiAssigneeText = computed(() => {
+  const assignee = props.chat.meta?.assignee;
+  return assignee
+    ? t('GTI_CHAT.ASSIGNED_TO', { name: assignee.name })
+    : t('GTI_CHAT.WAITING_AGENT');
+});
+
 const copyConversationId = async () => {
   try {
     await copyTextToClipboard(String(props.chat.id));
@@ -149,6 +160,31 @@ const copyConversationId = async () => {
         </div>
 
         <div
+          v-if="!gtiClassicMode"
+          class="flex items-center max-w-full gap-1 overflow-hidden text-xs text-n-slate-11 whitespace-nowrap"
+        >
+          <span class="truncate">{{ gtiAssigneeText }}</span>
+          <template v-if="chat.meta?.team">
+            <span>•</span>
+            <span class="font-semibold truncate text-n-brand">
+              {{ chat.meta.team.name }}
+            </span>
+          </template>
+          <template v-if="inbox?.name">
+            <span>•</span>
+            <span class="truncate">{{ inbox.name }}</span>
+          </template>
+          <span>•</span>
+          <button
+            type="button"
+            class="shrink-0 text-n-slate-11 hover:text-n-slate-12 !p-0"
+            @click="copyConversationId"
+          >
+            {{ `#${chat.id}` }}
+          </button>
+        </div>
+        <div
+          v-else
           class="flex items-center max-w-full gap-1 overflow-hidden text-xs conversation--header--actions text-n-slate-11 text-ellipsis whitespace-nowrap"
         >
           <button
@@ -188,6 +224,7 @@ const copyConversationId = async () => {
         :parent-width="width"
         class="hidden md:flex"
       />
+      <GtiConversationActions v-if="!gtiClassicMode" :chat="currentChat" />
       <ConversationCallButton :inbox="inbox" :chat="currentChat" />
       <MoreActions :conversation-id="currentChat.id" />
     </div>

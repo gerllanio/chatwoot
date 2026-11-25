@@ -227,7 +227,17 @@ export const colors = {
 
     black: '#000000',
     brand: '#00A656',
-    gti: { navy: '#1E293B', green: '#00A656' },
+    // GTI "Work": WhatsApp-style chat (wallpaper, incoming and outgoing bubbles).
+    gti: {
+      navy: '#1E293B',
+      green: '#00A656',
+      chat: '#EFEAE2',
+      'chat-dark': '#0C1117',
+      in: '#FFFFFF',
+      'in-dark': '#1F2933',
+      out: '#D9FDD3',
+      'out-dark': '#144D37',
+    },
     portal: 'var(--dynamic-portal-color)',
     'portal-soft': 'var(--dynamic-portal-color-soft)',
     'portal-faint': 'var(--dynamic-portal-color-faint)',

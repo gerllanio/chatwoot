@@ -59,6 +59,7 @@ import EmojiReactionPicker from './EmojiReactionPicker.vue';
 import ReactionDisplay from './ReactionDisplay.vue';
 import { useBranding } from 'shared/composables/useBranding';
 import { useTranslations } from 'dashboard/composables/useTranslations';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 /**
  * @typedef {Object} Attachment
@@ -301,7 +302,12 @@ const orientation = computed(() => {
   return ORIENTATION.LEFT;
 });
 
+// GTI "Work": private notes sit in the middle, like the Ticketz notes.
+const gtiClassicMode = useGtiClassicMode();
 const flexOrientationClass = computed(() => {
+  if (!gtiClassicMode.value && variant.value === MESSAGE_VARIANTS.PRIVATE) {
+    return 'justify-center';
+  }
   const map = {
     [ORIENTATION.LEFT]: 'justify-start',
     [ORIENTATION.RIGHT]: 'justify-end',
@@ -365,6 +371,8 @@ const shouldGroupWithNext = computed(() => {
 const shouldShowAvatar = computed(() => {
   if (props.messageType === MESSAGE_TYPES.ACTIVITY) return false;
   if (orientation.value === ORIENTATION.LEFT) return false;
+  // GTI "Work" shows the agent's name inside the bubble instead.
+  if (!gtiClassicMode.value) return false;
 
   return true;
 });

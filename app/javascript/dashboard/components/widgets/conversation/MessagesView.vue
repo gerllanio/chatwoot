@@ -30,6 +30,8 @@ import Banner from 'dashboard/components/ui/Banner.vue';
 import WhatsappNumberMissingBanner from './WhatsappNumberMissingBanner.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 import GtiContactHistory from 'dashboard/components/widgets/gti/GtiContactHistory.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
+import { GTI_CHAT_WALLPAPER } from 'dashboard/helper/gtiChat';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import CollapsedReplyBar from './CollapsedReplyBar.vue';
 import ResizableEditorWrapper from './ResizableEditorWrapper.vue';
@@ -199,6 +201,8 @@ export default {
     });
 
     return {
+      gtiClassicMode: useGtiClassicMode(),
+      GTI_CHAT_WALLPAPER,
       ...useCampaignHistory(),
       olderConversation,
       newerConversation,
@@ -1108,7 +1112,11 @@ export default {
     <MessageList
       ref="conversationPanelRef"
       class="conversation-panel flex-shrink flex-grow basis-px flex flex-col overflow-y-auto relative h-full m-0 transition-[padding]"
-      :class="[foldMotion, isReplyFolded ? 'pb-16' : 'pb-4']"
+      :class="[
+        foldMotion,
+        isReplyFolded ? 'pb-16' : 'pb-4',
+        { [GTI_CHAT_WALLPAPER]: !gtiClassicMode },
+      ]"
       :current-user-id="currentUserId"
       :first-unread-id="unReadMessages[0]?.id"
       :is-an-email-channel="isAnEmailChannel"

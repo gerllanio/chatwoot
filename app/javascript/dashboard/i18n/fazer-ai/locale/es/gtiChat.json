@@ -1,0 +1,23 @@
+{
+  "GTI_CHAT": {
+    "ASSIGNED_TO": "Asignado a {name}",
+    "WAITING_AGENT": "Esperando un agente",
+    "ACCEPT": "Aceptar",
+    "ACCEPT_FAILED": "No se pudo aceptar esta conversación",
+    "RETURN": "Devolver",
+    "RETURN_HINT": "Devolver a la cola",
+    "RETURNED": "Conversación devuelta a la cola",
+    "RESOLVE": "Resolver",
+    "RESOLVED": "Conversación resuelta",
+    "REOPEN": "Reabrir",
+    "TRANSFER": "Transferir",
+    "TRANSFER_TITLE": "Transferir conversación",
+    "TRANSFER_DESCRIPTION": "Pasa esta conversación a otra cola y, si quieres, a un agente específico.",
+    "TRANSFERRED": "Conversación transferida",
+    "QUEUE": "Cola",
+    "QUEUE_PLACEHOLDER": "Elige una cola",
+    "AGENT": "Agente (opcional)",
+    "AGENT_PLACEHOLDER": "Cualquiera de la cola",
+    "ACTION_FAILED": "No se pudo actualizar esta conversación"
+  }
+}

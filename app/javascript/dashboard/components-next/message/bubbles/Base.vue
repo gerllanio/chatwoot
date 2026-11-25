@@ -15,6 +15,11 @@ import { useI18n } from 'vue-i18n';
 import MessageFormatter from 'shared/helpers/MessageFormatter.js';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { MESSAGE_VARIANTS, ORIENTATION } from '../constants';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
+import {
+  GTI_BUBBLE_VARIANTS,
+  GTI_BUBBLE_ORIENTATION,
+} from 'dashboard/helper/gtiChat';
 
 const props = defineProps({
   hideMeta: { type: Boolean, default: false },
@@ -30,8 +35,20 @@ const {
   contentAttributes,
   isCaptainMessage,
   showingOriginal,
+  sender,
+  groupWithPrevious,
 } = useMessageContext();
 const { t } = useI18n();
+const gtiClassicMode = useGtiClassicMode();
+
+// GTI "Work": WhatsApp-style bubbles with the agent's name on top of each reply.
+const showGtiAgentName = computed(
+  () =>
+    !gtiClassicMode.value &&
+    variant.value === MESSAGE_VARIANTS.AGENT &&
+    !groupWithPrevious?.value &&
+    !!sender?.value?.name
+);
 
 // Click-to-WhatsApp ad metadata attached to the first message after an ad click.
 const referral = computed(() => contentAttributes.value?.referral);
@@ -95,10 +112,16 @@ const scheduledMessageClass = computed(() => {
 });
 
 const messageClass = computed(() => {
-  const classToApply = [varaintBaseMap[variant.value]];
+  const gtiVariants = gtiClassicMode.value ? {} : GTI_BUBBLE_VARIANTS;
+  const gtiOrientations = gtiClassicMode.value ? {} : GTI_BUBBLE_ORIENTATION;
+  const classToApply = [
+    gtiVariants[variant.value] || varaintBaseMap[variant.value],
+  ];
 
   if (variant.value !== MESSAGE_VARIANTS.ACTIVITY) {
-    classToApply.push(orientationMap[orientation.value]);
+    classToApply.push(
+      gtiOrientations[orientation.value] || orientationMap[orientation.value]
+    );
   } else {
     classToApply.push('rounded-lg');
   }
@@ -163,6 +186,12 @@ const replyToPreview = computed(() => {
       },
     ]"
   >
+    <span
+      v-if="showGtiAgentName"
+      class="block mb-0.5 text-xs font-bold text-n-brand"
+    >
+      {{ sender.name }}
+    </span>
     <ReferralCard v-if="referral" :referral="referral" />
     <QuotedProduct />
     <div

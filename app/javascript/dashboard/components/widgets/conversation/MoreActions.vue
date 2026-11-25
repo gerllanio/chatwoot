@@ -14,6 +14,7 @@ import ButtonV4 from 'dashboard/components-next/button/Button.vue';
 import DropdownMenu from 'dashboard/components-next/dropdown-menu/DropdownMenu.vue';
 import ConversationApi from 'dashboard/api/inbox/conversation';
 import { isSessionLayerProvider } from 'dashboard/helper/whatsappSession';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 import {
   CMD_MUTE_CONVERSATION,
@@ -26,6 +27,9 @@ import {
 // No props needed as we're getting currentChat from the store directly
 const store = useStore();
 const { t } = useI18n();
+// The GTI header has its own Resolve/Reopen buttons; this one stays mounted
+// (hidden) so its keyboard shortcuts keep working.
+const gtiClassicMode = useGtiClassicMode();
 
 const [showEmailActionsModal, toggleEmailModal] = useToggle(false);
 const [showActionsDropdown, toggleDropdown] = useToggle(false);
@@ -213,6 +217,7 @@ onUnmounted(() => {
 <template>
   <div class="relative flex items-center gap-2 actions--container">
     <ResolveAction
+      v-show="gtiClassicMode"
       :conversation-id="currentChat.id"
       :status="currentChat.status"
     />

@@ -1,0 +1,23 @@
+{
+  "GTI_CHAT": {
+    "ASSIGNED_TO": "Assigned to {name}",
+    "WAITING_AGENT": "Waiting for an agent",
+    "ACCEPT": "Accept",
+    "ACCEPT_FAILED": "Could not accept this conversation",
+    "RETURN": "Return",
+    "RETURN_HINT": "Return to the queue",
+    "RETURNED": "Conversation returned to the queue",
+    "RESOLVE": "Resolve",
+    "RESOLVED": "Conversation resolved",
+    "REOPEN": "Reopen",
+    "TRANSFER": "Transfer",
+    "TRANSFER_TITLE": "Transfer conversation",
+    "TRANSFER_DESCRIPTION": "Move this conversation to another queue and, if you want, to a specific agent.",
+    "TRANSFERRED": "Conversation transferred",
+    "QUEUE": "Queue",
+    "QUEUE_PLACEHOLDER": "Choose a queue",
+    "AGENT": "Agent (optional)",
+    "AGENT_PLACEHOLDER": "Anyone in the queue",
+    "ACTION_FAILED": "Could not update this conversation"
+  }
+}
