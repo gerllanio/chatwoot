@@ -134,4 +134,14 @@ describe('buildGtiMenu', () => {
       names.indexOf('Gti Campaigns') + 1
     );
   });
+
+  it('points Kanban at the GTI board when its route is given', () => {
+    const menu = buildGtiMenu(upstreamMenu(), t, {
+      kanbanRoute: '/gti-kanban',
+    });
+    const kanban = menu.find(item => item.name === 'Kanban');
+
+    expect(kanban.to).toBe('/gti-kanban');
+    expect(menu.filter(item => item.name === 'Kanban')).toHaveLength(1);
+  });
 });

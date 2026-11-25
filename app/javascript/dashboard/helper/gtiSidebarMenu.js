@@ -72,18 +72,22 @@ export const buildGtiMenu = (
   t,
   {
     monitorRoute,
+    kanbanRoute,
     helpRoute,
     tasksRoute,
     panelRoute,
     campaignsRoute,
     contactListsRoute,
+    settingsRoute,
   } = {}
 ) => {
   const settings = findByName(upstreamItems, 'Settings');
   const settingsChildren = settings?.children || [];
   const promotedNames = Object.values(PROMOTED_SETTINGS);
   const remainingSettings = renamed(settings, {
-    label: t('GTI.SIDEBAR.SETTINGS'),
+    label: settingsRoute
+      ? t('GTI.SIDEBAR.ADVANCED_SETTINGS')
+      : t('GTI.SIDEBAR.SETTINGS'),
     children: settingsChildren.filter(
       child => !promotedNames.includes(child.name)
     ),
@@ -103,9 +107,17 @@ export const buildGtiMenu = (
       label: t('GTI.SIDEBAR.NOTIFICATIONS'),
       icon: 'i-lucide-bell',
     }),
-    renamed(findByName(upstreamItems, 'Kanban'), {
-      label: t('GTI.SIDEBAR.KANBAN'),
-    }),
+    // GTI's own board (stages, queues and TV mode) replaces fazer.ai's funnels.
+    kanbanRoute
+      ? {
+          name: 'Kanban',
+          label: t('GTI.SIDEBAR.KANBAN'),
+          icon: 'i-lucide-kanban',
+          to: kanbanRoute,
+        }
+      : renamed(findByName(upstreamItems, 'Kanban'), {
+          label: t('GTI.SIDEBAR.KANBAN'),
+        }),
     monitorRoute
       ? {
           name: 'Gti Monitor',
@@ -198,6 +210,14 @@ export const buildGtiMenu = (
     }),
     findByName(upstreamItems, 'Captain'),
     findByName(upstreamItems, 'Portals'),
+    settingsRoute
+      ? {
+          name: 'Gti Settings',
+          label: t('GTI.SIDEBAR.SETTINGS'),
+          icon: 'i-lucide-sliders-horizontal',
+          to: settingsRoute,
+        }
+      : null,
     remainingSettings,
   ];
 
