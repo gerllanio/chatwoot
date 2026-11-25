@@ -9,6 +9,17 @@ import GtiSettings from './GtiSettings.vue';
 import GtiCampaigns from './GtiCampaigns.vue';
 import GtiContactLists from './GtiContactLists.vue';
 import GtiContactListItems from './GtiContactListItems.vue';
+import GtiUsers from './GtiUsers.vue';
+import GtiQueues from './GtiQueues.vue';
+import GtiConnections from './GtiConnections.vue';
+import GtiQuickReplies from './GtiQuickReplies.vue';
+import GtiTags from './GtiTags.vue';
+import GtiContacts from './GtiContacts.vue';
+import GtiIntegrations from './GtiIntegrations.vue';
+import {
+  ROLES,
+  CONVERSATION_PERMISSIONS,
+} from 'dashboard/constants/permissions.js';
 
 export default {
   routes: [
@@ -101,6 +112,62 @@ export default {
         permissions: ['administrator'],
       },
       component: GtiContactListItems,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/users'),
+      name: 'gti_users',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiUsers,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/queues'),
+      name: 'gti_queues',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiQueues,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/connections'),
+      name: 'gti_connections',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiConnections,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/quick-replies'),
+      name: 'gti_quick_replies',
+      meta: {
+        permissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
+      },
+      component: GtiQuickReplies,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/tags'),
+      name: 'gti_tags',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiTags,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/contacts'),
+      name: 'gti_contacts',
+      meta: {
+        permissions: ['administrator', 'agent', 'contact_manage'],
+      },
+      component: GtiContacts,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/integrations'),
+      name: 'gti_integrations',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiIntegrations,
     },
   ],
 };

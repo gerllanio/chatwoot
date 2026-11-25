@@ -1,0 +1,90 @@
+{
+  "GTI_PAGES": {
+    "SEARCH": "Buscar…",
+    "EDIT": "Editar",
+    "DELETE": "Eliminar",
+    "YES": "Sí",
+    "NO": "No",
+    "USERS": {
+      "TITLE": "Usuarios",
+      "SUBTITLE": "Agentes, supervisores y administradores.",
+      "ADD": "Agregar usuario",
+      "NAME": "Nombre",
+      "ROLE": "Perfil",
+      "QUEUES": "Colas",
+      "STATUS_HEADER": "Estado",
+      "EMAIL": "Correo",
+      "STATUS": {
+        "ONLINE": "En línea",
+        "BUSY": "Ocupado",
+        "OFFLINE": "Desconectado"
+      }
+    },
+    "QUEUES": {
+      "TITLE": "Colas y Chatbot",
+      "SUBTITLE": "Menú automático enviado al cliente antes de llegar a la cola.",
+      "ADD": "Agregar cola",
+      "WELCOME": "Mensaje de bienvenida",
+      "WELCOME_GREETING": "¡Hola! Bienvenido a {name} 👋",
+      "WELCOME_PROMPT": "Escribe el número de la opción:",
+      "QUEUE": "Cola",
+      "OPTION": "Opción",
+      "AGENTS": "Agentes",
+      "GREETING": "Saludo"
+    },
+    "CONNECTIONS": {
+      "TITLE": "Conexiones",
+      "SUBTITLE": "Todos los canales. WhatsApp se conecta por código QR, sin API de pago.",
+      "ADD": "Agregar conexión",
+      "CONFIGURE": "Configurar",
+      "NEW_QR": "Nuevo QR",
+      "KIND_QR": "Código QR (nativo)",
+      "KIND_CHANNEL": "Canal",
+      "STATE": {
+        "CONNECTED": "Conectado",
+        "CONNECTING": "Conectando…",
+        "DISCONNECTED": "Desconectado"
+      }
+    },
+    "QUICK": {
+      "TITLE": "Respuestas rápidas",
+      "SUBTITLE": "Escribe / en el campo de mensaje para usarlas. Admite variables como {'{{contact.name}}'} y {'{{agent.name}}'}.",
+      "ADD": "Nueva respuesta",
+      "SHORTCUT": "Atajo",
+      "MESSAGE": "Mensaje"
+    },
+    "TAGS": {
+      "TITLE": "Etiquetas",
+      "SUBTITLE": "Etiquetas para organizar conversaciones y contactos.",
+      "ADD": "Nueva etiqueta",
+      "TAG": "Etiqueta",
+      "DESCRIPTION": "Descripción",
+      "SIDEBAR": "En el menú"
+    },
+    "CONTACTS": {
+      "TITLE": "Contactos",
+      "SUBTITLE": "Todos los contactos de todos los canales en un solo lugar.",
+      "SEARCH": "Buscar contacto",
+      "ADD": "Agregar",
+      "IMPORT": "Importar",
+      "NAME": "Nombre",
+      "CONTACT": "Contacto",
+      "CHANNEL": "Canal",
+      "COMPANY": "Empresa",
+      "OPEN_TICKET": "Abrir ticket",
+      "EMPTY": "No se encontraron contactos.",
+      "PAGE": "Página {page} de {total}"
+    },
+    "INTEGRATIONS": {
+      "TITLE": "Integraciones",
+      "SUBTITLE": "Conexiones de Work con otros sistemas.",
+      "ACTIVE": "Activa",
+      "INACTIVE": "Inactiva"
+    },
+    "HELP": {
+      "WHATSAPP": "WhatsApp",
+      "EMAIL": "Correo",
+      "VERSION": "Versión"
+    }
+  }
+}

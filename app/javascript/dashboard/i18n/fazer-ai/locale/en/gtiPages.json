@@ -1,0 +1,90 @@
+{
+  "GTI_PAGES": {
+    "SEARCH": "Search…",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "YES": "Yes",
+    "NO": "No",
+    "USERS": {
+      "TITLE": "Users",
+      "SUBTITLE": "Agents, supervisors and administrators.",
+      "ADD": "Add user",
+      "NAME": "Name",
+      "ROLE": "Role",
+      "QUEUES": "Queues",
+      "STATUS_HEADER": "Status",
+      "EMAIL": "Email",
+      "STATUS": {
+        "ONLINE": "Online",
+        "BUSY": "Busy",
+        "OFFLINE": "Offline"
+      }
+    },
+    "QUEUES": {
+      "TITLE": "Queues & Chatbot",
+      "SUBTITLE": "Automatic menu sent to the customer before reaching a queue.",
+      "ADD": "Add queue",
+      "WELCOME": "Welcome message",
+      "WELCOME_GREETING": "Hi! Welcome to {name} 👋",
+      "WELCOME_PROMPT": "Type the option number:",
+      "QUEUE": "Queue",
+      "OPTION": "Option",
+      "AGENTS": "Agents",
+      "GREETING": "Greeting"
+    },
+    "CONNECTIONS": {
+      "TITLE": "Connections",
+      "SUBTITLE": "All channels. WhatsApp connects by QR code, no paid API.",
+      "ADD": "Add connection",
+      "CONFIGURE": "Configure",
+      "NEW_QR": "New QR",
+      "KIND_QR": "QR code (native)",
+      "KIND_CHANNEL": "Channel",
+      "STATE": {
+        "CONNECTED": "Connected",
+        "CONNECTING": "Connecting…",
+        "DISCONNECTED": "Disconnected"
+      }
+    },
+    "QUICK": {
+      "TITLE": "Quick replies",
+      "SUBTITLE": "Type / in the message box to use them. Variables such as {'{{contact.name}}'} and {'{{agent.name}}'} are supported.",
+      "ADD": "New reply",
+      "SHORTCUT": "Shortcut",
+      "MESSAGE": "Message"
+    },
+    "TAGS": {
+      "TITLE": "Tags",
+      "SUBTITLE": "Labels to organize conversations and contacts.",
+      "ADD": "New tag",
+      "TAG": "Tag",
+      "DESCRIPTION": "Description",
+      "SIDEBAR": "In the menu"
+    },
+    "CONTACTS": {
+      "TITLE": "Contacts",
+      "SUBTITLE": "Every contact from every channel in one place.",
+      "SEARCH": "Search contact",
+      "ADD": "Add",
+      "IMPORT": "Import",
+      "NAME": "Name",
+      "CONTACT": "Contact",
+      "CHANNEL": "Channel",
+      "COMPANY": "Company",
+      "OPEN_TICKET": "Open ticket",
+      "EMPTY": "No contacts found.",
+      "PAGE": "Page {page} of {total}"
+    },
+    "INTEGRATIONS": {
+      "TITLE": "Integrations",
+      "SUBTITLE": "Connections between Work and other systems.",
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "HELP": {
+      "WHATSAPP": "WhatsApp",
+      "EMAIL": "Email",
+      "VERSION": "Version"
+    }
+  }
+}

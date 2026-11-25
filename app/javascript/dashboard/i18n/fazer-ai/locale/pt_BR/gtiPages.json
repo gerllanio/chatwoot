@@ -1,0 +1,90 @@
+{
+  "GTI_PAGES": {
+    "SEARCH": "Pesquisar…",
+    "EDIT": "Editar",
+    "DELETE": "Excluir",
+    "YES": "Sim",
+    "NO": "Não",
+    "USERS": {
+      "TITLE": "Usuários",
+      "SUBTITLE": "Atendentes, supervisores e administradores.",
+      "ADD": "Adicionar usuário",
+      "NAME": "Nome",
+      "ROLE": "Perfil",
+      "QUEUES": "Filas",
+      "STATUS_HEADER": "Status",
+      "EMAIL": "E-mail",
+      "STATUS": {
+        "ONLINE": "Online",
+        "BUSY": "Ocupado",
+        "OFFLINE": "Offline"
+      }
+    },
+    "QUEUES": {
+      "TITLE": "Filas & Chatbot",
+      "SUBTITLE": "Menu automático enviado ao cliente antes de cair na fila.",
+      "ADD": "Adicionar fila",
+      "WELCOME": "Mensagem de boas-vindas",
+      "WELCOME_GREETING": "Olá! Bem-vindo à {name} 👋",
+      "WELCOME_PROMPT": "Digite o número da opção:",
+      "QUEUE": "Fila",
+      "OPTION": "Opção",
+      "AGENTS": "Atendentes",
+      "GREETING": "Saudação"
+    },
+    "CONNECTIONS": {
+      "TITLE": "Conexões",
+      "SUBTITLE": "Todos os canais da GTI. WhatsApp conecta por QR Code, sem API paga.",
+      "ADD": "Adicionar conexão",
+      "CONFIGURE": "Configurar",
+      "NEW_QR": "Novo QR",
+      "KIND_QR": "QR Code (nativo)",
+      "KIND_CHANNEL": "Canal",
+      "STATE": {
+        "CONNECTED": "Conectado",
+        "CONNECTING": "Conectando…",
+        "DISCONNECTED": "Desconectado"
+      }
+    },
+    "QUICK": {
+      "TITLE": "Respostas rápidas",
+      "SUBTITLE": "Digite / no campo de mensagem para usar. Aceita variáveis como {'{{contact.name}}'} e {'{{agent.name}}'}.",
+      "ADD": "Nova resposta",
+      "SHORTCUT": "Atalho",
+      "MESSAGE": "Mensagem"
+    },
+    "TAGS": {
+      "TITLE": "Tags",
+      "SUBTITLE": "Etiquetas para organizar atendimentos e contatos.",
+      "ADD": "Nova tag",
+      "TAG": "Tag",
+      "DESCRIPTION": "Descrição",
+      "SIDEBAR": "No menu"
+    },
+    "CONTACTS": {
+      "TITLE": "Contatos",
+      "SUBTITLE": "Todos os contatos de todos os canais em um só lugar.",
+      "SEARCH": "Pesquisar contato",
+      "ADD": "Adicionar",
+      "IMPORT": "Importar",
+      "NAME": "Nome",
+      "CONTACT": "Contato",
+      "CHANNEL": "Canal",
+      "COMPANY": "Empresa",
+      "OPEN_TICKET": "Abrir ticket",
+      "EMPTY": "Nenhum contato encontrado.",
+      "PAGE": "Página {page} de {total}"
+    },
+    "INTEGRATIONS": {
+      "TITLE": "Integrações",
+      "SUBTITLE": "Conexões do Work com os sistemas da GTI.",
+      "ACTIVE": "Ativa",
+      "INACTIVE": "Inativa"
+    },
+    "HELP": {
+      "WHATSAPP": "WhatsApp",
+      "EMAIL": "E-mail",
+      "VERSION": "Versão"
+    }
+  }
+}
