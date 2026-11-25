@@ -3,6 +3,7 @@ import GtiMonitor from './GtiMonitor.vue';
 import GtiHelp from './GtiHelp.vue';
 import GtiTasks from './GtiTasks.vue';
 import GtiPanel from './GtiPanel.vue';
+import GtiSettings from './GtiSettings.vue';
 
 export default {
   routes: [
@@ -37,6 +38,14 @@ export default {
         permissions: ['administrator', 'report_manage'],
       },
       component: GtiPanel,
+    },
+    {
+      path: frontendURL('accounts/:accountId/gti/settings'),
+      name: 'gti_settings',
+      meta: {
+        permissions: ['administrator'],
+      },
+      component: GtiSettings,
     },
   ],
 };

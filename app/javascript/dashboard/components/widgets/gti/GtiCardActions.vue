@@ -11,6 +11,7 @@ import MessageApi from 'dashboard/api/inbox/message';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import wootConstants from 'dashboard/constants/globals';
+import { useGtiNotice } from 'dashboard/composables/useGtiNotice';
 
 const props = defineProps({
   chat: { type: Object, required: true },
@@ -21,6 +22,7 @@ const MESSAGE_TYPE = { INCOMING: 0, OUTGOING: 1, ACTIVITY: 2 };
 const store = useStore();
 const { t } = useI18n();
 const currentUser = useMapGetter('getCurrentUser');
+const sendGtiNotice = useGtiNotice();
 
 const peekDialogRef = ref(null);
 const peekMessages = ref([]);
@@ -53,6 +55,7 @@ const acceptConversation = async () => {
       assignee: { ...user, thumbnail: avatarUrl },
       assigneeType: 'User',
     });
+    await sendGtiNotice(props.chat.id, 'accepted');
   } catch (error) {
     useAssignmentError(error, t('GTI.TICKETS.ACCEPT_FAILED'));
   } finally {

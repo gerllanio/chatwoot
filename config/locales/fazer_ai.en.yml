@@ -22,6 +22,8 @@ en:
     messages:
       deleted: This message was deleted
   errors:
+    gti_notices:
+      invalid_kind: Unknown notice. Use accepted or transfer.
     attachments:
       video_note:
         with_text: A video note carries no text. Send the text as a message of its own.

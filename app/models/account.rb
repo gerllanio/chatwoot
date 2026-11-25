@@ -72,6 +72,8 @@ class Account < ApplicationRecord # rubocop:disable Metrics/ClassLength
   store_accessor :settings, :enforce_mfa
   # Email only. The dashboard, favicon and PWA stay on the installation's brand; see Brand.
   store_accessor :settings, :brand_name, :brand_url, :brand_color
+  # GTI "Work": texts sent to the customer when an agent accepts or transfers a conversation.
+  store_accessor :settings, :gti_ticket_accepted_message, :gti_transfer_message
   include AccountAgentRestrictions
   include AccountWhatsappProviders
   include AccountCaptainAutoResolve

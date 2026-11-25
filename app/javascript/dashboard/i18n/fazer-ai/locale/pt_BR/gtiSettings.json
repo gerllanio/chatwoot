@@ -1,0 +1,69 @@
+{
+  "GTI_SETTINGS": {
+    "TITLE": "Configurações",
+    "TABS": {
+      "OPTIONS": "Opções",
+      "HOURS": "Horários"
+    },
+    "SAVE": "Salvar",
+    "SAVED": "Configurações salvas",
+    "SAVE_FAILED": "Não foi possível salvar as configurações",
+    "NOTICE_FAILED": "A ação funcionou, mas a mensagem para o cliente não pôde ser enviada",
+    "NO_WHATSAPP": "Esta empresa ainda não tem conexão de WhatsApp. Avaliações e horários valem para as conexões de WhatsApp e passam a funcionar quando uma for adicionada.",
+    "GENERAL": {
+      "TITLE": "Geral",
+      "RATINGS": "Avaliações",
+      "RATINGS_HINT": "Ao resolver um atendimento, o cliente recebe o pedido para avaliar o atendimento.",
+      "ENABLED": "Habilitado",
+      "DISABLED": "Desabilitado",
+      "ACCEPTED_MESSAGE": "Mensagem de ticket aceito",
+      "ACCEPTED_PLACEHOLDER": "O colaborador {user} irá prosseguir com o atendimento.",
+      "TRANSFER_MESSAGE": "Mensagem de transferência",
+      "TRANSFER_PLACEHOLDER": "Você foi transferido para a fila {queue}.",
+      "VARIABLES": "Variáveis disponíveis: {variables}. Deixe vazio para não enviar nada."
+    },
+    "TIMEOUTS": {
+      "TITLE": "Tempos de espera",
+      "CLOSE_AFTER": "Fechar ticket sem interação após (minutos)",
+      "CLOSE_AFTER_HINT": "Deixe vazio para nunca fechar sozinho. Mínimo: {min} minutos.",
+      "ACTION": "Ação para timeout de ticket aberto",
+      "ACTION_CLOSE": "Fechar atendimento",
+      "CLOSE_MESSAGE": "Mensagem enviada ao fechar",
+      "CLOSE_MESSAGE_PLACEHOLDER": "Estamos encerrando este atendimento. Se precisar, é só mandar uma mensagem.",
+      "MIN_ERROR": "O mínimo é {min} minutos",
+      "CHATBOT_NOTE": "Os timeouts do chatbot e de ticket sem fila vêm com o robô do n8n (Malu), quando ele for ligado ao Work."
+    },
+    "OFFICE": {
+      "TITLE": "Horário de expediente",
+      "MANAGEMENT": "Gerenciamento de expediente",
+      "BY_COMPANY": "Gerenciamento por empresa",
+      "ACTION": "Ação fora do expediente",
+      "ACTION_PENDING": "Deixar como pendente e responder com a mensagem abaixo",
+      "MESSAGE": "Mensagem fora do expediente",
+      "MESSAGE_PLACEHOLDER": "Estamos fora do horário de atendimento. Responderemos assim que voltarmos."
+    },
+    "HOURS": {
+      "TIMEZONE": "Fuso horário",
+      "WEEKLY_TITLE": "Horários de funcionamento semanais",
+      "WEEKLY_DESCRIPTION": "Configure os horários regulares de funcionamento para cada dia da semana. Dias sem regra ficam fechados.",
+      "RULE": "Regra {n}",
+      "DAYS": "Dias da semana",
+      "FROM": "De",
+      "TO": "Até",
+      "UNTIL": "até",
+      "REMOVE_RULE": "Remover regra",
+      "ADD_RULE": "Adicionar nova regra semanal",
+      "INVALID_RULE": "Cada regra precisa de pelo menos um dia e de um horário de fim depois do início",
+      "ONE_INTERVAL": "Cada dia tem um intervalo de funcionamento."
+    },
+    "DAYS": {
+      "0": "Domingo",
+      "1": "Segunda",
+      "2": "Terça",
+      "3": "Quarta",
+      "4": "Quinta",
+      "5": "Sexta",
+      "6": "Sábado"
+    }
+  }
+}

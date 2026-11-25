@@ -26,6 +26,8 @@ module AccountSettingsSchema
         'brand_name': { 'type': %w[string null], 'maxLength': 255 },
         'brand_url': { 'type': %w[string null], 'maxLength': 2000 },
         'brand_color': { 'type': %w[string null], 'pattern': '^(#(\\h{3}|\\h{6}))?$' },
+        'gti_ticket_accepted_message': { 'type': %w[string null], 'maxLength': 2000 },
+        'gti_transfer_message': { 'type': %w[string null], 'maxLength': 2000 },
         'conversation_required_attributes': {
           'type': %w[array null],
           'items': { 'type': 'string' }

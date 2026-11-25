@@ -11,6 +11,7 @@ import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
 import wootConstants from 'dashboard/constants/globals';
 import { GTI_CHAT_ACTIONS, gtiChatActions } from 'dashboard/helper/gtiChat';
+import { useGtiNotice } from 'dashboard/composables/useGtiNotice';
 
 const props = defineProps({
   chat: { type: Object, required: true },
@@ -59,6 +60,9 @@ const assignTo = assignee =>
     assigneeType: assignee ? 'User' : null,
   });
 
+const sendGtiNotice = useGtiNotice();
+const sendNotice = kind => sendGtiNotice(props.chat.id, kind);
+
 const setStatus = status =>
   store.dispatch('toggleStatus', { conversationId: props.chat.id, status });
 
@@ -66,6 +70,7 @@ const accept = () =>
   run(async () => {
     const { avatar_url: avatarUrl, ...user } = currentUser.value || {};
     await assignTo({ ...user, thumbnail: avatarUrl });
+    await sendNotice('accepted');
   }, t('GTI_CHAT.ACCEPT_FAILED'));
 
 const returnToQueue = () =>
@@ -95,7 +100,8 @@ const openTransfer = () => {
 const transfer = () =>
   run(async () => {
     const team = teams.value.find(item => item.id === transferTeamId.value);
-    if (team && team.id !== props.chat.meta?.team?.id) {
+    const teamChanged = Boolean(team) && team.id !== props.chat.meta?.team?.id;
+    if (teamChanged) {
       await store.dispatch('assignTeam', {
         conversationId: props.chat.id,
         team,
@@ -106,6 +112,9 @@ const transfer = () =>
     ).find(item => item.id === transferAgentId.value);
     if (agent) {
       await assignTo(agent);
+    }
+    if (teamChanged || agent) {
+      await sendNotice('transfer');
     }
     transferDialogRef.value.close();
     useAlert(t('GTI_CHAT.TRANSFERRED'));

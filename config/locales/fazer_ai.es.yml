@@ -22,6 +22,8 @@ es:
     messages:
       deleted: Este mensaje fue eliminado
   errors:
+    gti_notices:
+      invalid_kind: Aviso desconocido. Usa accepted o transfer.
     attachments:
       video_note:
         with_text: La videonota no lleva texto. Envía el texto en un mensaje aparte.

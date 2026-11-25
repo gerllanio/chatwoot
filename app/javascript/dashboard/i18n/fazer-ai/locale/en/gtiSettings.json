@@ -1,0 +1,69 @@
+{
+  "GTI_SETTINGS": {
+    "TITLE": "Settings",
+    "TABS": {
+      "OPTIONS": "Options",
+      "HOURS": "Business hours"
+    },
+    "SAVE": "Save",
+    "SAVED": "Settings saved",
+    "SAVE_FAILED": "Could not save the settings",
+    "NOTICE_FAILED": "The action worked, but the message to the customer could not be sent",
+    "NO_WHATSAPP": "This company has no WhatsApp connection yet. Ratings and business hours apply to WhatsApp connections, so they start working once one is added.",
+    "GENERAL": {
+      "TITLE": "General",
+      "RATINGS": "Ratings",
+      "RATINGS_HINT": "After a conversation is resolved, the customer is asked to rate the service.",
+      "ENABLED": "Enabled",
+      "DISABLED": "Disabled",
+      "ACCEPTED_MESSAGE": "Ticket accepted message",
+      "ACCEPTED_PLACEHOLDER": "Agent {user} will continue the service.",
+      "TRANSFER_MESSAGE": "Transfer message",
+      "TRANSFER_PLACEHOLDER": "You have been transferred to the {queue} queue.",
+      "VARIABLES": "Available variables: {variables}. Leave empty to send nothing."
+    },
+    "TIMEOUTS": {
+      "TITLE": "Waiting times",
+      "CLOSE_AFTER": "Close an inactive ticket after (minutes)",
+      "CLOSE_AFTER_HINT": "Leave empty to never close automatically. Minimum: {min} minutes.",
+      "ACTION": "Action on timeout",
+      "ACTION_CLOSE": "Close the ticket",
+      "CLOSE_MESSAGE": "Message sent when closing",
+      "CLOSE_MESSAGE_PLACEHOLDER": "We are closing this conversation. Send a message whenever you need us.",
+      "MIN_ERROR": "The minimum is {min} minutes",
+      "CHATBOT_NOTE": "The chatbot and no-queue timeouts come with the n8n bot (Malu) once it is connected to Work."
+    },
+    "OFFICE": {
+      "TITLE": "Business hours",
+      "MANAGEMENT": "Business hours management",
+      "BY_COMPANY": "By company",
+      "ACTION": "Action outside business hours",
+      "ACTION_PENDING": "Keep as pending and reply with the message below",
+      "MESSAGE": "Message outside business hours",
+      "MESSAGE_PLACEHOLDER": "We are closed right now. We will reply as soon as we are back."
+    },
+    "HOURS": {
+      "TIMEZONE": "Time zone",
+      "WEEKLY_TITLE": "Weekly business hours",
+      "WEEKLY_DESCRIPTION": "Set the regular business hours for each day of the week. Days without a rule are closed.",
+      "RULE": "Rule {n}",
+      "DAYS": "Days of the week",
+      "FROM": "From",
+      "TO": "To",
+      "UNTIL": "until",
+      "REMOVE_RULE": "Remove rule",
+      "ADD_RULE": "Add new weekly rule",
+      "INVALID_RULE": "Each rule needs at least one day and a closing time after the opening time",
+      "ONE_INTERVAL": "Each day has one opening interval."
+    },
+    "DAYS": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    }
+  }
+}
