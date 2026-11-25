@@ -143,7 +143,10 @@ export default {
 
 <template>
   <div class="flex flex-col flex-grow min-h-0 overflow-hidden">
-    <GtiTopBar v-if="!gtiClassicMode" />
+    <GtiTopBar
+      v-if="!gtiClassicMode"
+      @toggle-mobile-sidebar="toggleMobileSidebar"
+    />
     <div class="flex flex-1 min-h-0 overflow-hidden text-n-slate-12">
       <NextSidebar
         :is-mobile-sidebar-open="isMobileSidebarOpen"

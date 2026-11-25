@@ -22,7 +22,8 @@
       "HELP": "Ajuda",
       "TASKS": "Tarefas",
       "PANEL": "Painel",
-      "ADMIN_SECTION": "Administração"
+      "ADMIN_SECTION": "Administração",
+      "ADMIN_TAG": "ADMIN"
     },
     "TICKETS": {
       "ATTENDING": "Atendendo",
@@ -39,7 +40,13 @@
       "ACCEPT_FAILED": "Não foi possível aceitar o atendimento",
       "CLOSE": "Fechar",
       "LOADING": "Carregando mensagens…",
-      "ATTACHMENT": "📎 Anexo"
+      "ATTACHMENT": "📎 Anexo",
+      "OPEN": "Abertos",
+      "SEARCH": "Busca",
+      "NEW": "Novo",
+      "QUEUES": "Filas ({count})",
+      "ALL_QUEUES": "Todas as filas",
+      "ADVANCED_FILTERS": "Filtros avançados"
     },
     "ALERTS": {
       "CUSTOMER": "Cliente",
@@ -149,7 +156,13 @@
     "TOPBAR": {
       "PRODUCT": "Work",
       "TAGLINE": "Atendimento",
-      "NOTIFICATIONS": "Notificações"
+      "NOTIFICATIONS": "Notificações",
+      "MENU": "Mostrar ou esconder o menu",
+      "DARK_MODE": "Modo escuro",
+      "LIGHT_MODE": "Modo claro",
+      "USER_ROLE": "{name} · {role}",
+      "ROLE_ADMIN": "Administrador",
+      "ROLE_AGENT": "Atendente"
     },
     "CLASSIC": {
       "ENTER": "Abrir o modo Chatwoot (clássico)",

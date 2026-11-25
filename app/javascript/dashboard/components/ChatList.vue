@@ -26,6 +26,7 @@ import SaveCustomView from 'next/filter/SaveCustomView.vue';
 import ChatTypeTabs from './widgets/ChatTypeTabs.vue';
 import GtiTicketTabs from './widgets/gti/GtiTicketTabs.vue';
 import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
+import { useAdmin } from 'dashboard/composables/useAdmin';
 import {
   GTI_TICKET_TABS,
   buildGtiTicketTabs,
@@ -250,9 +251,15 @@ const gtiTicketTabs = computed(() =>
   buildGtiTicketTabs({
     allowedAssignees: gtiAllowedAssignees.value,
     stats: conversationStats.value,
-    status: activeStatus.value,
+    showAll: gtiShowAll.value,
     t,
   })
+);
+const { isAdmin: gtiIsAdmin } = useAdmin();
+const gtiAllTeams = useMapGetter('teams/getTeams');
+const gtiMyTeams = useMapGetter('teams/getMyTeams');
+const gtiTeams = computed(() =>
+  gtiIsAdmin.value ? gtiAllTeams.value : gtiMyTeams.value
 );
 const gtiActiveTicketTab = computed(() =>
   filtersToGtiTab({
@@ -1119,6 +1126,7 @@ watch(appliedFilters, () => resetBulkActions());
   >
     <slot />
     <ChatListHeader
+      v-if="gtiClassicMode || hasAppliedFiltersOrActiveFolders"
       :page-title="pageTitle"
       :contact-filter="appliedContactFilter"
       :has-applied-filters="hasAppliedFilters"
@@ -1169,7 +1177,10 @@ watch(appliedFilters, () => resetBulkActions());
       :items="gtiTicketTabs"
       :active-tab="gtiActiveTicketTab"
       :can-show-all="gtiAllowedAssignees.includes('all')"
+      :teams="gtiTeams"
+      :active-team-id="teamId"
       @tab-change="onGtiTicketTabChange"
+      @filters-modal="onToggleAdvanceFiltersModal"
     />
 
     <p

@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMapGetter } from 'dashboard/composables/store.js';
 import Icon from 'next/icon/Icon.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 const props = defineProps({
   to: { type: [Object, String], default: '' },
@@ -16,6 +17,17 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['toggle']);
+
+// GTI "Work": the active page is highlighted in green with a bar on the
+// leading edge, as in the prototype.
+const gtiClassicMode = useGtiClassicMode();
+const gtiItemClass = computed(() => {
+  const base = 'border-s-[3px] rounded-s-none';
+  if (props.isActive || props.hasActiveChild) {
+    return `${base} border-n-brand bg-n-brand/10 text-n-brand font-semibold`;
+  }
+  return `${base} border-transparent text-n-slate-11 hover:bg-n-alpha-2`;
+});
 
 const router = useRouter();
 const showBadge = useMapGetter(props.getterKeys.badge);
@@ -43,11 +55,16 @@ const onClick = event => {
     draggable="false"
     :href="href"
     :title="label"
-    :class="{
-      'text-n-slate-12 bg-n-alpha-2 font-medium': isActive && !hasActiveChild,
-      'text-n-slate-12 font-medium': hasActiveChild,
-      'text-n-slate-11 hover:bg-n-alpha-2': !isActive && !hasActiveChild,
-    }"
+    :class="
+      gtiClassicMode
+        ? {
+            'text-n-slate-12 bg-n-alpha-2 font-medium':
+              isActive && !hasActiveChild,
+            'text-n-slate-12 font-medium': hasActiveChild,
+            'text-n-slate-11 hover:bg-n-alpha-2': !isActive && !hasActiveChild,
+          }
+        : gtiItemClass
+    "
     @click.stop="onClick"
   >
     <div v-if="icon" class="relative flex items-center gap-2">

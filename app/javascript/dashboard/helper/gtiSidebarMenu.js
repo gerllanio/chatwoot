@@ -29,6 +29,44 @@ const renamed = (item, overrides) => {
   return { ...item, ...overrides };
 };
 
+// Every conversation list page: the flat "Atendimentos" entry stays
+// highlighted on all of them (queues, labels, inboxes, mentions...).
+const CONVERSATION_ROUTES = [
+  'home',
+  'inbox_conversation',
+  'inbox_dashboard',
+  'conversation_through_inbox',
+  'label_conversations',
+  'conversations_through_label',
+  'team_conversations',
+  'conversations_through_team',
+  'folder_conversations',
+  'conversations_through_folders',
+  'conversation_mentions',
+  'conversation_through_mentions',
+  'conversation_unattended',
+  'conversation_through_unattended',
+  'conversation_participating',
+  'conversation_through_participating',
+];
+
+// "Atendimentos" is a plain link in the prototype: the queue, inbox and label
+// filters live in the ticket list header instead of a long tree here.
+const flatConversations = (conversation, t) => {
+  if (!conversation) {
+    return null;
+  }
+  const { children = [], ...item } = conversation;
+  const home = findByName(children, 'All');
+  return {
+    ...item,
+    label: t('GTI.SIDEBAR.TICKETS'),
+    icon: 'i-lucide-messages-square',
+    to: home?.to,
+    activeOn: CONVERSATION_ROUTES,
+  };
+};
+
 export const buildGtiMenu = (
   upstreamItems,
   t,
@@ -45,10 +83,7 @@ export const buildGtiMenu = (
   });
 
   const attendanceItems = [
-    renamed(findByName(upstreamItems, 'Conversation'), {
-      label: t('GTI.SIDEBAR.TICKETS'),
-      icon: 'i-lucide-messages-square',
-    }),
+    flatConversations(findByName(upstreamItems, 'Conversation'), t),
     tasksRoute
       ? {
           name: 'Gti Tasks',

@@ -1,6 +1,8 @@
 import {
+  GTI_LIST_SECTIONS,
   GTI_TICKET_TABS,
   buildGtiTicketTabs,
+  gtiSectionOfTab,
   filtersToGtiTab,
   gtiTabToFilters,
   isGtiWaitingConversation,
@@ -70,44 +72,57 @@ describe('filtersToGtiTab', () => {
   });
 });
 
-describe('buildGtiTicketTabs', () => {
-  const stats = { mineCount: 4, unAssignedCount: 7 };
+describe('gtiSectionOfTab', () => {
+  it('puts "Atendendo" and "Aguardando" under "Abertos"', () => {
+    expect(gtiSectionOfTab(GTI_TICKET_TABS.ATTENDING)).toBe(
+      GTI_LIST_SECTIONS.OPEN
+    );
+    expect(gtiSectionOfTab(GTI_TICKET_TABS.WAITING)).toBe(
+      GTI_LIST_SECTIONS.OPEN
+    );
+    expect(gtiSectionOfTab(GTI_TICKET_TABS.RESOLVED)).toBe(
+      GTI_LIST_SECTIONS.RESOLVED
+    );
+  });
+});
 
-  it('shows counts on the open tabs', () => {
+describe('buildGtiTicketTabs', () => {
+  const stats = { mineCount: 4, unAssignedCount: 7, allCount: 15 };
+
+  it('counts my conversations on "Atendendo" and the queue on "Aguardando"', () => {
     const tabs = buildGtiTicketTabs({
       allowedAssignees: everyone,
       stats,
-      status: 'open',
+      showAll: false,
       t,
     });
 
     expect(tabs.map(tab => [tab.key, tab.count])).toEqual([
       ['attending', 4],
       ['waiting', 7],
-      ['resolved', null],
     ]);
   });
 
-  it('hides counts while resolved conversations are listed', () => {
+  it('counts every assigned conversation on "Atendendo" with "Ver todos"', () => {
     const tabs = buildGtiTicketTabs({
       allowedAssignees: everyone,
       stats,
-      status: 'resolved',
+      showAll: true,
       t,
     });
 
-    expect(tabs.every(tab => tab.count === null)).toBe(true);
+    expect(tabs[0].count).toBe(8);
   });
 
   it('hides "Aguardando" from agents who cannot see unassigned conversations', () => {
     const tabs = buildGtiTicketTabs({
       allowedAssignees: ['me'],
       stats,
-      status: 'open',
+      showAll: false,
       t,
     });
 
-    expect(tabs.map(tab => tab.key)).toEqual(['attending', 'resolved']);
+    expect(tabs.map(tab => tab.key)).toEqual(['attending']);
   });
 });
 

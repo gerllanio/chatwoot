@@ -180,6 +180,15 @@ const isResizing = ref(false);
 const startX = ref(0);
 const startWidth = ref(0);
 
+// The GTI top bar's menu button collapses/expands the sidebar through the
+// saved width, so follow it here too.
+watch(
+  () => uiSettings.value.sidebar_width,
+  width => {
+    if (width && !isResizing.value) setSidebarWidth(width);
+  }
+);
+
 provideSidebarContext({
   expandedItem,
   setExpandedItem,
@@ -1106,6 +1115,7 @@ const { isAdmin } = useAdmin();
         </template>
       </div>
       <div
+        v-if="gtiClassicMode"
         class="flex gap-2 min-w-0"
         :class="isEffectivelyCollapsed ? 'flex-col items-center' : 'px-2'"
       >
@@ -1188,9 +1198,14 @@ const { isAdmin } = useAdmin();
         >
           <li
             v-if="sectionLabel && isAdmin && !isEffectivelyCollapsed"
-            class="px-2 pt-3 pb-1 text-xs font-semibold tracking-wide uppercase text-n-slate-10 select-none"
+            class="flex items-center gap-1.5 px-2 pt-3 pb-1 text-xs font-semibold tracking-wide uppercase text-n-slate-10 select-none"
           >
             {{ sectionLabel }}
+            <span
+              class="px-1 text-[0.5625rem] leading-4 rounded-sm text-white bg-n-gti-navy dark:bg-n-slate-9"
+            >
+              {{ t('GTI.SIDEBAR.ADMIN_TAG') }}
+            </span>
           </li>
           <li
             v-else-if="sectionLabel && isAdmin"

@@ -112,4 +112,14 @@ describe('buildGtiMenu', () => {
 
     expect(reports.sectionLabel).toBe('GTI.SIDEBAR.ADMIN_SECTION');
   });
+
+  it('turns "Atendimentos" into a plain link to the conversation list', () => {
+    const tickets = buildGtiMenu(upstreamMenu(), t).find(
+      item => item.name === 'Conversation'
+    );
+
+    expect(tickets.children).toBeUndefined();
+    expect(tickets.to).toBe('/all');
+    expect(tickets.activeOn).toContain('conversation_through_inbox');
+  });
 });

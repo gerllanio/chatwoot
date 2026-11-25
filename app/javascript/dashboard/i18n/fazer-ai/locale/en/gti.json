@@ -22,7 +22,8 @@
       "HELP": "Help",
       "TASKS": "Tasks",
       "PANEL": "Panel",
-      "ADMIN_SECTION": "Administration"
+      "ADMIN_SECTION": "Administration",
+      "ADMIN_TAG": "ADMIN"
     },
     "TICKETS": {
       "ATTENDING": "Attending",
@@ -39,7 +40,13 @@
       "ACCEPT_FAILED": "Could not accept the conversation",
       "CLOSE": "Close",
       "LOADING": "Loading messages…",
-      "ATTACHMENT": "📎 Attachment"
+      "ATTACHMENT": "📎 Attachment",
+      "OPEN": "Open",
+      "SEARCH": "Search",
+      "NEW": "New",
+      "QUEUES": "Queues ({count})",
+      "ALL_QUEUES": "All queues",
+      "ADVANCED_FILTERS": "Advanced filters"
     },
     "ALERTS": {
       "CUSTOMER": "Customer",
@@ -149,7 +156,13 @@
     "TOPBAR": {
       "PRODUCT": "Work",
       "TAGLINE": "Customer service",
-      "NOTIFICATIONS": "Notifications"
+      "NOTIFICATIONS": "Notifications",
+      "MENU": "Show or hide the menu",
+      "DARK_MODE": "Dark mode",
+      "LIGHT_MODE": "Light mode",
+      "USER_ROLE": "{name} · {role}",
+      "ROLE_ADMIN": "Administrator",
+      "ROLE_AGENT": "Agent"
     },
     "CLASSIC": {
       "ENTER": "Open classic Chatwoot mode",

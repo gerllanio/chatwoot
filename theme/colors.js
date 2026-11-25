@@ -231,6 +231,7 @@ export const colors = {
     gti: {
       navy: '#1E293B',
       green: '#00A656',
+      blue: '#046BD2',
       chat: '#EFEAE2',
       'chat-dark': '#0C1117',
       in: '#FFFFFF',

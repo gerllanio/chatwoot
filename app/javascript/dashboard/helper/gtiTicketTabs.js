@@ -40,15 +40,33 @@ export const filtersToGtiTab = ({ assignee, status }) => {
   return GTI_TICKET_TABS.ATTENDING;
 };
 
-// Counts come from the conversation stats of the status being listed, so they
-// are only meaningful on the open tabs.
-export const buildGtiTicketTabs = ({ allowedAssignees, stats, status, t }) => {
-  const showCounts = status === STATUS_TYPE.OPEN;
+// The list column has two levels, as in the prototype: "Abertos" (with the
+// "Atendendo" / "Aguardando" sub-tabs) and "Resolvidos"; "Busca" just opens
+// the search page.
+export const GTI_LIST_SECTIONS = {
+  OPEN: 'open',
+  RESOLVED: 'resolved',
+  SEARCH: 'search',
+};
+
+export const gtiSectionOfTab = tab =>
+  tab === GTI_TICKET_TABS.RESOLVED
+    ? GTI_LIST_SECTIONS.RESOLVED
+    : GTI_LIST_SECTIONS.OPEN;
+
+// Sub-tabs of "Abertos". "Atendendo" counts my conversations, or every
+// assigned one when "Ver todos" is on.
+export const buildGtiTicketTabs = ({ allowedAssignees, stats, showAll, t }) => {
+  const canSeeAll = allowedAssignees.includes(ASSIGNEE_TYPE.ALL);
+  const attendingCount =
+    showAll && canSeeAll
+      ? (stats.allCount || 0) - (stats.unAssignedCount || 0)
+      : stats.mineCount || 0;
   const tabs = [
     {
       key: GTI_TICKET_TABS.ATTENDING,
       name: t('GTI.TICKETS.ATTENDING'),
-      count: showCounts ? stats.mineCount || 0 : null,
+      count: attendingCount,
     },
   ];
 
@@ -56,15 +74,9 @@ export const buildGtiTicketTabs = ({ allowedAssignees, stats, status, t }) => {
     tabs.push({
       key: GTI_TICKET_TABS.WAITING,
       name: t('GTI.TICKETS.WAITING'),
-      count: showCounts ? stats.unAssignedCount || 0 : null,
+      count: stats.unAssignedCount || 0,
     });
   }
-
-  tabs.push({
-    key: GTI_TICKET_TABS.RESOLVED,
-    name: t('GTI.TICKETS.RESOLVED'),
-    count: null,
-  });
 
   return tabs;
 };
