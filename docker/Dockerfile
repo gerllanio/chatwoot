@@ -22,7 +22,7 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
   && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack; \
   fi
 
-FROM ruby:3.4.13-alpine3.23 AS pre-builder
+FROM ruby:3.4.13-alpine3.23 AS pre-builder-deps
 
 ARG NODE_VERSION="24.22.1"
 ARG PNPM_VERSION="10.2.0"
@@ -96,6 +96,10 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
 COPY package.json pnpm-lock.yaml ./
 COPY patches ./patches
 RUN pnpm i
+
+# GTI: gems and node_modules end here, so CI can cache this stage on its own (it holds no
+# enterprise/ tree) and only rebuild the code and assets below on an ordinary change.
+FROM pre-builder-deps AS pre-builder
 
 COPY . /app
 

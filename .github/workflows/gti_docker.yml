@@ -43,6 +43,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Gems and node_modules (the pre-builder-deps stage) are cached on their own with
+      # mode=max: that stage never touches enterprise/, so storing all its layers is safe,
+      # and an ordinary change then skips bundle install and pnpm i.
+      - name: Build dependencies
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          target: pre-builder-deps
+          platforms: linux/amd64
+          push: false
+          cache-from: type=gha,scope=gti-deps
+          cache-to: type=gha,scope=gti-deps,mode=max
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -55,5 +69,7 @@ jobs:
             ${{ env.IMAGE }}:gti-${{ env.SHORT_SHA }}
           # mode=min keeps only the final image's layers in the cache, so the
           # intermediate stage holding the official enterprise/ tree is never stored.
-          cache-from: type=gha
-          cache-to: type=gha,mode=min
+          cache-from: |
+            type=gha,scope=gti-deps
+            type=gha,scope=gti-final
+          cache-to: type=gha,scope=gti-final,mode=min
