@@ -1,0 +1,9 @@
+{
+  "GTI_CHANNEL_NOTES": {
+    "TITLE": "Mis notas",
+    "HELP": "Solo tú puedes ver estas notas.",
+    "PLACEHOLDER": "Escribe recordatorios sobre este canal…",
+    "SAVE": "Guardar notas",
+    "SAVED": "Guardado"
+  }
+}

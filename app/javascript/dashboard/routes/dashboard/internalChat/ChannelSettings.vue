@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { useStore } from 'dashboard/composables/store';
 import Icon from 'dashboard/components-next/icon/Icon.vue';
 import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
+import GtiChannelNotes from 'dashboard/components/widgets/gti/GtiChannelNotes.vue';
 import InternalChatChannelsAPI from 'dashboard/api/internalChatChannels';
 import { formatLocalized } from 'shared/helpers/localizedDate';
 import { vOnClickOutside } from '@vueuse/components';
@@ -242,6 +243,8 @@ defineExpose({ fetchMembers });
           </div>
         </div>
       </div>
+
+      <GtiChannelNotes :channel-id="channel.id" />
 
       <!-- Members -->
       <div class="border-b border-n-slate-5 px-4 py-4">
