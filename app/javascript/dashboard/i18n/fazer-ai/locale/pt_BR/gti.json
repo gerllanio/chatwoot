@@ -18,6 +18,23 @@
       "SETTINGS": "Configurações",
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin"
+    },
+    "TICKETS": {
+      "ATTENDING": "Atendendo",
+      "WAITING": "Aguardando",
+      "RESOLVED": "Resolvidos",
+      "SHOW_ALL": "Ver todos",
+      "FINISH": "Finalizar conversa",
+      "FINISHED": "Conversa de {name} finalizada",
+      "FINISH_FAILED": "Não foi possível finalizar a conversa",
+      "PEEK": "Espiar a conversa",
+      "PEEK_TITLE": "Espiando: {name}",
+      "PEEK_DESCRIPTION": "Espiar não avisa o cliente e não tira a conversa da fila.",
+      "ACCEPT": "Aceitar atendimento",
+      "ACCEPT_FAILED": "Não foi possível aceitar o atendimento",
+      "CLOSE": "Fechar",
+      "LOADING": "Carregando mensagens…",
+      "ATTACHMENT": "📎 Anexo"
     }
   }
 }

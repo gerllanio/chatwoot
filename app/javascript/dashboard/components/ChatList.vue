@@ -23,7 +23,13 @@ import ConversationList from './ConversationList.vue';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import ConversationFilter from 'next/filter/ConversationFilter.vue';
 import SaveCustomView from 'next/filter/SaveCustomView.vue';
-import ChatTypeTabs from './widgets/ChatTypeTabs.vue';
+import GtiTicketTabs from './widgets/gti/GtiTicketTabs.vue';
+import {
+  GTI_TICKET_TABS,
+  buildGtiTicketTabs,
+  filtersToGtiTab,
+  gtiTabToFilters,
+} from 'dashboard/helper/gtiTicketTabs';
 import DeleteCustomViews from 'dashboard/routes/dashboard/customviews/DeleteCustomViews.vue';
 import ConversationBulkActions from './widgets/conversation/conversationBulkActions/Index.vue';
 import TeleportWithDirection from 'dashboard/components-next/TeleportWithDirection.vue';
@@ -232,6 +238,25 @@ const assigneeTabItems = computed(() => {
     count: conversationStats.value[countKey] || 0,
   }));
 });
+
+const gtiShowAll = ref(false);
+const gtiAllowedAssignees = computed(() =>
+  assigneeTabItems.value.map(item => item.key)
+);
+const gtiTicketTabs = computed(() =>
+  buildGtiTicketTabs({
+    allowedAssignees: gtiAllowedAssignees.value,
+    stats: conversationStats.value,
+    status: activeStatus.value,
+    t,
+  })
+);
+const gtiActiveTicketTab = computed(() =>
+  filtersToGtiTab({
+    assignee: activeAssigneeTab.value,
+    status: activeStatus.value,
+  })
+);
 
 const showAssigneeInConversationCard = computed(() => {
   return (
@@ -735,6 +760,22 @@ function onBasicFilterChange(value, type) {
   resetAndFetchData();
 }
 
+function onGtiTicketTabChange(tab) {
+  const { assignee, status } = gtiTabToFilters(tab, {
+    showAll: gtiShowAll.value,
+    allowedAssignees: gtiAllowedAssignees.value,
+  });
+  emitter.emit('clearSearchInput');
+  activeAssigneeTab.value = assignee;
+  onBasicFilterChange(status, 'status');
+}
+
+watch(gtiShowAll, () => {
+  if (gtiActiveTicketTab.value === GTI_TICKET_TABS.ATTENDING) {
+    onGtiTicketTabChange(GTI_TICKET_TABS.ATTENDING);
+  }
+});
+
 function openLastSavedItemInFolder() {
   const lastItemOfFolder = folders.value[folders.value.length - 1];
   const lastItemId = lastItemOfFolder.id;
@@ -1112,12 +1153,13 @@ watch(appliedFilters, () => resetBulkActions());
       @close="onCloseDeleteFoldersModal"
     />
 
-    <ChatTypeTabs
+    <GtiTicketTabs
       v-if="!hasAppliedFiltersOrActiveFolders"
-      :items="assigneeTabItems"
-      :active-tab="activeAssigneeTab"
-      is-compact
-      @chat-tab-change="updateAssigneeTab"
+      v-model:show-all="gtiShowAll"
+      :items="gtiTicketTabs"
+      :active-tab="gtiActiveTicketTab"
+      :can-show-all="gtiAllowedAssignees.includes('all')"
+      @tab-change="onGtiTicketTabChange"
     />
 
     <p

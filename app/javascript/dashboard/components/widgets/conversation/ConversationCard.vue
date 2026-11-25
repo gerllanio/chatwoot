@@ -7,6 +7,8 @@ import MessagePreview from './MessagePreview.vue';
 import InboxName from '../InboxName.vue';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
+import GtiCardActions from '../gti/GtiCardActions.vue';
+import { isGtiWaitingConversation } from 'dashboard/helper/gtiTicketTabs';
 import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
 import CardPinIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPinIcon.vue';
 import UnreadBadge from 'dashboard/components-next/Conversation/ConversationCard/UnreadBadge.vue';
@@ -255,6 +257,11 @@ watch(
           <SLACardLabel :chat="chat" class="ltr:mr-1 rtl:ml-1" />
         </template>
       </CardLabels>
+      <GtiCardActions
+        v-if="isGtiWaitingConversation(chat)"
+        :chat="chat"
+        class="mx-2 mt-1.5"
+      />
     </div>
   </div>
 </template>

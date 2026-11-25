@@ -18,6 +18,23 @@
       "SETTINGS": "Settings",
       "VERSION": "Work {version} · GTI Tecnologia",
       "SUPER_ADMIN": "Super Admin"
+    },
+    "TICKETS": {
+      "ATTENDING": "Attending",
+      "WAITING": "Waiting",
+      "RESOLVED": "Resolved",
+      "SHOW_ALL": "Show all",
+      "FINISH": "Finish conversation",
+      "FINISHED": "{name}'s conversation finished",
+      "FINISH_FAILED": "Could not finish the conversation",
+      "PEEK": "Peek at the conversation",
+      "PEEK_TITLE": "Peeking: {name}",
+      "PEEK_DESCRIPTION": "Peeking does not notify the customer and keeps the conversation in the queue.",
+      "ACCEPT": "Accept conversation",
+      "ACCEPT_FAILED": "Could not accept the conversation",
+      "CLOSE": "Close",
+      "LOADING": "Loading messages…",
+      "ATTACHMENT": "📎 Attachment"
     }
   }
 }
