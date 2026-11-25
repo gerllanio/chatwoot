@@ -39,7 +39,9 @@
       "LATE_TITLE": "⚠ Esperando há mais de 10 min",
       "ON_TIME_TITLE": "✓ Fila dentro do prazo",
       "ON_TIME": "Nenhum cliente esperando além de 10 minutos.",
-      "LATE_ENTRY": "{name} · {queue}"
+      "LATE_ENTRY": "{name} · {queue}",
+      "MY_TASKS": "Minhas tarefas pendentes",
+      "NO_TASKS": "Nenhuma tarefa pendente."
     },
     "KPI": {
       "CONVERSATIONS": "Atendimentos no período",
@@ -86,10 +88,12 @@
       "TOTAL": "Total",
       "OPEN": "Abertos agora",
       "RESOLVED": "Resolvidos",
-      "FIRST_RESPONSE": "1ª resposta",
-      "RESOLUTION": "T.M. resolução",
+      "FIRST_RESPONSE": "T.M. espera",
+      "RESOLUTION": "T.M. atendimento",
       "SHARE": "% do volume",
-      "EMPTY": "Nenhum atendente"
+      "EMPTY": "Nenhum atendente",
+      "RATING": "Avaliação",
+      "NO_RATING": "—"
     }
   }
 }

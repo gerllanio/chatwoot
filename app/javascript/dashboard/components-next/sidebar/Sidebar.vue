@@ -1234,7 +1234,11 @@ const { isAdmin } = useAdmin();
       class="grid overflow-y-scroll flex-grow gap-2 pb-5 no-scrollbar min-w-0"
       :class="[
         isEffectivelyCollapsed ? 'px-1' : 'px-2',
-        { '!px-0 pt-1.5': !gtiClassicMode && !isEffectivelyCollapsed },
+        // GTI: a column, so the version block can sit at the bottom of the panel.
+        {
+          '!px-0 pt-1.5': !gtiClassicMode && !isEffectivelyCollapsed,
+          '!flex flex-col': !gtiClassicMode,
+        },
       ]"
     >
       <ul
@@ -1267,10 +1271,10 @@ const { isAdmin } = useAdmin();
           <SidebarGroup v-bind="item" />
         </template>
       </ul>
-      <!-- GTI: version block at the end of the list, scrolling with it (prototype .ver). -->
+      <!-- GTI: version block pinned to the bottom of the panel (mt-auto); it scrolls with the list when the list is taller. -->
       <div
         v-if="!gtiClassicMode && !isEffectivelyCollapsed"
-        class="w-full px-[1.125rem] pt-3.5 pb-[1.125rem] text-[0.6875rem] leading-relaxed mt-2.5 border-t border-n-gti-line text-n-gti-muted"
+        class="w-full px-[1.125rem] pt-3.5 pb-[1.125rem] text-[0.6875rem] leading-relaxed mt-auto border-t border-n-gti-line text-n-gti-muted"
       >
         <b>{{ t('GTI.SIDEBAR.PRODUCT_VERSION') }}</b>
         <br />

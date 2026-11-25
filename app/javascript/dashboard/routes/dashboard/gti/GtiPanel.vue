@@ -11,6 +11,7 @@ import ReportsAPI from 'dashboard/api/reports';
 import SummaryReportsAPI from 'dashboard/api/summaryReports';
 import LiveReportsAPI from 'dashboard/api/liveReports';
 import CSATReportsAPI from 'dashboard/api/csatReports';
+import GtiTasksAPI from 'dashboard/api/gtiTasks';
 import ConversationApi from 'dashboard/api/inbox/conversation';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Select from 'dashboard/components-next/select/Select.vue';
@@ -193,6 +194,17 @@ const buckets = ref([]);
 const channelRows = ref([]);
 const teamRows = ref([]);
 const agentSummary = ref([]);
+// CSAT ratings of the period grouped by agent (Avaliação column) and my pending tasks (Agora).
+const agentRatings = ref({});
+const myTasks = ref([]);
+const RATING_PAGES = 4;
+const TASKS_IN_CARD = 4;
+const taskDueFormat = dateTimeFormat(undefined, {
+  day: '2-digit',
+  month: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+});
 const peakGrid = ref(heatmapGrid([]));
 let periodRequest = 0;
 
@@ -230,6 +242,24 @@ const buildBuckets = (opened, resolved, groupBy) => {
       ) || 0,
   }));
 };
+
+async function fetchAgentRatings(since, until) {
+  const ratings = {};
+  for (let page = 1; page <= RATING_PAGES; page += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    const { data } = await CSATReportsAPI.get({ page, from: since, to: until });
+    const responses = Array.isArray(data) ? data : data?.payload || [];
+    responses.forEach(response => {
+      const agentKey = response.assigned_agent?.id;
+      if (!agentKey || !response.rating) return;
+      ratings[agentKey] = ratings[agentKey] || { sum: 0, count: 0 };
+      ratings[agentKey].sum += response.rating;
+      ratings[agentKey].count += 1;
+    });
+    if (responses.length < 25) break;
+  }
+  return ratings;
+}
 
 const fetchPeriod = async () => {
   periodRequest += 1;
@@ -309,6 +339,15 @@ const fetchPeriod = async () => {
   teamRows.value = teamResponse.data;
   agentSummary.value = agentResponse.data;
   peakGrid.value = heatmapGrid(peakResponse.data);
+  agentRatings.value = await fetchAgentRatings(since, until);
+};
+
+const fetchMyTasks = async () => {
+  const { data } = await GtiTasksAPI.list({
+    status: 'pending',
+    assignee: 'me',
+  });
+  myTasks.value = data.payload || [];
 };
 
 const previous = computed(() => summary.value.previous || {});
@@ -392,7 +431,12 @@ const agentTableRows = computed(() =>
     agentSummary.value,
     byAgentLive.value.map(row => ({ id: row.assignee_id, metric: row })),
     agents.value
-  ).filter(row => agentId.value === ALL || row.id === agentId.value)
+  )
+    .filter(row => agentId.value === ALL || row.id === agentId.value)
+    .map(row => {
+      const rating = agentRatings.value[row.id];
+      return { ...row, rating: rating ? rating.sum / rating.count : null };
+    })
 );
 
 const openMonitor = () => {
@@ -409,6 +453,7 @@ onMounted(() => {
   fetchNow();
   startRefetching();
   fetchPeriod();
+  fetchMyTasks();
 });
 </script>
 
@@ -467,7 +512,7 @@ onMounted(() => {
     >
       {{ t('GTI_PANEL.SECTIONS.NOW') }}
     </h2>
-    <section class="grid gap-3 grid-cols-[repeat(auto-fill,minmax(14rem,1fr))]">
+    <section class="grid gap-3 grid-cols-[repeat(auto-fit,minmax(13rem,1fr))]">
       <PanelDonutCard
         :title="t('GTI_PANEL.NOW.AGENTS_ONLINE')"
         :value="`${statusCounts.online}/${agents.length}`"
@@ -525,6 +570,31 @@ onMounted(() => {
           {{ t('GTI_PANEL.NOW.ON_TIME') }}
         </span>
       </div>
+      <router-link
+        :to="{ name: 'gti_tasks' }"
+        class="flex flex-col gap-1 p-3 min-w-0 rounded-xl bg-n-solid-2 outline outline-1 outline-n-container border-s-4 border-n-gti-blue text-n-slate-12 hover:bg-n-alpha-1"
+      >
+        <span class="text-xs text-n-slate-11">
+          {{ t('GTI_PANEL.NOW.MY_TASKS') }}
+        </span>
+        <b class="text-xl leading-tight tabular-nums">{{ myTasks.length }}</b>
+        <div
+          v-for="task in myTasks.slice(0, TASKS_IN_CARD)"
+          :key="task.id"
+          class="flex justify-between gap-2 py-0.5 text-xs border-b border-dashed border-n-weak"
+        >
+          <span class="truncate">{{ task.title }}</span>
+          <span
+            v-if="task.due_at"
+            class="tabular-nums whitespace-nowrap text-n-slate-11"
+          >
+            {{ taskDueFormat.format(task.due_at * 1000) }}
+          </span>
+        </div>
+        <span v-if="!myTasks.length" class="text-xs text-n-slate-11">
+          {{ t('GTI_PANEL.NOW.NO_TASKS') }}
+        </span>
+      </router-link>
     </section>
 
     <h2
@@ -532,9 +602,7 @@ onMounted(() => {
     >
       {{ t('GTI_PANEL.SECTIONS.PERIOD', { period: periodLabel }) }}
     </h2>
-    <section
-      class="grid gap-3 grid-cols-[repeat(auto-fill,minmax(10.5rem,1fr))]"
-    >
+    <section class="grid gap-3 grid-cols-[repeat(auto-fit,minmax(9.5rem,1fr))]">
       <PanelKpiCard
         v-for="kpi in kpis"
         :key="kpi.key"
@@ -555,7 +623,42 @@ onMounted(() => {
     >
       {{ t('GTI_PANEL.SECTIONS.VOLUME') }}
     </h2>
-    <section class="grid gap-3 lg:grid-cols-[2fr_1fr]">
+    <section class="grid gap-3 lg:grid-cols-2">
+      <PanelBarList
+        :title="t('GTI_PANEL.CHANNELS.TITLE')"
+        :subtitle="t('GTI_PANEL.CHANNELS.SUBTITLE')"
+        :rows="channelBars"
+        :empty-label="t('GTI_PANEL.EMPTY')"
+      />
+      <PanelBarList
+        :title="t('GTI_PANEL.QUEUES.TITLE')"
+        :subtitle="t('GTI_PANEL.QUEUES.SUBTITLE')"
+        :rows="teamBars"
+        :empty-label="t('GTI_PANEL.EMPTY')"
+      />
+    </section>
+    <section class="grid gap-3">
+      <div
+        class="flex flex-col p-4 min-w-0 rounded-xl bg-n-solid-2 outline outline-1 outline-n-container"
+      >
+        <h4 class="m-0 text-sm font-semibold">
+          {{ t('GTI_PANEL.PEAK.TITLE') }}
+        </h4>
+        <p class="m-0 mt-0.5 mb-3 text-xs text-n-slate-11">
+          {{ t('GTI_PANEL.PEAK.SUBTITLE', { days: PEAK_DAYS }) }}
+        </p>
+        <PanelHeatmap :grid="peakGrid" :weekdays="weekdays" />
+      </div>
+    </section>
+
+    <h2
+      class="m-0 mt-2 text-xs font-semibold tracking-wide uppercase text-n-slate-11"
+    >
+      {{ t('GTI_PANEL.SECTIONS.AGENTS') }}
+    </h2>
+    <PanelAgentsTable :rows="agentTableRows" />
+
+    <section class="grid gap-3">
       <div
         class="flex flex-col p-4 min-w-0 rounded-xl bg-n-solid-2 outline outline-1 outline-n-container"
       >
@@ -571,38 +674,6 @@ onMounted(() => {
         </p>
         <PanelLineChart :buckets="buckets" />
       </div>
-      <PanelBarList
-        :title="t('GTI_PANEL.CHANNELS.TITLE')"
-        :subtitle="t('GTI_PANEL.CHANNELS.SUBTITLE')"
-        :rows="channelBars"
-        :empty-label="t('GTI_PANEL.EMPTY')"
-      />
     </section>
-    <section class="grid gap-3 lg:grid-cols-[2fr_1fr]">
-      <div
-        class="flex flex-col p-4 min-w-0 rounded-xl bg-n-solid-2 outline outline-1 outline-n-container"
-      >
-        <h4 class="m-0 text-sm font-semibold">
-          {{ t('GTI_PANEL.PEAK.TITLE') }}
-        </h4>
-        <p class="m-0 mt-0.5 mb-3 text-xs text-n-slate-11">
-          {{ t('GTI_PANEL.PEAK.SUBTITLE', { days: PEAK_DAYS }) }}
-        </p>
-        <PanelHeatmap :grid="peakGrid" :weekdays="weekdays" />
-      </div>
-      <PanelBarList
-        :title="t('GTI_PANEL.QUEUES.TITLE')"
-        :subtitle="t('GTI_PANEL.QUEUES.SUBTITLE')"
-        :rows="teamBars"
-        :empty-label="t('GTI_PANEL.EMPTY')"
-      />
-    </section>
-
-    <h2
-      class="m-0 mt-2 text-xs font-semibold tracking-wide uppercase text-n-slate-11"
-    >
-      {{ t('GTI_PANEL.SECTIONS.AGENTS') }}
-    </h2>
-    <PanelAgentsTable :rows="agentTableRows" />
   </div>
 </template>

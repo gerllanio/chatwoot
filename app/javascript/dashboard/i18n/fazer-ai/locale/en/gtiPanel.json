@@ -39,7 +39,9 @@
       "LATE_TITLE": "⚠ Waiting for more than 10 min",
       "ON_TIME_TITLE": "✓ Queue within target",
       "ON_TIME": "No customer has waited more than 10 minutes.",
-      "LATE_ENTRY": "{name} · {queue}"
+      "LATE_ENTRY": "{name} · {queue}",
+      "MY_TASKS": "My pending tasks",
+      "NO_TASKS": "No pending tasks."
     },
     "KPI": {
       "CONVERSATIONS": "Conversations in period",
@@ -86,10 +88,12 @@
       "TOTAL": "Total",
       "OPEN": "Open now",
       "RESOLVED": "Resolved",
-      "FIRST_RESPONSE": "First response",
-      "RESOLUTION": "Avg resolution",
+      "FIRST_RESPONSE": "Avg. wait",
+      "RESOLUTION": "Avg. handling",
       "SHARE": "% of volume",
-      "EMPTY": "No agents"
+      "EMPTY": "No agents",
+      "RATING": "Rating",
+      "NO_RATING": "—"
     }
   }
 }

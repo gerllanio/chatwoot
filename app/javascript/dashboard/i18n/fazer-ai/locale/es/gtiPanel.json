@@ -39,7 +39,9 @@
       "LATE_TITLE": "⚠ Esperando hace más de 10 min",
       "ON_TIME_TITLE": "✓ Cola dentro del plazo",
       "ON_TIME": "Ningún cliente espera más de 10 minutos.",
-      "LATE_ENTRY": "{name} · {queue}"
+      "LATE_ENTRY": "{name} · {queue}",
+      "MY_TASKS": "Mis tareas pendientes",
+      "NO_TASKS": "Ninguna tarea pendiente."
     },
     "KPI": {
       "CONVERSATIONS": "Conversaciones en el período",
@@ -86,10 +88,12 @@
       "TOTAL": "Total",
       "OPEN": "Abiertas ahora",
       "RESOLVED": "Resueltas",
-      "FIRST_RESPONSE": "1ª respuesta",
-      "RESOLUTION": "T. medio resolución",
+      "FIRST_RESPONSE": "T.M. espera",
+      "RESOLUTION": "T.M. atención",
       "SHARE": "% del volumen",
-      "EMPTY": "Ningún agente"
+      "EMPTY": "Ningún agente",
+      "RATING": "Valoración",
+      "NO_RATING": "—"
     }
   }
 }

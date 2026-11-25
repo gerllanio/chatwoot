@@ -19,6 +19,7 @@ const sortDirection = ref(-1);
 
 const COLUMNS = [
   { key: 'name', label: 'GTI_PANEL.AGENTS.NAME', numeric: false },
+  { key: 'rating', label: 'GTI_PANEL.AGENTS.RATING', numeric: false },
   { key: 'total', label: 'GTI_PANEL.AGENTS.TOTAL', numeric: true },
   { key: 'open', label: 'GTI_PANEL.AGENTS.OPEN', numeric: true },
   { key: 'resolved', label: 'GTI_PANEL.AGENTS.RESOLVED', numeric: true },
@@ -41,6 +42,11 @@ const totalVolume = computed(() =>
 );
 const share = row => Math.round((row.total / totalVolume.value) * 100);
 const shareText = row => `${share(row)}%`;
+
+// Prototype stars: filled ★ in amber for the rounded grade, the rest in the line colour.
+const STAR_COUNT = 5;
+const fullStars = rating => Math.round(rating || 0);
+const ratingText = rating => (rating ? rating.toFixed(1) : '');
 
 const sortBy = key => {
   if (sortKey.value === key) {
@@ -68,23 +74,25 @@ const arrow = key => {
           <th
             v-for="column in COLUMNS"
             :key="column.key"
-            class="px-3 py-2 font-medium border-b cursor-pointer select-none border-n-weak"
+            class="px-3 py-2.5 text-xs font-semibold tracking-wide uppercase border-b cursor-pointer select-none border-n-weak"
             :class="[
               column.numeric ? 'text-end' : 'text-start',
-              { 'text-n-slate-12': sortKey === column.key },
+              { 'text-n-gti-green': sortKey === column.key },
             ]"
             @click="sortBy(column.key)"
           >
             {{ t(column.label) }}{{ arrow(column.key) }}
           </th>
-          <th class="px-3 py-2 font-medium border-b text-start border-n-weak">
+          <th
+            class="px-3 py-2.5 text-xs font-semibold tracking-wide uppercase border-b text-start border-n-weak"
+          >
             {{ t('GTI_PANEL.AGENTS.SHARE') }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-if="!rows.length">
-          <td colspan="7" class="px-3 py-4 text-n-slate-10">
+          <td colspan="8" class="px-3 py-4 text-n-slate-10">
             {{ t('GTI_PANEL.AGENTS.EMPTY') }}
           </td>
         </tr>
@@ -112,6 +120,20 @@ const arrow = key => {
               </div>
             </div>
           </td>
+          <td class="px-3 py-2 whitespace-nowrap">
+            <template v-if="row.rating">
+              <span class="tracking-[1px] text-[#E0A100]">{{
+                '★'.repeat(fullStars(row.rating))
+              }}</span>
+              <span class="tracking-[1px] text-n-gti-line">{{
+                '★'.repeat(STAR_COUNT - fullStars(row.rating))
+              }}</span>
+              {{ ratingText(row.rating) }}
+            </template>
+            <span v-else class="text-n-slate-10">{{
+              t('GTI_PANEL.AGENTS.NO_RATING')
+            }}</span>
+          </td>
           <td class="px-3 py-2 tabular-nums text-end">{{ row.total }}</td>
           <td class="px-3 py-2 tabular-nums text-end">{{ row.open }}</td>
           <td class="px-3 py-2 tabular-nums text-end">{{ row.resolved }}</td>
@@ -127,7 +149,7 @@ const arrow = key => {
                 class="w-20 h-1.5 overflow-hidden rounded-full bg-n-slate-3"
               >
                 <i
-                  class="block h-full rounded-full bg-n-brand"
+                  class="block h-full rounded-full bg-n-gti-green"
                   :style="{ width: shareText(row) }"
                 />
               </span>
