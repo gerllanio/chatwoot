@@ -93,7 +93,7 @@
       "SUBTITLE": "How to do everyday tasks in Work.",
       "SUPPORT_TITLE": "GTI internal support",
       "SUPPORT_BODY": "Questions or problems with the system? Talk to the IT team.",
-      "SUPPORT_EMAIL": "suporte@gtiplus.com.br",
+      "SUPPORT_EMAIL": "suporte{'@'}gtiplus.com.br",
       "TOPICS": {
         "ACCEPT": {
           "TITLE": "Accept a conversation",

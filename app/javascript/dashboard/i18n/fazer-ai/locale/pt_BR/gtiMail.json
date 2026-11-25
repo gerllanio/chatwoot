@@ -31,7 +31,7 @@
     "DISCARD": "Descartar",
     "FROM": "De",
     "TO": "Para",
-    "TO_PLACEHOLDER": "cliente@empresa.com.br",
+    "TO_PLACEHOLDER": "cliente{'@'}empresa.com.br",
     "CC": "Cc",
     "SUBJECT": "Assunto",
     "MESSAGE": "Mensagem",

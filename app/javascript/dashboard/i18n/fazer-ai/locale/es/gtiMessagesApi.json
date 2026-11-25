@@ -17,7 +17,7 @@
       "TOKEN": "Antes de enviar mensajes, crea un token abajo, vinculado a la conexión que enviará los mensajes.",
       "NUMBER": "El campo number acepta dos tipos de valor:",
       "NUMBER_PHONE": "Número de WhatsApp: cualquier número que empiece con el código del país (Brasil = 55).",
-      "NUMBER_JID": "JID de WhatsApp: el identificador de WhatsApp; para grupos es un número largo que termina en @g.us.",
+      "NUMBER_JID": "JID de WhatsApp: el identificador de WhatsApp; para grupos es un número largo que termina en {'@'}g.us.",
       "SAVE_ON_TICKET": "saveOnTicket: false envía sin dejar la conversación abierta en Atenciones."
     },
     "TEXT": {
