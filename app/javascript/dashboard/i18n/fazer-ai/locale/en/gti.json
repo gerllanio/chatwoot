@@ -35,6 +35,18 @@
       "CLOSE": "Close",
       "LOADING": "Loading messages…",
       "ATTACHMENT": "📎 Attachment"
+    },
+    "ALERTS": {
+      "CUSTOMER": "Customer",
+      "ATTACHMENT": "📎 Attachment",
+      "CLOSE": "Close alert"
+    },
+    "VOLUME": {
+      "TITLE": "Notification sound",
+      "MUTED": "muted",
+      "MUTE": "Mute",
+      "TEST": "Test sound",
+      "DEVICE_NOTIFICATIONS": "Desktop and mobile notifications"
     }
   }
 }

@@ -35,6 +35,18 @@
       "CLOSE": "Cerrar",
       "LOADING": "Cargando mensajes…",
       "ATTACHMENT": "📎 Adjunto"
+    },
+    "ALERTS": {
+      "CUSTOMER": "Cliente",
+      "ATTACHMENT": "📎 Adjunto",
+      "CLOSE": "Cerrar aviso"
+    },
+    "VOLUME": {
+      "TITLE": "Sonido de las notificaciones",
+      "MUTED": "silencio",
+      "MUTE": "Silenciar",
+      "TEST": "Probar sonido",
+      "DEVICE_NOTIFICATIONS": "Avisos en Windows y en el celular"
     }
   }
 }

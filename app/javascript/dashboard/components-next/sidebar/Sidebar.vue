@@ -32,6 +32,8 @@ import {
   sortSidebarItems,
 } from 'dashboard/helper/sidebarSort';
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
+import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
+import GtiMessageAlerts from 'dashboard/components/widgets/gti/GtiMessageAlerts.vue';
 
 const props = defineProps({
   isMobileSidebarOpen: {
@@ -1206,7 +1208,8 @@ const gtiMenuItems = computed(() => buildGtiMenu(menuItems.value, t));
         v-if="!isEffectivelyCollapsed"
         class="flex items-center justify-between w-full gap-2 px-3 pb-2"
       >
-        <p class="m-0 text-xs truncate text-n-slate-10">
+        <GtiVolumeControl />
+        <p class="flex-1 min-w-0 m-0 text-xs truncate text-n-slate-10">
           {{ t('GTI.SIDEBAR.VERSION', { version: globalConfig.appVersion }) }}
         </p>
         <a
@@ -1221,6 +1224,7 @@ const gtiMenuItems = computed(() => buildGtiMenu(menuItems.value, t));
         </a>
       </div>
     </section>
+    <GtiMessageAlerts />
     <!-- Resize Handle (desktop only) -->
     <div
       class="hidden md:block absolute top-0 h-full w-1 cursor-col-resize z-40 ltr:right-0 rtl:left-0 group"

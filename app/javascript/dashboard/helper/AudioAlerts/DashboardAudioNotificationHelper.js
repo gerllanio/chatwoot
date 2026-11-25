@@ -12,6 +12,10 @@ import {
 } from './AudioMessageHelper';
 import WindowVisibilityHelper from './WindowVisibilityHelper';
 import { useAlert } from 'dashboard/composables';
+import {
+  effectiveGtiAlertVolume,
+  emitGtiMessageAlert,
+} from 'dashboard/helper/gtiNotificationPrefs';
 
 const NOTIFICATION_TIME = 30000;
 const ALERT_DURATION = 10000;
@@ -50,6 +54,9 @@ export class DashboardAudioNotificationHelper {
   };
 
   playAudioAlert = async () => {
+    const volume = effectiveGtiAlertVolume();
+    if (volume === 0) return;
+    this.audioConfig.audio.volume = volume;
     try {
       await this.audioConfig.audio.play();
     } catch (error) {
@@ -171,6 +178,9 @@ export class DashboardAudioNotificationHelper {
   triggerAlert = message => {
     if (!this.store.hasConversationPermission(this.currentUser)) return;
     if (!this.shouldNotifyOnMessage(message)) return;
+    if (!this.store.isMessageFromCurrentConversation(message)) {
+      emitGtiMessageAlert(message);
+    }
     if (WindowVisibilityHelper.isWindowVisible()) {
       if (this.store.isMessageFromCurrentConversation(message)) return;
       if (this.notificationConfig.playAlertOnlyWhenHidden) return;
