@@ -8,6 +8,7 @@ import InboxName from '../InboxName.vue';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
 import GtiCardActions from '../gti/GtiCardActions.vue';
+import GtiCardMeta from '../gti/GtiCardMeta.vue';
 import { isGtiWaitingConversation } from 'dashboard/helper/gtiTicketTabs';
 import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
@@ -228,6 +229,13 @@ watch(
           {{ $t(`CHAT_LIST.NO_MESSAGES`) }}
         </span>
       </p>
+      <GtiCardMeta
+        v-if="!gtiClassicMode"
+        :chat="chat"
+        :inbox="inbox"
+        :assignee="assignee"
+        class="mx-2 mt-0.5"
+      />
       <div
         class="absolute flex flex-col ltr:right-3 rtl:left-3"
         :class="showMetaSection ? 'top-8' : 'top-4'"

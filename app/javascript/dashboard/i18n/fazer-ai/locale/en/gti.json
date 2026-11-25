@@ -152,6 +152,11 @@
     "CLASSIC": {
       "ENTER": "Open classic Chatwoot mode",
       "BACK": "Back to Work"
+    },
+    "CARD": {
+      "QUEUE": "Queue",
+      "CONNECTION": "Connection",
+      "ASSIGNEE": "Attended by"
     }
   }
 }

@@ -8,6 +8,7 @@ import ConversationCard from './widgets/conversation/ConversationCard.vue';
 import ConversationCardExpanded from 'dashboard/components-next/Conversation/ConversationCard/ConversationCardExpanded.vue';
 import ContextMenu from 'dashboard/components/ui/ContextMenu.vue';
 import ConversationContextMenu from './widgets/conversation/contextMenu/Index.vue';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 const props = defineProps({
   source: { type: Object, required: true },
@@ -21,6 +22,9 @@ const props = defineProps({
 
 const router = useRouter();
 const store = useStore();
+// In the GTI layout the card's chips (GtiCardMeta) already name the inbox and
+// the assignee, so the condensed card's upstream meta row would repeat them.
+const gtiClassicMode = useGtiClassicMode();
 
 const selectConversation = inject('selectConversation');
 const deSelectConversation = inject('deSelectConversation');
@@ -244,8 +248,8 @@ const onTogglePin = () => {
     :inbox="inbox"
     :selected="isConversationSelected(source.id)"
     :is-active-chat="isActiveChat"
-    :show-assignee="showAssignee"
-    :show-inbox-name="showInboxName"
+    :show-assignee="showAssignee && gtiClassicMode"
+    :show-inbox-name="showInboxName && gtiClassicMode"
     :typing-preview="typingPreviewText"
     :has-group-activity="hasGroupActivity"
     :is-pinned="isPinned(source.id)"

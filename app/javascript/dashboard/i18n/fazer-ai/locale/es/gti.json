@@ -152,6 +152,11 @@
     "CLASSIC": {
       "ENTER": "Abrir el modo Chatwoot (clásico)",
       "BACK": "Volver a Work"
+    },
+    "CARD": {
+      "QUEUE": "Cola",
+      "CONNECTION": "Conexión",
+      "ASSIGNEE": "Atendido por"
     }
   }
 }
