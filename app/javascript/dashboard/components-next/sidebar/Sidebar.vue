@@ -1274,10 +1274,6 @@ const { isAdmin } = useAdmin();
       >
         <b>{{ t('GTI.SIDEBAR.PRODUCT_VERSION') }}</b>
         <br />
-        {{
-          t('GTI.SIDEBAR.BASE_VERSION', { version: globalConfig.appVersion })
-        }}
-        <br />
         {{ t('GTI.SIDEBAR.COPYRIGHT') }}
       </div>
     </nav>
