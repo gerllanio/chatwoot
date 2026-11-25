@@ -1,0 +1,9 @@
+{
+  "GTI_INBOX": {
+    "CONNECTION": {
+      "CONNECTED": "Connected",
+      "CONNECTING": "Connecting…",
+      "DISCONNECTED": "Disconnected"
+    }
+  }
+}
