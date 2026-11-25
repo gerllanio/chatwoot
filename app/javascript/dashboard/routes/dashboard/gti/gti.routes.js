@@ -1,5 +1,5 @@
 import { frontendURL } from '../../../helper/URLHelper';
-import GtiMonitor from './GtiMonitor.vue';
+import GtiKanban from './GtiKanban.vue';
 import GtiHelp from './GtiHelp.vue';
 import GtiTasks from './GtiTasks.vue';
 import GtiPanel from './GtiPanel.vue';
@@ -12,12 +12,22 @@ import GtiContactListItems from './GtiContactListItems.vue';
 export default {
   routes: [
     {
+      path: frontendURL('accounts/:accountId/gti/kanban'),
+      name: 'gti_kanban',
+      meta: {
+        permissions: ['administrator', 'agent'],
+      },
+      component: GtiKanban,
+    },
+    {
+      // The old TV monitor link: the same Kanban, opened in TV mode.
       path: frontendURL('accounts/:accountId/gti/monitor'),
       name: 'gti_monitor',
       meta: {
         permissions: ['administrator', 'agent'],
       },
-      component: GtiMonitor,
+      component: GtiKanban,
+      props: { tv: true },
     },
     {
       path: frontendURL('accounts/:accountId/gti/help'),

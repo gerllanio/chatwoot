@@ -1,0 +1,21 @@
+{
+  "GTI_KANBAN": {
+    "TITLE": "Kanban",
+    "SUBTITLE_STAGE": "Atenciones por etapa. Arrastra las tarjetas entre las columnas.",
+    "SUBTITLE_TEAM": "Conversaciones abiertas y en espera, por cola.",
+    "BY_STAGE": "Por etapa",
+    "BY_TEAM": "Por cola",
+    "TV_MODE": "Modo monitor (TV)",
+    "EXIT_TV": "Salir del modo monitor",
+    "STAGES": {
+      "NEW": "Nuevo",
+      "ATTENDING": "En atención",
+      "WAITING_CUSTOMER": "Esperando al cliente",
+      "RESOLVED": "Resuelto"
+    },
+    "EMPTY": "Ninguna atención",
+    "NO_QUEUE": "Sin cola",
+    "NO_AGENT": "Sin agente",
+    "MOVE_FAILED": "No se pudo mover la atención"
+  }
+}

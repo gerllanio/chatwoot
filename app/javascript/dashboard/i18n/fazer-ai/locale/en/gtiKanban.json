@@ -1,0 +1,21 @@
+{
+  "GTI_KANBAN": {
+    "TITLE": "Kanban",
+    "SUBTITLE_STAGE": "Conversations by stage. Drag the cards between columns.",
+    "SUBTITLE_TEAM": "Open and waiting conversations, by queue.",
+    "BY_STAGE": "By stage",
+    "BY_TEAM": "By queue",
+    "TV_MODE": "Monitor mode (TV)",
+    "EXIT_TV": "Leave monitor mode",
+    "STAGES": {
+      "NEW": "New",
+      "ATTENDING": "In service",
+      "WAITING_CUSTOMER": "Waiting for customer",
+      "RESOLVED": "Resolved"
+    },
+    "EMPTY": "No conversations",
+    "NO_QUEUE": "No queue",
+    "NO_AGENT": "No agent",
+    "MOVE_FAILED": "Could not move the conversation"
+  }
+}

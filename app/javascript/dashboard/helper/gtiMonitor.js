@@ -1,5 +1,5 @@
-// Data shaping for the GTI "Work" TV monitor: who is waiting in each queue
-// (Chatwoot team) and for how long.
+// Wait-time helpers for the GTI "Work" Kanban TV mode and the Painel: how
+// long a customer has been waiting and when that counts as late.
 
 export const LATE_AFTER_SECONDS = 10 * 60;
 const SECONDS_PER_MINUTE = 60;
@@ -23,44 +23,3 @@ export const formatWait = seconds => {
 };
 
 export const isLate = seconds => seconds >= LATE_AFTER_SECONDS;
-
-// One column per team, plus "no queue" when someone is waiting outside any
-// team. Customers are sorted by who has waited the longest.
-export const groupWaitingByTeam = (
-  conversations,
-  teams,
-  nowSeconds,
-  noTeamLabel
-) => {
-  const columns = teams.map(team => ({
-    id: team.id,
-    name: team.name,
-    waiting: [],
-  }));
-  const noTeam = { id: null, name: noTeamLabel, waiting: [] };
-
-  conversations.forEach(conversation => {
-    const entry = {
-      id: conversation.id,
-      name: conversation.meta?.sender?.name || '',
-      seconds: waitingSeconds(conversation, nowSeconds),
-    };
-    const column = columns.find(
-      item => item.id === conversation.meta?.team?.id
-    );
-    (column || noTeam).waiting.push(entry);
-  });
-
-  const all = noTeam.waiting.length ? [...columns, noTeam] : columns;
-  all.forEach(column =>
-    column.waiting.sort((first, second) => second.seconds - first.seconds)
-  );
-  return all;
-};
-
-export const longestWait = columns =>
-  columns.reduce(
-    (longest, column) =>
-      Math.max(longest, ...column.waiting.map(entry => entry.seconds)),
-    0
-  );
