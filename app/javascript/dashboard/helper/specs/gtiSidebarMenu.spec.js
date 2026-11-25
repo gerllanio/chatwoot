@@ -84,4 +84,12 @@ describe('buildGtiMenu', () => {
 
     expect(menu.some(item => item.name === 'Kanban')).toBe(false);
   });
+
+  it('adds the TV monitor right after Kanban when its route is given', () => {
+    const names = buildGtiMenu(upstreamMenu(), t, {
+      monitorRoute: '/monitor',
+    }).map(item => item.name);
+
+    expect(names.indexOf('Gti Monitor')).toBe(names.indexOf('Kanban') + 1);
+  });
 });

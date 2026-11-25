@@ -17,7 +17,8 @@
       "INTEGRATIONS": "Integrações",
       "SETTINGS": "Configurações",
       "VERSION": "Work {version} · GTI Tecnologia",
-      "SUPER_ADMIN": "Super Admin"
+      "SUPER_ADMIN": "Super Admin",
+      "MONITOR": "Monitor (TV)"
     },
     "TICKETS": {
       "ATTENDING": "Atendendo",
@@ -56,6 +57,20 @@
       "SEPARATOR": "Atendimento #{id} · {date}",
       "CURRENT": "Atendimento atual #{id}",
       "ATTACHMENT": "📎 Anexo"
+    },
+    "MONITOR": {
+      "TITLE": "Painel de atendimento",
+      "FULLSCREEN": "Tela cheia",
+      "WAITING": "Aguardando",
+      "ATTENDING": "Em atendimento",
+      "LONGEST": "Maior espera",
+      "ONLINE": "Atendentes online",
+      "LATE": "Esperando há mais de 10 min",
+      "WAITING_COUNT": "{count} aguardando",
+      "NOBODY_WAITING": "Ninguém aguardando ✓",
+      "NO_QUEUE": "Sem fila",
+      "NONE": "—",
+      "RATIO": "{online}/{total}"
     }
   }
 }

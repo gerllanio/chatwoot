@@ -17,7 +17,8 @@
       "INTEGRATIONS": "Integraciones",
       "SETTINGS": "Configuración",
       "VERSION": "Work {version} · GTI Tecnologia",
-      "SUPER_ADMIN": "Super Admin"
+      "SUPER_ADMIN": "Super Admin",
+      "MONITOR": "Monitor (TV)"
     },
     "TICKETS": {
       "ATTENDING": "Atendiendo",
@@ -56,6 +57,20 @@
       "SEPARATOR": "Atención #{id} · {date}",
       "CURRENT": "Atención actual #{id}",
       "ATTACHMENT": "📎 Adjunto"
+    },
+    "MONITOR": {
+      "TITLE": "Panel de atención",
+      "FULLSCREEN": "Pantalla completa",
+      "WAITING": "En espera",
+      "ATTENDING": "En atención",
+      "LONGEST": "Mayor espera",
+      "ONLINE": "Agentes en línea",
+      "LATE": "Esperando más de 10 min",
+      "WAITING_COUNT": "{count} en espera",
+      "NOBODY_WAITING": "Nadie en espera ✓",
+      "NO_QUEUE": "Sin cola",
+      "NONE": "—",
+      "RATIO": "{online}/{total}"
     }
   }
 }

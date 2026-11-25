@@ -1037,7 +1037,11 @@ const menuItems = computed(() => {
 const globalConfig = useMapGetter('globalConfig/get');
 const currentUser = useMapGetter('getCurrentUser');
 const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
-const gtiMenuItems = computed(() => buildGtiMenu(menuItems.value, t));
+const gtiMenuItems = computed(() =>
+  buildGtiMenu(menuItems.value, t, {
+    monitorRoute: accountScopedRoute('gti_monitor'),
+  })
+);
 </script>
 
 <template>

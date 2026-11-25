@@ -29,7 +29,7 @@ const renamed = (item, overrides) => {
   return { ...item, ...overrides };
 };
 
-export const buildGtiMenu = (upstreamItems, t) => {
+export const buildGtiMenu = (upstreamItems, t, { monitorRoute } = {}) => {
   const settings = findByName(upstreamItems, 'Settings');
   const settingsChildren = settings?.children || [];
   const promotedNames = Object.values(PROMOTED_SETTINGS);
@@ -52,6 +52,14 @@ export const buildGtiMenu = (upstreamItems, t) => {
     renamed(findByName(upstreamItems, 'Kanban'), {
       label: t('GTI.SIDEBAR.KANBAN'),
     }),
+    monitorRoute
+      ? {
+          name: 'Gti Monitor',
+          label: t('GTI.SIDEBAR.MONITOR'),
+          icon: 'i-lucide-monitor',
+          to: monitorRoute,
+        }
+      : null,
     promoteSettingsChild(settingsChildren, PROMOTED_SETTINGS.canned, {
       name: 'Gti Quick Replies',
       label: t('GTI.SIDEBAR.QUICK_REPLIES'),

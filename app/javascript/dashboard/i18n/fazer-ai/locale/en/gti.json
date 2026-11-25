@@ -17,7 +17,8 @@
       "INTEGRATIONS": "Integrations",
       "SETTINGS": "Settings",
       "VERSION": "Work {version} · GTI Tecnologia",
-      "SUPER_ADMIN": "Super Admin"
+      "SUPER_ADMIN": "Super Admin",
+      "MONITOR": "TV monitor"
     },
     "TICKETS": {
       "ATTENDING": "Attending",
@@ -56,6 +57,20 @@
       "SEPARATOR": "Conversation #{id} · {date}",
       "CURRENT": "Current conversation #{id}",
       "ATTACHMENT": "📎 Attachment"
+    },
+    "MONITOR": {
+      "TITLE": "Service board",
+      "FULLSCREEN": "Full screen",
+      "WAITING": "Waiting",
+      "ATTENDING": "Being attended",
+      "LONGEST": "Longest wait",
+      "ONLINE": "Agents online",
+      "LATE": "Waiting over 10 min",
+      "WAITING_COUNT": "{count} waiting",
+      "NOBODY_WAITING": "Nobody waiting ✓",
+      "NO_QUEUE": "No queue",
+      "NONE": "—",
+      "RATIO": "{online}/{total}"
     }
   }
 }
