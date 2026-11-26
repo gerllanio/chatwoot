@@ -102,7 +102,12 @@ const { buildConversationPath, buildConversationListPath } =
 
 const resolveAttributesModalRef = ref(null);
 
-const activeAssigneeTab = ref(wootConstants.ASSIGNEE_TYPE.ME);
+// GTI: "Ver todos" starts on, so "Atendendo" opens with every assigned conversation.
+const activeAssigneeTab = ref(
+  useGtiClassicMode().value
+    ? wootConstants.ASSIGNEE_TYPE.ME
+    : wootConstants.ASSIGNEE_TYPE.ALL
+);
 const activeStatus = ref(wootConstants.STATUS_TYPE.OPEN);
 const activeSortBy = ref(wootConstants.SORT_BY_TYPE.LAST_ACTIVITY_AT_DESC);
 const activeGroupType = ref('');
@@ -243,7 +248,7 @@ const assigneeTabItems = computed(() => {
 });
 
 const gtiClassicMode = useGtiClassicMode();
-const gtiShowAll = ref(false);
+const gtiShowAll = ref(true);
 const gtiAllowedAssignees = computed(() =>
   assigneeTabItems.value.map(item => item.key)
 );
@@ -417,6 +422,16 @@ const conversationList = computed(() => {
       localConversationList = [...unAssignedChatsList.value(filters)];
     } else {
       localConversationList = [...allChatList.value(filters)];
+      // GTI "Atendendo" with "Ver todos": only conversations someone took
+      // (the waiting ones live in "Aguardando"), matching the tab count.
+      if (
+        !gtiClassicMode.value &&
+        gtiActiveTicketTab.value === GTI_TICKET_TABS.ATTENDING
+      ) {
+        localConversationList = localConversationList.filter(
+          chat => chat.meta?.assignee
+        );
+      }
     }
   } else {
     localConversationList = [...chatLists.value];

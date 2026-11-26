@@ -34,7 +34,7 @@ import {
 import { buildGtiMenu } from 'dashboard/helper/gtiSidebarMenu';
 import { useGtiOpenTasksCount } from 'dashboard/composables/useGtiOpenTasksCount';
 import { useGtiMailUnread } from 'dashboard/composables/useGtiMailUnread';
-import { useGtiWaitingCount } from 'dashboard/composables/useGtiWaitingCount';
+import { useGtiOpenCount } from 'dashboard/composables/useGtiOpenCount';
 import { useAdmin } from 'dashboard/composables/useAdmin';
 import { setGtiClassicMode, useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import GtiVolumeControl from 'dashboard/components/widgets/gti/GtiVolumeControl.vue';
@@ -1054,11 +1054,11 @@ const isSuperAdmin = computed(() => currentUser.value?.type === 'SuperAdmin');
 const gtiClassicMode = useGtiClassicMode();
 const { count: gtiOpenTasks } = useGtiOpenTasksCount();
 const { unreadCount: gtiMailUnread } = useGtiMailUnread();
-const { count: gtiWaiting } = useGtiWaitingCount();
+const { count: gtiOpenTotal } = useGtiOpenCount();
 const internalChatUnread = useMapGetter('internalChat/getUnreadCount');
 // Prototype pills: red for customers waiting in the queue, blue for the rest.
 const GTI_MENU_COUNTS = {
-  Conversation: () => ({ gtiCount: gtiWaiting.value, gtiCountTone: 'red' }),
+  Conversation: () => ({ gtiCount: gtiOpenTotal.value, gtiCountTone: 'red' }),
   'Gti Mail': () => ({ gtiCount: gtiMailUnread.value }),
   'Gti Tasks': () => ({ gtiCount: gtiOpenTasks.value }),
   InternalChat: () => ({ gtiCount: internalChatUnread.value || 0 }),
