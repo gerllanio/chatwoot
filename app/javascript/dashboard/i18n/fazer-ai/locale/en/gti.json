@@ -203,6 +203,9 @@
       "QUEUE": "Queue",
       "CONNECTION": "Connection",
       "ASSIGNEE": "Attended by"
+    },
+    "INTERNAL_CHAT": {
+      "NEW_CONVERSATION": "New conversation"
     }
   }
 }

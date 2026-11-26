@@ -10,6 +10,7 @@ import CreateDMModal from './CreateDMModal.vue';
 import CreateCategoryModal from './CreateCategoryModal.vue';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import Draggable from 'vuedraggable';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import { emitter } from 'shared/helpers/mitt';
 import {
   currentDateLocale,
@@ -461,6 +462,47 @@ function navigateToDrafts() {
   });
 }
 
+// GTI "Work": prototype internal chat column (.ilist): 250px, white, full-width rows
+// with a "#" glyph or avatar, soft green active row and a blue unread pill. The
+// global button reset (_base.scss) is unlayered, hence the important modifiers.
+const gtiClassicMode = useGtiClassicMode();
+const GTI_COLUMN_WIDTH = 250;
+const GTI_HASH = '#';
+const GTI_ITEM =
+  '!flex w-full items-center gap-2.5 !rounded-none !px-3.5 !py-[0.5625rem] text-sm transition-colors';
+const UPSTREAM_ITEM =
+  'flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors';
+const itemClass = active => {
+  if (gtiClassicMode.value) {
+    return `${UPSTREAM_ITEM} ${
+      active
+        ? 'bg-n-alpha-2 text-n-slate-12'
+        : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12'
+    }`;
+  }
+  return `${GTI_ITEM} ${
+    active
+      ? 'bg-n-gti-soft text-n-gti-green font-semibold dark:bg-n-gti-soft-dark'
+      : 'text-n-gti-navy hover:bg-n-gti-panel2 dark:text-n-slate-12 dark:hover:bg-n-alpha-1'
+  }`;
+};
+const sectionClass = computed(() =>
+  gtiClassicMode.value
+    ? 'px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10'
+    : 'px-3.5 pt-3.5 pb-1.5 text-[0.6875rem] font-normal uppercase tracking-[0.06em] text-n-gti-muted'
+);
+const badgeTone = mention => {
+  if (mention) return 'bg-n-ruby-9';
+  return gtiClassicMode.value
+    ? 'bg-n-brand'
+    : 'bg-n-gti-blue !px-[0.4375rem] !py-0 !text-[0.6875rem] leading-[1.125rem]';
+};
+const listPadding = computed(() => (gtiClassicMode.value ? 'px-1.5' : 'px-0'));
+const dmAvatarSize = computed(() => (gtiClassicMode.value ? 20 : 28));
+const columnWidth = computed(() =>
+  gtiClassicMode.value ? sidebarWidth.value : GTI_COLUMN_WIDTH
+);
+
 function getChannelIcon(channel) {
   if (channel.channel_type === 'dm') return 'i-lucide-message-circle';
   if (channel.channel_type === 'private_channel') return 'i-lucide-lock';
@@ -504,12 +546,20 @@ async function handleDeleteCategory() {
 
 <template>
   <div
-    class="relative flex h-full w-full flex-col border-r border-n-slate-5 bg-n-solid-2 md:w-auto md:flex-shrink-0"
-    :style="isSmallScreen ? undefined : { width: `${sidebarWidth}px` }"
+    class="relative flex h-full w-full flex-col border-r md:w-auto md:flex-shrink-0"
+    :class="
+      gtiClassicMode
+        ? 'border-n-slate-5 bg-n-solid-2'
+        : 'border-n-gti-line bg-white dark:bg-n-solid-2'
+    "
+    :style="isSmallScreen ? undefined : { width: `${columnWidth}px` }"
   >
     <div class="px-3 pt-3 pb-1">
       <div class="mb-2 flex items-center justify-between gap-2">
-        <h1 class="min-w-0 truncate text-base font-semibold text-n-slate-12">
+        <h1
+          class="min-w-0 truncate font-semibold text-n-slate-12"
+          :class="gtiClassicMode ? 'text-base' : 'text-[0.9375rem]'"
+        >
           {{ t('INTERNAL_CHAT.TITLE') }}
         </h1>
         <button
@@ -523,7 +573,12 @@ async function handleDeleteCategory() {
         </button>
       </div>
       <div
-        class="flex h-7 items-center gap-1.5 rounded-lg bg-n-alpha-1 px-2 py-1"
+        class="flex items-center gap-1.5"
+        :class="
+          gtiClassicMode
+            ? 'h-7 rounded-lg bg-n-alpha-1 px-2 py-1'
+            : 'rounded-md border border-n-gti-line bg-n-gti-panel2 px-2.5 py-2 dark:bg-n-alpha-1'
+        "
       >
         <Icon
           icon="i-lucide-search"
@@ -545,9 +600,22 @@ async function handleDeleteCategory() {
           <Icon icon="i-lucide-x" class="size-3.5" />
         </button>
       </div>
+      <button
+        v-if="!gtiClassicMode"
+        type="button"
+        class="mt-2 !flex w-full items-center justify-center gap-1.5 !rounded-md !px-3 !py-1.5 text-sm font-medium text-white bg-n-gti-green hover:brightness-95"
+        @click="openCreateDM"
+      >
+        <Icon icon="i-material-symbols-add" class="size-4" />
+        {{ t('GTI.INTERNAL_CHAT.NEW_CONVERSATION') }}
+      </button>
     </div>
     <!-- Search Results -->
-    <div v-if="isSearchMode" class="flex-1 overflow-y-auto px-1.5">
+    <div
+      v-if="isSearchMode"
+      class="flex-1 overflow-y-auto"
+      :class="listPadding"
+    >
       <!-- Min characters hint -->
       <div
         v-if="!isSearchReady"
@@ -605,20 +673,13 @@ async function handleDeleteCategory() {
       <template v-else>
         <!-- Channel results -->
         <div v-if="searchChannels.length > 0" class="mb-3">
-          <h3
-            class="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
-          >
+          <h3 class="" :class="sectionClass">
             {{ t('INTERNAL_CHAT.SEARCH.CHANNELS') }}
           </h3>
           <button
             v-for="channel in searchChannels"
             :key="`sc-${channel.id}`"
-            class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
-            :class="
-              activeChannelId === channel.id
-                ? 'bg-n-alpha-2 text-n-slate-12'
-                : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12'
-            "
+            :class="itemClass(activeChannelId === channel.id)"
             @click="
               navigateToChannel({
                 id: channel.id,
@@ -626,7 +687,14 @@ async function handleDeleteCategory() {
               })
             "
           >
+            <span
+              v-if="!gtiClassicMode"
+              class="w-7 flex-shrink-0 text-center font-bold text-n-gti-muted"
+            >
+              {{ GTI_HASH }}
+            </span>
             <Icon
+              v-else
               :icon="getChannelIcon(channel)"
               class="size-4 flex-shrink-0"
             />
@@ -636,20 +704,13 @@ async function handleDeleteCategory() {
 
         <!-- DM results -->
         <div v-if="searchDMs.length > 0" class="mb-3">
-          <h3
-            class="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
-          >
+          <h3 class="" :class="sectionClass">
             {{ t('INTERNAL_CHAT.SEARCH.DIRECT_MESSAGES') }}
           </h3>
           <button
             v-for="dm in searchDMs"
             :key="`sd-${dm.id}`"
-            class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
-            :class="
-              activeChannelId === dm.id
-                ? 'bg-n-alpha-2 text-n-slate-12'
-                : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12'
-            "
+            :class="itemClass(activeChannelId === dm.id)"
             @click="
               navigateToChannel({ id: dm.id, channel_type: dm.channel_type })
             "
@@ -657,7 +718,7 @@ async function handleDeleteCategory() {
             <Avatar
               :name="dm.peer?.name || ''"
               :src="dm.peer?.avatar_url || ''"
-              :size="20"
+              :size="dmAvatarSize"
               rounded-full
             />
             <span class="flex-1 truncate text-left">
@@ -668,9 +729,7 @@ async function handleDeleteCategory() {
 
         <!-- Message results -->
         <div v-if="searchMessages.length > 0" class="mb-3">
-          <h3
-            class="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
-          >
+          <h3 class="" :class="sectionClass">
             {{ t('INTERNAL_CHAT.SEARCH.MESSAGES') }}
           </h3>
           <div v-if="isSearchLimited" class="px-2 pb-2">
@@ -721,16 +780,8 @@ async function handleDeleteCategory() {
     </div>
 
     <!-- Normal sidebar content -->
-    <div v-show="!isSearchMode" class="px-1.5 pb-1">
-      <button
-        class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
-        :class="
-          isDraftsRoute
-            ? 'bg-n-alpha-2 text-n-slate-12'
-            : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12'
-        "
-        @click="navigateToDrafts"
-      >
+    <div v-show="!isSearchMode" class="pb-1" :class="listPadding">
+      <button :class="itemClass(isDraftsRoute)" @click="navigateToDrafts">
         <Icon icon="i-lucide-file-edit" class="size-4 flex-shrink-0" />
         <span class="flex-1 text-left">{{
           t('INTERNAL_CHAT.DRAFT.TITLE')
@@ -743,11 +794,16 @@ async function handleDeleteCategory() {
         </span>
       </button>
     </div>
-    <div v-show="!isSearchMode" class="flex-1 overflow-y-auto px-1.5">
+    <div
+      v-show="!isSearchMode"
+      class="flex-1 overflow-y-auto"
+      :class="listPadding"
+    >
       <!-- Favorites -->
       <div v-if="filteredFavoriteChannels.length > 0" class="mb-3">
         <h3
-          class="flex cursor-pointer items-center gap-1.5 px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
+          class="flex cursor-pointer items-center gap-1.5"
+          :class="sectionClass"
           @click="toggleSection('favorites')"
         >
           <Icon
@@ -765,12 +821,7 @@ async function handleDeleteCategory() {
           <button
             v-for="channel in filteredFavoriteChannels"
             :key="`fav-${channel.id}`"
-            class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
-            :class="
-              activeChannelId === channel.id
-                ? 'bg-n-alpha-2 text-n-slate-12'
-                : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12'
-            "
+            :class="itemClass(activeChannelId === channel.id)"
             @click="navigateToChannel(channel)"
           >
             <Avatar
@@ -778,15 +829,23 @@ async function handleDeleteCategory() {
               :name="getDMDisplayName(channel)"
               :src="getDMDisplayMember(channel)?.avatar_url || ''"
               :status="getDMDisplayMember(channel)?.availability_status"
-              :size="20"
+              :size="dmAvatarSize"
               rounded-full
               hide-offline-status
             />
-            <Icon
-              v-else
-              :icon="getChannelIcon(channel)"
-              class="size-4 flex-shrink-0"
-            />
+            <template v-else>
+              <span
+                v-if="!gtiClassicMode"
+                class="w-7 flex-shrink-0 text-center font-bold text-n-gti-muted"
+              >
+                {{ GTI_HASH }}
+              </span>
+              <Icon
+                v-else
+                :icon="getChannelIcon(channel)"
+                class="size-4 flex-shrink-0"
+              />
+            </template>
             <span class="flex-1 truncate text-left">
               {{ getDisplayName(channel) }}
               <span v-if="isSelfDM(channel)" class="text-xs text-n-slate-10">
@@ -802,7 +861,7 @@ async function handleDeleteCategory() {
             <span
               v-if="channel.unread_count > 0"
               class="flex-shrink-0 flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-medium text-white"
-              :class="channel.has_unread_mention ? 'bg-n-ruby-9' : 'bg-n-brand'"
+              :class="badgeTone(channel.has_unread_mention)"
             >
               <span v-if="channel.has_unread_mention">{{
                 t('INTERNAL_CHAT.MENTION_BADGE')
@@ -816,7 +875,8 @@ async function handleDeleteCategory() {
       <!-- Categories -->
       <div v-for="category in categories" :key="category.id" class="mb-3">
         <h3
-          class="group/cat flex cursor-pointer items-center justify-between px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
+          class="group/cat flex cursor-pointer items-center justify-between"
+          :class="sectionClass"
           @click="toggleSection(`category-${category.id}`)"
         >
           <span class="flex items-center gap-1.5">
@@ -852,11 +912,8 @@ async function handleDeleteCategory() {
             <template #item="{ element: channel }">
               <button
                 :data-channel-id="channel.id"
-                class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
                 :class="[
-                  activeChannelId === channel.id
-                    ? 'bg-n-alpha-2 text-n-slate-12'
-                    : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12',
+                  itemClass(activeChannelId === channel.id),
                   {
                     'opacity-50':
                       channel.muted || channel.status === 'archived',
@@ -864,7 +921,14 @@ async function handleDeleteCategory() {
                 ]"
                 @click="navigateToChannel(channel)"
               >
+                <span
+                  v-if="!gtiClassicMode"
+                  class="w-7 flex-shrink-0 text-center font-bold text-n-gti-muted"
+                >
+                  {{ GTI_HASH }}
+                </span>
                 <Icon
+                  v-else
                   :icon="getChannelIcon(channel)"
                   class="size-4 flex-shrink-0"
                 />
@@ -884,9 +948,7 @@ async function handleDeleteCategory() {
                 <span
                   v-if="channel.unread_count > 0"
                   class="flex-shrink-0 flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-medium text-white"
-                  :class="
-                    channel.has_unread_mention ? 'bg-n-ruby-9' : 'bg-n-brand'
-                  "
+                  :class="badgeTone(channel.has_unread_mention)"
                 >
                   <span v-if="channel.has_unread_mention">{{
                     t('INTERNAL_CHAT.MENTION_BADGE')
@@ -912,7 +974,8 @@ async function handleDeleteCategory() {
       <!-- Uncategorized channels -->
       <div class="mb-3">
         <h3
-          class="flex cursor-pointer items-center justify-between px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
+          class="flex cursor-pointer items-center justify-between"
+          :class="sectionClass"
           @click="toggleSection('channels')"
         >
           <span class="flex items-center gap-1.5">
@@ -952,11 +1015,8 @@ async function handleDeleteCategory() {
             <template #item="{ element: channel }">
               <button
                 :data-channel-id="channel.id"
-                class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
                 :class="[
-                  activeChannelId === channel.id
-                    ? 'bg-n-alpha-2 text-n-slate-12'
-                    : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12',
+                  itemClass(activeChannelId === channel.id),
                   {
                     'opacity-50':
                       channel.muted || channel.status === 'archived',
@@ -964,7 +1024,14 @@ async function handleDeleteCategory() {
                 ]"
                 @click="navigateToChannel(channel)"
               >
+                <span
+                  v-if="!gtiClassicMode"
+                  class="w-7 flex-shrink-0 text-center font-bold text-n-gti-muted"
+                >
+                  {{ GTI_HASH }}
+                </span>
                 <Icon
+                  v-else
                   :icon="getChannelIcon(channel)"
                   class="size-4 flex-shrink-0"
                 />
@@ -984,9 +1051,7 @@ async function handleDeleteCategory() {
                 <span
                   v-if="channel.unread_count > 0"
                   class="flex-shrink-0 flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-medium text-white"
-                  :class="
-                    channel.has_unread_mention ? 'bg-n-ruby-9' : 'bg-n-brand'
-                  "
+                  :class="badgeTone(channel.has_unread_mention)"
                 >
                   <span v-if="channel.has_unread_mention">{{
                     t('INTERNAL_CHAT.MENTION_BADGE')
@@ -1002,7 +1067,8 @@ async function handleDeleteCategory() {
       <!-- Direct Messages -->
       <div class="mb-3">
         <h3
-          class="flex cursor-pointer items-center justify-between px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
+          class="flex cursor-pointer items-center justify-between"
+          :class="sectionClass"
           @click="toggleSection('dm')"
         >
           <span class="flex items-center gap-1.5">
@@ -1028,11 +1094,8 @@ async function handleDeleteCategory() {
           <button
             v-for="channel in filteredDMChannels"
             :key="`dm-${channel.id}`"
-            class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors"
             :class="[
-              activeChannelId === channel.id
-                ? 'bg-n-alpha-2 text-n-slate-12'
-                : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12',
+              itemClass(activeChannelId === channel.id),
               { 'opacity-50': channel.muted },
             ]"
             @click="navigateToChannel(channel)"
@@ -1041,7 +1104,7 @@ async function handleDeleteCategory() {
               :name="getDMDisplayName(channel)"
               :src="getDMDisplayMember(channel)?.avatar_url || ''"
               :status="getDMDisplayMember(channel)?.availability_status"
-              :size="20"
+              :size="dmAvatarSize"
               rounded-full
               hide-offline-status
             />
@@ -1070,7 +1133,7 @@ async function handleDeleteCategory() {
             <span
               v-if="channel.unread_count > 0"
               class="flex-shrink-0 flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-medium text-white"
-              :class="channel.has_unread_mention ? 'bg-n-ruby-9' : 'bg-n-brand'"
+              :class="badgeTone(channel.has_unread_mention)"
             >
               <span v-if="channel.has_unread_mention">{{
                 t('INTERNAL_CHAT.MENTION_BADGE')
@@ -1084,7 +1147,8 @@ async function handleDeleteCategory() {
       <!-- Archived channels -->
       <div class="mb-3">
         <h3
-          class="flex cursor-pointer items-center gap-1.5 px-2 py-1 text-xs font-semibold uppercase tracking-wider text-n-slate-10"
+          class="flex cursor-pointer items-center gap-1.5"
+          :class="sectionClass"
           @click="toggleArchivedSection"
         >
           <Icon
@@ -1119,15 +1183,18 @@ async function handleDeleteCategory() {
             <button
               v-for="channel in archivedChannels"
               :key="`arch-${channel.id}`"
-              class="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm opacity-50 transition-colors"
-              :class="[
-                activeChannelId === channel.id
-                  ? 'bg-n-alpha-2 text-n-slate-12'
-                  : 'text-n-slate-11 hover:bg-n-alpha-1 hover:text-n-slate-12',
-              ]"
+              class="opacity-50"
+              :class="[itemClass(activeChannelId === channel.id)]"
               @click="navigateToChannel(channel)"
             >
+              <span
+                v-if="!gtiClassicMode"
+                class="w-7 flex-shrink-0 text-center font-bold text-n-gti-muted"
+              >
+                {{ GTI_HASH }}
+              </span>
               <Icon
+                v-else
                 :icon="getChannelIcon(channel)"
                 class="size-4 flex-shrink-0"
               />

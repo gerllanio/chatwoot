@@ -203,6 +203,9 @@
       "QUEUE": "Fila",
       "CONNECTION": "Conexão",
       "ASSIGNEE": "Atendido por"
+    },
+    "INTERNAL_CHAT": {
+      "NEW_CONVERSATION": "Nova conversa"
     }
   }
 }
