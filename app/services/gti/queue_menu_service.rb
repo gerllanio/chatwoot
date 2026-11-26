@@ -50,11 +50,18 @@ class Gti::QueueMenuService
   end
 
   def applicable?
-    return false unless message.incoming? && !message.private? && !message.reaction?
-    return false if conversation.group_type_group? || conversation.resolved?
-    return false if conversation.team_id.present? || conversation.assignee_id.present?
+    customer_message? && waiting_for_queue? && setting.present? && setting.menu_active?
+  end
 
-    setting.present? && setting.menu_active?
+  def customer_message?
+    message.incoming? && !message.private? && !message.reaction?
+  end
+
+  # An individual open conversation that nobody took yet and is not in a queue.
+  def waiting_for_queue?
+    return false if conversation.group_type_group? || conversation.resolved?
+
+    conversation.team_id.blank? && conversation.assignee_id.blank?
   end
 
   def chosen_team
