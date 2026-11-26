@@ -2,6 +2,7 @@
 import { mapGetters } from 'vuex';
 import { useAdmin } from 'dashboard/composables/useAdmin';
 import { useAccount } from 'dashboard/composables/useAccount';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 import OnboardingView from '../OnboardingView.vue';
 import EmptyStateMessage from './EmptyStateMessage.vue';
 import CopilotEmptyStatePrompts from 'dashboard/components-next/copilot/CopilotEmptyStatePrompts.vue';
@@ -22,10 +23,12 @@ export default {
     const { isAdmin } = useAdmin();
 
     const { accountScopedUrl } = useAccount();
+    const gtiClassicMode = useGtiClassicMode();
 
     return {
       isAdmin,
       accountScopedUrl,
+      gtiClassicMode,
     };
   },
   computed: {
@@ -91,8 +94,9 @@ export default {
         v-if="!allConversations.length"
         :message="$t('CONVERSATION.NO_MESSAGE_1')"
       />
+      <!-- GTI "Work": no "select a conversation" hint, the panel stays blank -->
       <EmptyStateMessage
-        v-else-if="allConversations.length && !currentChat.id"
+        v-else-if="allConversations.length && !currentChat.id && gtiClassicMode"
         :message="conversationMissingMessage"
       />
       <CopilotEmptyStatePrompts />
