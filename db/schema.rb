@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_11_25_201619) do
+ActiveRecord::Schema[7.2].define(version: 2026_11_25_235834) do
   create_schema "whatsapp_connector"
 
   # These extensions should be enabled to support this database
@@ -1500,6 +1500,19 @@ ActiveRecord::Schema[7.2].define(version: 2026_11_25_201619) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_gti_contact_lists_on_account_id"
+  end
+
+  create_table "gti_inbox_settings", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "inbox_id", null: false
+    t.boolean "menu_enabled", default: false, null: false
+    t.text "greeting_message"
+    t.integer "team_ids", default: [], null: false, array: true
+    t.integer "no_queue_timeout_minutes"
+    t.bigint "no_queue_team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inbox_id"], name: "index_gti_inbox_settings_on_inbox_id", unique: true
   end
 
   create_table "gti_tasks", force: :cascade do |t|

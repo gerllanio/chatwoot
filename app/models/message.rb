@@ -45,6 +45,7 @@ class Message < ApplicationRecord
   include MessageFilterHelpers
   include Liquidable
   include ScheduledMessageHandler
+  include GtiQueueMenu
   NUMBER_OF_PERMITTED_ATTACHMENTS = 15
   BOT_SENDER_TYPES = %w[AgentBot Captain::Assistant].freeze
 
@@ -677,7 +678,7 @@ class Message < ApplicationRecord
       conversation.open!
     else
       # GTI "Work": like a new Ticketz ticket, a WhatsApp customer writing again goes back to the queue (Aguardando).
-      conversation.assignee_id = nil if conversation.inbox.whatsapp?
+      Gti::QueueMenuService.return_to_queue(conversation) if conversation.inbox.whatsapp?
       conversation.open!
     end
   end

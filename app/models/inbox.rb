@@ -81,6 +81,7 @@ class Inbox < ApplicationRecord
   has_many :email_templates, dependent: :destroy_async
 
   has_one :inbox_assignment_policy, dependent: :destroy
+  has_one :gti_setting, class_name: 'GtiInboxSetting', dependent: :destroy
   has_one :assignment_policy, through: :inbox_assignment_policy
 
   # Round-robin inboxes that hold assignment while closed but have no assignment policy,

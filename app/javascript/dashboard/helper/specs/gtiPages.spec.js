@@ -7,7 +7,8 @@ import {
   gtiContactInbox,
   gtiTeamColor,
   gtiTruncate,
-  gtiWelcomeMenu,
+  gtiMenuTeamOrder,
+  gtiQueueMenuText,
 } from '../gtiPages';
 
 describe('gtiTeamColor', () => {
@@ -49,14 +50,47 @@ describe('contact helpers', () => {
   });
 });
 
-describe('gtiWelcomeMenu', () => {
-  it('numbers the queues from 1', () => {
+describe('gtiQueueMenuText', () => {
+  const contact = { name: 'Maria Souza', time: '12:52:29' };
+
+  it('fills the variables and numbers the queues with keycaps', () => {
     expect(
-      gtiWelcomeMenu([{ name: 'Suporte' }, { name: 'Comercial' }])
-    ).toEqual([
-      { option: 1, name: 'Suporte' },
-      { option: 2, name: 'Comercial' },
+      gtiQueueMenuText(
+        'Olá {{firstname}} ({{name}}), são {{hora}}.',
+        [{ name: 'comercial 🛒' }, { name: 'suporte' }],
+        contact
+      )
+    ).toBe(
+      'Olá Maria (Maria Souza), são 12:52:29.\n\n1️⃣ - Comercial 🛒\n2️⃣ - Suporte'
+    );
+  });
+
+  it('sends only the queues when there is no greeting', () => {
+    expect(gtiQueueMenuText('', [{ name: 'suporte' }], contact)).toBe(
+      '1️⃣ - Suporte'
+    );
+  });
+
+  it('falls back to plain numbers after the tenth queue', () => {
+    const teams = Array.from({ length: 11 }, (_, i) => ({ name: `f${i}` }));
+    expect(gtiQueueMenuText('', teams, contact).split('\n')[10]).toBe(
+      '11 - F10'
+    );
+  });
+});
+
+describe('gtiMenuTeamOrder', () => {
+  const teams = [
+    { id: 1, name: 'suporte' },
+    { id: 2, name: 'comercial' },
+    { id: 3, name: 'convenio' },
+  ];
+
+  it('puts the chosen queues first in menu order, then the rest by name', () => {
+    expect(gtiMenuTeamOrder(teams, [3, 1]).map(team => team.id)).toEqual([
+      3, 1, 2,
     ]);
+    expect(gtiMenuTeamOrder(teams, []).map(team => team.id)).toEqual([2, 3, 1]);
   });
 });
 

@@ -24,13 +24,32 @@
       "TITLE": "Colas y Chatbot",
       "SUBTITLE": "Menú automático enviado al cliente antes de llegar a la cola.",
       "ADD": "Agregar cola",
-      "WELCOME": "Mensaje de bienvenida",
-      "WELCOME_GREETING": "¡Hola! Bienvenido a {name} 👋",
-      "WELCOME_PROMPT": "Escribe el número de la opción:",
       "QUEUE": "Cola",
       "OPTION": "Opción",
       "AGENTS": "Agentes",
-      "GREETING": "Saludo"
+      "GREETING": "Saludo",
+      "MENU": {
+        "TITLE": "Menú de la conexión",
+        "CONNECTION": "Conexión",
+        "NO_CONNECTIONS": "Aún no hay conexiones de WhatsApp.",
+        "ENABLED": "Activar menú automático",
+        "ENABLED_HINT": "Cuando el cliente escribe y la conversación no tiene cola, recibe el saludo y las colas de abajo. Respondiendo el número, la conversación pasa a esa cola.",
+        "GREETING": "Saludo",
+        "GREETING_PLACEHOLDER": "¡Hola {'{{firstname}}'}! ¿Cómo podemos ayudar?",
+        "VARIABLES": "Variables: {'{{name}}'}, {'{{firstname}}'}, {'{{hora}}'} (hora HH:MM:SS).",
+        "QUEUES": "Colas en el menú",
+        "QUEUES_HINT": "Las colas marcadas aparecen en este orden.",
+        "MOVE_UP": "Subir",
+        "MOVE_DOWN": "Bajar",
+        "TIMEOUT": "Sin elección después de",
+        "TIMEOUT_MINUTES": "min, mover a",
+        "TIMEOUT_NONE": "No mover",
+        "PREVIEW": "Vista previa",
+        "PREVIEW_CONTACT": "María Souza",
+        "SAVE": "Guardar",
+        "SAVED": "Menú guardado.",
+        "SAVE_ERROR": "No se pudo guardar el menú."
+      }
     },
     "CONNECTIONS": {
       "TITLE": "Conexiones",
@@ -73,7 +92,8 @@
       "COMPANY": "Empresa",
       "OPEN_TICKET": "Abrir ticket",
       "EMPTY": "No se encontraron contactos.",
-      "PAGE": "Página {page} de {total}"
+      "PAGE": "Página {page} de {total}",
+      "EDIT": "Editar"
     },
     "INTEGRATIONS": {
       "TITLE": "Integraciones",

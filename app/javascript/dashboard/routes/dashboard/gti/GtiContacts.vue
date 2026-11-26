@@ -31,6 +31,14 @@ const store = useStore();
 const route = useRoute();
 const router = useRouter();
 
+// Opens upstream's contact page, where every field, note and label can be edited.
+const editContact = contact => {
+  router.push({
+    name: 'contacts_edit',
+    params: { accountId: route.params.accountId, contactId: contact.id },
+  });
+};
+
 const contacts = ref([]);
 const total = ref(0);
 const page = ref(1);
@@ -164,7 +172,15 @@ const contactLine = contact => contact.phone_number || contact.email || '—';
               {{ gtiContactCompany(contact) || '—' }}
             </td>
             <td :class="GTI_TD">
-              <div class="flex justify-end">
+              <div class="flex justify-end gap-1.5">
+                <Button
+                  size="xs"
+                  color="slate"
+                  variant="faded"
+                  icon="i-material-symbols-edit"
+                  :label="t('GTI_PAGES.CONTACTS.EDIT')"
+                  @click="editContact(contact)"
+                />
                 <ComposeConversation :contact-id="String(contact.id)">
                   <template #trigger>
                     <Button

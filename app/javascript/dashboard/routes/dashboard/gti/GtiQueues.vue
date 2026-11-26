@@ -1,12 +1,14 @@
 <script setup>
-// GTI "Filas & Chatbot": the welcome menu preview and the queue table of the
-// prototype. Editing a queue opens Chatwoot's team page (with the GTI greeting).
+// GTI "Filas & Chatbot": the menu editor of each WhatsApp connection and the
+// queue table of the prototype. Editing a queue opens Chatwoot's team page
+// (with the GTI greeting).
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore, useMapGetter } from 'dashboard/composables/store';
 import Button from 'dashboard/components-next/button/Button.vue';
 import GtiPage from 'dashboard/components/widgets/gti/pages/GtiPage.vue';
+import GtiQueueMenuEditor from 'dashboard/components/widgets/gti/pages/GtiQueueMenuEditor.vue';
 import GtiTeamMembersAPI from 'dashboard/api/gtiTeamMembers';
 import { useGtiTeamColors } from 'dashboard/composables/useGtiTeamColors';
 import {
@@ -14,7 +16,6 @@ import {
   GTI_TD,
   GTI_TH,
   gtiTruncate,
-  gtiWelcomeMenu,
 } from 'dashboard/helper/gtiPages';
 
 const { t } = useI18n();
@@ -22,14 +23,13 @@ const store = useStore();
 const route = useRoute();
 const router = useRouter();
 const teams = useMapGetter('teams/getTeams');
-const getAccount = useMapGetter('accounts/getAccount');
+const inboxes = useMapGetter('inboxes/getInboxes');
 const { settingsByTeam, loadTeamSettings, colorOf } = useGtiTeamColors();
 const membersByTeam = ref({});
 
-const accountName = computed(
-  () => getAccount.value(route.params.accountId)?.name || ''
+const whatsappInboxes = computed(() =>
+  inboxes.value.filter(inbox => inbox.channel_type === 'Channel::Whatsapp')
 );
-const menu = computed(() => gtiWelcomeMenu(teams.value));
 
 const loadMembers = async () => {
   const entries = await Promise.all(
@@ -74,22 +74,11 @@ const addTeam = () =>
         @click="addTeam"
       />
     </template>
-    <div
-      class="w-full max-w-lg p-4 mb-3.5 border rounded-[0.625rem] border-n-weak bg-n-solid-1 shadow-sm"
-    >
-      <b class="text-sm text-n-slate-12">{{ t('GTI_PAGES.QUEUES.WELCOME') }}</b>
-      <div
-        class="px-2.5 pt-1.5 pb-2 mt-2.5 text-sm border rounded-lg rounded-tl-none border-n-weak bg-n-gti-in dark:bg-n-gti-in-dark text-n-slate-12"
-      >
-        <p class="m-0">
-          {{ t('GTI_PAGES.QUEUES.WELCOME_GREETING', { name: accountName }) }}
-        </p>
-        <p class="m-0">{{ t('GTI_PAGES.QUEUES.WELCOME_PROMPT') }}</p>
-        <p v-for="item in menu" :key="item.option" class="m-0">
-          <b>{{ item.option }}</b> – {{ item.name }}
-        </p>
-      </div>
-    </div>
+    <GtiQueueMenuEditor
+      v-if="teams.length"
+      :inboxes="whatsappInboxes"
+      :teams="teams"
+    />
     <div :class="GTI_TABLE_CARD">
       <table class="w-full border-collapse">
         <thead>

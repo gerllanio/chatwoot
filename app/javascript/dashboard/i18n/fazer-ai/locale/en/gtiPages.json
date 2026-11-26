@@ -24,13 +24,32 @@
       "TITLE": "Queues & Chatbot",
       "SUBTITLE": "Automatic menu sent to the customer before reaching a queue.",
       "ADD": "Add queue",
-      "WELCOME": "Welcome message",
-      "WELCOME_GREETING": "Hi! Welcome to {name} 👋",
-      "WELCOME_PROMPT": "Type the option number:",
       "QUEUE": "Queue",
       "OPTION": "Option",
       "AGENTS": "Agents",
-      "GREETING": "Greeting"
+      "GREETING": "Greeting",
+      "MENU": {
+        "TITLE": "Connection menu",
+        "CONNECTION": "Connection",
+        "NO_CONNECTIONS": "No WhatsApp connection yet.",
+        "ENABLED": "Enable automatic menu",
+        "ENABLED_HINT": "When a customer writes and the conversation has no queue, the greeting and the queues below are sent. Answering with the number puts the conversation in that queue.",
+        "GREETING": "Greeting",
+        "GREETING_PLACEHOLDER": "Hi {'{{firstname}}'}! How can we help?",
+        "VARIABLES": "Variables: {'{{name}}'}, {'{{firstname}}'}, {'{{hora}}'} (time HH:MM:SS).",
+        "QUEUES": "Queues in the menu",
+        "QUEUES_HINT": "Checked queues are listed in this order.",
+        "MOVE_UP": "Move up",
+        "MOVE_DOWN": "Move down",
+        "TIMEOUT": "No choice after",
+        "TIMEOUT_MINUTES": "min, move to",
+        "TIMEOUT_NONE": "Do not move",
+        "PREVIEW": "Preview",
+        "PREVIEW_CONTACT": "Maria Souza",
+        "SAVE": "Save",
+        "SAVED": "Menu saved.",
+        "SAVE_ERROR": "Could not save the menu."
+      }
     },
     "CONNECTIONS": {
       "TITLE": "Connections",
@@ -73,7 +92,8 @@
       "COMPANY": "Company",
       "OPEN_TICKET": "Open ticket",
       "EMPTY": "No contacts found.",
-      "PAGE": "Page {page} of {total}"
+      "PAGE": "Page {page} of {total}",
+      "EDIT": "Edit"
     },
     "INTEGRATIONS": {
       "TITLE": "Integrations",

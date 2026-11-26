@@ -24,13 +24,32 @@
       "TITLE": "Filas & Chatbot",
       "SUBTITLE": "Menu automático enviado ao cliente antes de cair na fila.",
       "ADD": "Adicionar fila",
-      "WELCOME": "Mensagem de boas-vindas",
-      "WELCOME_GREETING": "Olá! Bem-vindo à {name} 👋",
-      "WELCOME_PROMPT": "Digite o número da opção:",
       "QUEUE": "Fila",
       "OPTION": "Opção",
       "AGENTS": "Atendentes",
-      "GREETING": "Saudação"
+      "GREETING": "Saudação",
+      "MENU": {
+        "TITLE": "Menu da conexão",
+        "CONNECTION": "Conexão",
+        "NO_CONNECTIONS": "Nenhuma conexão WhatsApp ainda.",
+        "ENABLED": "Ativar menu automático",
+        "ENABLED_HINT": "Quando o cliente escreve e a conversa não tem fila, recebe a saudação e as filas abaixo. Respondendo o número, a conversa vai para aquela fila.",
+        "GREETING": "Saudação",
+        "GREETING_PLACEHOLDER": "Olá {'{{firstname}}'}! Como podemos ajudar?",
+        "VARIABLES": "Variáveis: {'{{name}}'}, {'{{firstname}}'}, {'{{hora}}'} (hora HH:MM:SS).",
+        "QUEUES": "Filas no menu",
+        "QUEUES_HINT": "As filas marcadas aparecem nesta ordem.",
+        "MOVE_UP": "Subir",
+        "MOVE_DOWN": "Descer",
+        "TIMEOUT": "Sem escolha após",
+        "TIMEOUT_MINUTES": "min, mover para",
+        "TIMEOUT_NONE": "Não mover",
+        "PREVIEW": "Pré-visualização",
+        "PREVIEW_CONTACT": "Maria Souza",
+        "SAVE": "Salvar",
+        "SAVED": "Menu salvo.",
+        "SAVE_ERROR": "Não foi possível salvar o menu."
+      }
     },
     "CONNECTIONS": {
       "TITLE": "Conexões",
@@ -73,7 +92,8 @@
       "COMPANY": "Empresa",
       "OPEN_TICKET": "Abrir ticket",
       "EMPTY": "Nenhum contato encontrado.",
-      "PAGE": "Página {page} de {total}"
+      "PAGE": "Página {page} de {total}",
+      "EDIT": "Editar"
     },
     "INTEGRATIONS": {
       "TITLE": "Integrações",

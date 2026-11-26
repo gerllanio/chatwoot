@@ -530,6 +530,7 @@ Rails.application.routes.draw do
 
           resources :inboxes, only: [] do
             resource :assignment_policy, only: [:show, :create, :destroy], module: :inboxes
+            resource :gti_settings, only: [:show, :update], module: :inboxes
           end
 
           namespace :twitter do
