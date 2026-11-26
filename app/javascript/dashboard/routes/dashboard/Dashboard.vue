@@ -23,6 +23,10 @@ const CommandBarV2 = defineAsyncComponent(
   () => import('dashboard/modules/command-bar/CommandBar.vue')
 );
 
+const GtiSearch = defineAsyncComponent(
+  () => import('dashboard/components/widgets/gti/GtiSearch.vue')
+);
+
 const FloatingCallWidget = defineAsyncComponent(
   () => import('dashboard/components-next/call/FloatingCallWidget.vue')
 );
@@ -39,6 +43,7 @@ export default {
     GtiTopBar,
     CommandBar,
     CommandBarV2,
+    GtiSearch,
     WootKeyShortcutModal,
     AddAccountModal,
     UpgradePage,
@@ -193,6 +198,7 @@ export default {
           :is-paywalled="isAccountPaywalled"
         />
         <CommandBar v-else :is-paywalled="isAccountPaywalled" />
+        <GtiSearch v-if="!gtiClassicMode" />
         <AddAccountModal
           :show="showCreateAccountModal"
           @close-account-create-modal="closeCreateAccountModal"

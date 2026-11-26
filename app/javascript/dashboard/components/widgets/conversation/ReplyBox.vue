@@ -140,6 +140,8 @@ export default {
         action: e => {
           e.preventDefault();
           // ninja-keys skips its own hotkey inside the editor; the v2 bar binds its own.
+          // GTI "Work" mode answers with its own search (GtiSearch) instead.
+          if (!useGtiClassicMode().value) return;
           document.querySelector('ninja-keys')?.open();
         },
         allowOnFocusedInput: true,

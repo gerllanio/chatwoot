@@ -26,6 +26,7 @@ import {
   CMD_BULK_ACTION_SNOOZE_CONVERSATION,
 } from 'dashboard/helper/commandbar/events';
 import { emitter } from 'shared/helpers/mitt';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 const props = defineProps({
   isPaywalled: {
@@ -38,6 +39,9 @@ const store = useStore();
 const { t, tm } = useI18n();
 const { resolvedLocale } = useLocale();
 
+// GTI "Work" mode opens its own search (GtiSearch) on Cmd/Ctrl+K.
+const DEFAULT_OPEN_HOTKEY = 'cmd+k,ctrl+k';
+const gtiClassicMode = useGtiClassicMode();
 const ninjakeys = ref(null);
 const resolveAttributesModalRef = ref(null);
 
@@ -256,6 +260,7 @@ onMounted(() => {
     ref="ninjakeys"
     noAutoLoadMdIcons
     hideBreadcrumbs
+    :openHotkey="gtiClassicMode ? DEFAULT_OPEN_HOTKEY : ''"
     :placeholder="placeholder"
     @change="onCommandBarChange"
     @selected="onSelected"

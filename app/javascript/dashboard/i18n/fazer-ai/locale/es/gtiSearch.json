@@ -1,0 +1,22 @@
+{
+  "GTI_SEARCH": {
+    "TITLE": "Búsqueda",
+    "PLACEHOLDER": "Busca contactos, conversaciones, tareas, respuestas rápidas y etiquetas",
+    "HINT": "Escribe un nombre, teléfono, número de ticket, tarea, respuesta rápida o etiqueta.",
+    "EMPTY": "No se encontró nada para \"{query}\".",
+    "LOADING": "buscando…",
+    "ESC": "Esc",
+    "COPY": "Copiar",
+    "COPIED": "Respuesta rápida copiada",
+    "TICKET": "Ticket #{id}",
+    "CONVERSATION_META": "#{id} · {inbox}",
+    "SECTIONS": {
+      "CONTACTS": "Contactos",
+      "WHATSAPP": "Conversaciones de WhatsApp",
+      "INSTAGRAM": "Instagram",
+      "TASKS": "Tareas",
+      "CANNED": "Respuestas rápidas",
+      "LABELS": "Etiquetas"
+    }
+  }
+}

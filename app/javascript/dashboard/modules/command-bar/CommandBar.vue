@@ -30,6 +30,7 @@ import { useHelpCommands } from 'dashboard/modules/command-bar/composables/useHe
 import { useSnoozeSuggestions } from 'dashboard/modules/command-bar/composables/useSnoozeSuggestions';
 import { useSearchCommands } from 'dashboard/modules/command-bar/composables/useSearchCommands';
 import { useBackCommands } from 'dashboard/modules/command-bar/composables/useBackCommands';
+import { useGtiClassicMode } from 'dashboard/helper/gtiMode';
 
 const props = defineProps({
   isPaywalled: { type: Boolean, default: false },
@@ -233,9 +234,13 @@ watch(pendingAttributes, pending => {
   }
 });
 
+// GTI "Work" mode opens its own search (GtiSearch) on Cmd/Ctrl+K.
+const gtiClassicMode = useGtiClassicMode();
+
 useKeyboardEvents({
   '$mod+KeyK': {
     action: event => {
+      if (!gtiClassicMode.value) return;
       event.preventDefault();
       bar.toggle();
     },

@@ -1,0 +1,22 @@
+{
+  "GTI_SEARCH": {
+    "TITLE": "Search",
+    "PLACEHOLDER": "Search contacts, conversations, tasks, quick replies and tags",
+    "HINT": "Type a name, phone, ticket number, task, quick reply or tag.",
+    "EMPTY": "Nothing found for \"{query}\".",
+    "LOADING": "searching…",
+    "ESC": "Esc",
+    "COPY": "Copy",
+    "COPIED": "Quick reply copied",
+    "TICKET": "Ticket #{id}",
+    "CONVERSATION_META": "#{id} · {inbox}",
+    "SECTIONS": {
+      "CONTACTS": "Contacts",
+      "WHATSAPP": "WhatsApp conversations",
+      "INSTAGRAM": "Instagram",
+      "TASKS": "Tasks",
+      "CANNED": "Quick replies",
+      "LABELS": "Tags"
+    }
+  }
+}
