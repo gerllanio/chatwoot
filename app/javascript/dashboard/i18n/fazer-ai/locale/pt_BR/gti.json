@@ -146,7 +146,7 @@
         "DUE": "Prazo",
         "CREATE": "Criar",
         "TICKET": "Ticket (opcional)",
-        "TICKET_PLACEHOLDER": "Número do atendimento, ex.: 6956"
+        "TICKET_PLACEHOLDER": "Busque por nome, telefone ou número"
       },
       "PRIORITY": {
         "HIGH": "Alta",
@@ -176,7 +176,16 @@
       },
       "NEW_FOR_CONVERSATION": "Nova tarefa para este atendimento",
       "META_ASSIGNEE": "👤 {name}",
-      "META_DUE": "⏰ {due}"
+      "META_DUE": "⏰ {due}",
+      "PICKER": {
+        "LOADING": "Carregando atendimentos…",
+        "EMPTY": "Nenhum atendimento encontrado.",
+        "USE_NUMBER": "Usar o ticket #{id}",
+        "WAITING": "Aguardando",
+        "CLEAR": "Tirar o ticket",
+        "ATTACHMENT": "Anexo",
+        "NUMBER": "#{id}"
+      }
     },
     "TOPBAR": {
       "PRODUCT": "Work",

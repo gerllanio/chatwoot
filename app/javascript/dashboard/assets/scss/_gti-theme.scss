@@ -41,3 +41,12 @@
 .gti-font * {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
 }
+
+// GTI "Work": every select shows its dropdown arrow at the end of the box. The GTI
+// screens give selects their own padding (px-2, p-2), which left upstream's arrow,
+// drawn 1rem past the content box, outside the visible area.
+select:not([multiple]) {
+  padding-inline-end: 2rem !important;
+  background-origin: padding-box !important;
+  background-position: right 0.75rem center !important;
+}

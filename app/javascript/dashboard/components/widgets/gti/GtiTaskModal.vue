@@ -11,6 +11,7 @@ import GtiTasksAPI from 'dashboard/api/gtiTasks';
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Input from 'dashboard/components-next/input/Input.vue';
+import GtiTicketPicker from './GtiTicketPicker.vue';
 import { emitter } from 'shared/helpers/mitt';
 import { GTI_TASKS_CHANGED } from 'dashboard/composables/useGtiOpenTasksCount';
 import { toDatetimeLocal } from 'dashboard/helper/gtiTasks';
@@ -141,9 +142,8 @@ defineExpose({ open });
           :label="t('GTI.TASKS.FORM.DUE')"
         />
       </div>
-      <Input
+      <GtiTicketPicker
         v-model="form.conversationDisplayId"
-        inputmode="numeric"
         :label="t('GTI.TASKS.FORM.TICKET')"
         :placeholder="t('GTI.TASKS.FORM.TICKET_PLACEHOLDER')"
       />
